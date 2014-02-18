@@ -1,0 +1,156 @@
+html, body
+{
+  background: image-url('bg-texture.png') #000 repeat;
+  color: #FFF;
+  font-family: Arial;
+  font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.wrapper {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.banner {
+  background: image-url('banner-940.png') no-repeat;
+  height: 100%;
+  position: relative;
+}
+
+.surround {
+  background: image-url('container-pattern.png') #252525;
+  border-bottom: 1px solid #131313;
+  border-left: 2px solid #131313;
+  border-right: 2px solid #131313;
+  padding-bottom: 25px;
+  -webkit-box-shadow: 0 0 50px #0c9eb5;
+  -moz-box-shadow: 0 0 50px #0c9eb5;
+  box-shadow: 0 0 50px #0c9eb5;
+}
+
+.navbar-toggle {
+  border: 1px solid #0477ba;
+}
+
+.navbar-toggle .icon-bar {
+  background: #0477ba;
+}
+
+nav.navbar {
+  background: image-url('bg-navigation.jpg') repeat-x;
+  border-top: 2px solid #5b5757;
+  font-size: 12px;
+
+  ul li {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+
+    a {
+      color: white;
+
+      &:hover {
+        background-color: transparent;
+        text-decoration: none;
+      }
+    }
+
+    &:hover {
+      box-shadow: -1px 0 0 #000, -2px 0 0 #2c2c2c, 1px 0 0 #000, 2px 0 0 #2c2c2c, inset 0 0 10px #000;
+    }
+  }
+}
+
+
+input.search {
+  float: left;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  background: #fff;
+  border: 1px solid #777;
+  font: 12px "Lucida Sans Unicode","Lucida Grande",sans-serif;
+  height: 32px;
+  padding-left: 10px;
+}
+
+button.search {
+  float: left;
+  background: image-url('btn-search.png');
+  border: 0;
+  cursor: pointer;
+  height: 32px;
+  margin-left: 5px;
+  text-align: center;
+  width: 32px;
+}
+
+.arrow-bar {
+  .arrow {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #0477ba;
+    position: relative;
+    top: -8px;
+    left: 40px;
+    z-index: 301;
+    /*background: image-url('nav-arrow.png') no-repeat scroll 0 0 transparent;
+    background-position: 44px 3px;
+    float: left;
+    height: 12px;
+    width: 100%;
+    position: absolute;
+    top: 35px;*/
+  }
+
+  position: relative;
+  z-index: 300;
+  background: #0477ba;
+  height: 6px;
+  margin-top: -4px;
+}
+
+footer
+{
+  //background-image: image-url('bg-footer.png');
+  background-position: center;
+  height: 135px;
+  padding-top: 20px;
+
+  a, h1 {
+    filter: dropshadow(color=#000293, offx=1, offy=1);
+    font-weight: 700;
+    text-shadow: 1px 1px 1px #000293;
+    color: #fff;
+  }
+  a, h1, p {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  h1
+  {
+    font-size: 1.5em;
+  }
+
+  p {
+    margin-top: 5px;
+  }
+
+  a {
+    font-size: 1.2em;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+

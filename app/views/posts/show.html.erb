@@ -1,0 +1,24 @@
+<div class="col-md-12">
+	<div class="news">
+		<div class="ribbon">
+			<div class="rib beg"></div>
+			<div class="rib cont"><%= time_ago_in_words(@post.created_at) %> ago</div>
+			<div class="rib end"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="top-border"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="title"><%= link_to @post.title, @post %></div>
+			</div>
+		</div>
+		<div class="row">
+			<p class="col-md-12 content"> 
+			<%= @post.body.html_safe %>
+			</p>
+		</div>
+	</div>
+</div>

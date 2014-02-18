@@ -1,0 +1,60 @@
+<div class="col-md-8">
+	<% @posts.each do |entry| %>
+		<div class="news"> 
+		<div class="ribbon">
+			<div class="rib beg"></div>
+			<div class="rib cont"><%= time_ago_in_words(entry.created_at) %> ago</div>
+			<div class="rib end"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="top-border"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="title"><%= link_to entry.title, entry %></div>
+			</div>
+		</div>
+		<div class="row">
+			<p class="col-md-12 content"> 
+			<%= entry.body.html_safe %>
+			</p>
+		</div>
+	</div>
+<% end %>
+	<div class="col-md-12 posts_pagination">
+		<%= will_paginate @posts %>
+	</div>
+</div>
+<div class="col-md-4">
+	<div class="top-players">
+		<div class="row">
+			<h1 class="col-md-12">Top 10 Players in All Regions</h1>
+		</div>
+		<div class="row">
+			<table class="col-md-12">
+				<thead>
+					<tr>
+						<th class="rank">Rank</th>
+						<th class="summoner">Summoner</th>
+						<th class="points">Points</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr> 
+					<td>{{ player.rank }}</td>
+					<td><a href="#">{{ player.name }}</a></td>
+					<td>{{ player.points }}</td>
+				</tr>
+				<tr> 
+					<td colspan="3">Loading...</td>
+				</tr>
+				<tr>
+					<td colspan="3">No Players Found</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
