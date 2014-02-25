@@ -17,13 +17,13 @@
       <tbody>
       <% @players.each do |player| %>
         <tr class="ladder">
-          <td class="rank"><%= player.rank %></td>
-        <td class="name"><%= player.name %></td>
-        <td class="tier"><%= player.tier %></td>
-        <td class="wins"><%= player.wins %></td>
-        <td class="points"><%= player.league_points %></td>
-      </tr>
-    <% end %>
+          <td class="rank"><%= player.rank + 1 %></td>
+          <td class="name"><%= player.name %></td>
+          <td class="tier"><%= player.tier.capitalize %></td>
+          <td class="wins"><%= player.wins %></td>
+          <td class="points"><%= player.league_points %></td>
+        </tr>
+      <% end %>
       </tbody>
     </table>
     <div class="col-md-12 ladder-pagination">

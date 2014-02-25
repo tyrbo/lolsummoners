@@ -7,20 +7,12 @@ class Ladder
 
   def find_by_page(page)
     redis_ids = find_players_by_rank(page)
-    players = Player.find_by_ranked_ids(redis_ids)
+    players = Player.find_players_by_region(redis_ids)
     combine_players_with_rank(players)
   end
 
   def find_players_by_rank(page)
-    if @region == 'all'
-      ids = []
-      $regions.each do |rgn|
-        ids << find_redis_ranks(rgn, page)
-      end
-      ids.flatten
-    else
-      find_redis_ranks(@region, page)
-    end
+    find_redis_ranks(@region, page)
   end
 
   def combine_players_with_rank(players)

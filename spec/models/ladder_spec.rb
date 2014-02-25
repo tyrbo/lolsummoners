@@ -10,11 +10,12 @@ describe Ladder do
     it 'returns a paginated list of summoners' do
       ladder = Ladder.new('test')
       redis.pipelined do
-        100.times do |number|
+        30.times do |number|
           redis.zadd('rank_test', number, "#{number}_test")
         end
       end
       expect(ladder.find_players_by_rank(1).count).to eq 25
+      expect(ladder.find_players_by_rank(2).count).to eq 5
     end
   end
 
