@@ -1,7 +1,44 @@
-<table>
-	<tr>
-		<% @players.each do |player| %>
-			<td class="ladder"><%= player.summoner_id %></td>
-		<% end %>
-	</tr>
-</table>
+<div class="col-md-8">
+  <div class="content-container clearfix">
+    <div class="header">Test</div>
+    <div class="region-picker pull-right">
+      Some Region Dropdown
+    </div>
+    <table class="ladder">
+      <thead>
+        <tr>
+          <th class="col-md-2">Rank</th>
+          <th class="col-md-3">Summoner</th>
+          <th class="col-md-3">Tier</th>
+          <th class="col-md-2">Wins</th>
+          <th class="col-md-2">Points</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr class="ladder">
+        <td class="rank">1 (0.01%)</td>
+        <td class="name">Some Name</td>
+        <td class="tier">Challenger</td>
+        <td class="wins">144</td>
+        <td class="points">1178</td>
+      </tr>
+      <tr class="ladder">
+        <td class="rank">2 (0.01%)</td>
+        <td class="name">Some Other</td>
+        <td class="tier">Challenger</td>
+        <td class="wins">117</td>
+        <td class="points">1174</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="col-md-12 ladder-pagination">
+      <a href="#" class="ladder-nav-button pull-left">Prev</a>
+      <a href="#" class="ladder-nav-button pull-right">Next</a>
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="content-container">
+    <div class="header">Stats and Stuff</div>
+  </div>
+</div>

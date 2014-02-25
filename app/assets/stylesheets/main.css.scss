@@ -61,6 +61,8 @@ nav.navbar {
     }
 
     &:hover {
+      -webkit-box-shadow: -1px 0 0 #000, -2px 0 0 #2c2c2c, 1px 0 0 #000, 2px 0 0 #2c2c2c, inset 0 0 10px #000;
+      -moz-box-shadow: -1px 0 0 #000, -2px 0 0 #2c2c2c, 1px 0 0 #000, 2px 0 0 #2c2c2c, inset 0 0 10px #000;
       box-shadow: -1px 0 0 #000, -2px 0 0 #2c2c2c, 1px 0 0 #000, 2px 0 0 #2c2c2c, inset 0 0 10px #000;
     }
   }
@@ -101,13 +103,6 @@ button.search {
     top: -8px;
     left: 40px;
     z-index: 301;
-    /*background: image-url('nav-arrow.png') no-repeat scroll 0 0 transparent;
-    background-position: 44px 3px;
-    float: left;
-    height: 12px;
-    width: 100%;
-    position: absolute;
-    top: 35px;*/
   }
 
   position: relative;
@@ -115,6 +110,45 @@ button.search {
   background: #0477ba;
   height: 6px;
   margin-top: -4px;
+}
+
+.content-container {
+  background-color: #0f0f0f;
+  border: 1px solid black;
+  -webkit-box-shadow: 0px 0px 0px 1px #323232;
+  -moz-box-shadow: 0px 0px 0px 1px #323232;
+  box-shadow: 0px 0px 0px 1px #323232;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 3px;
+
+  .header {
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-top-left-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: -3px -3px 0 -3px;
+    padding: 10px 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #002033;
+    height: 40px;
+    text-shadow: 1px 1px 0px #006ead;
+
+    background: #0477ba;
+    background: -webkit-linear-gradient(top, #0477ba 2%, #013c5e 98%);
+    background: -moz-linear-gradient(top, #0477ba 2%, #013c5e 98%);
+    background: -o-linear-gradient(top, #0477ba 2%, #013c5e 98%);
+    background: -ms-linear-gradient(top, #0477ba 2%, #013c5e 98%);
+    background: linear-gradient(top, #0477ba 2%, #013c5e 98%);
+    -webkit-box-shadow: 0px 0px 0px 1px #121212;
+    -moz-box-shadow: 0px 0px 0px 1px #121212;
+    box-shadow: 0px 0px 0px #121212;
+    border-bottom: 1px solid black;
+  }
 }
 
 footer
@@ -153,4 +187,3 @@ footer
     text-decoration: underline;
   }
 }
-

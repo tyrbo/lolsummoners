@@ -14,6 +14,6 @@ feature 'User can view the ladder' do
 
   scenario 'Viewing the global ladder' do
     visit ladder_path('all')
-    expect(page).to have_css('td.ladder', count: 5)
+    expect(page).to have_css('tr.ladder', count: 5)
   end
 end

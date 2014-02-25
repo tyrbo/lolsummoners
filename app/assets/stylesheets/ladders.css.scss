@@ -1,0 +1,87 @@
+table.ladder {
+  width: 100%;
+
+  thead {
+    tr {
+      padding: 10px 0;
+      background: #fb9f32;
+      background: -webkit-linear-gradient(top, #fb9f32 2%, #ff8a01 98%);
+      background: -moz-linear-gradient(top, #fb9f32 2%, #ff8a01 98%);
+      background: -o-linear-gradient(top, #fb9f32 2%, #ff8a01 98%);
+      background: -ms-linear-gradient(top, #fb9f32 2%, #ff8a01 98%);
+      background: linear-gradient(top, #fb9f32 2%, #ff8a01 98%);
+
+      th {
+        padding: 12px 0;
+        font-size: 14px;
+        font-weight: bold;
+        color: black;
+        text-shadow: 1px 1px 0px #fdc620;
+        text-align: center;
+      }
+    }
+  }
+
+  tr {
+    border-bottom: 1px solid #2a2a2a;
+
+    &:nth-child(odd) {
+      background-color: #000000;
+    }
+
+    &:nth-child(even) {
+      background-color: #111111;
+    }
+
+    td {
+      padding: 18px 0;
+      text-align: center;
+      border-right: 1px solid #2a2a2a;
+
+      &.rank, &.name {
+        color: orange;
+      }
+
+      &.name {
+        font-weight: bold;
+      }
+
+      &.wins {
+        color: #12ff00;
+      }
+
+      &.points {
+        color: #616161;
+      }
+    }
+  }
+}
+
+.ladder-pagination {
+  margin: 10px 0;
+}
+
+.region-picker {
+  margin: 10px 0;
+}
+
+.ladder-nav-button {
+  padding: 9px 0;
+  text-align: center;
+  width: 110px;
+  color: white;
+
+  background: rgb(0,0,0);
+  background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(36,36,36,1) 98%);
+  background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(36,36,36,1) 98%);
+  background: -o-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(36,36,36,1) 98%);
+  background: -ms-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(36,36,36,1) 98%);
+  background: linear-gradient(top, rgba(0,0,0,1) 0%, rgba(36,36,36,1) 98%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#242424', GradientType=0);
+
+  border: 1px solid #000;
+  -webkit-box-shadow: 0px 0px 0px 1px #474646;
+  -moz-box-shadow: 0px 0px 0px 1px #474646;
+  box-shadow: 0px 0px 0px 1px #474646;
+  font-weight: bold;
+}

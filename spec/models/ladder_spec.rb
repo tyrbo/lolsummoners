@@ -7,7 +7,7 @@ describe Ladder do
   end
 
   describe '.find_players_by_rank' do
-    it 'returns a list of summoner_id' do
+    it 'returns a paginated list of summoners' do
       ladder = Ladder.new('test')
       redis.pipelined do
         100.times do |number|
