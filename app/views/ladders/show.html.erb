@@ -15,20 +15,15 @@
         </tr>
       </thead>
       <tbody>
-      <tr class="ladder">
-        <td class="rank">1 (0.01%)</td>
-        <td class="name">Some Name</td>
-        <td class="tier">Challenger</td>
-        <td class="wins">144</td>
-        <td class="points">1178</td>
+      <% @players.each do |player| %>
+        <tr class="ladder">
+          <td class="rank"><%= player.rank %></td>
+        <td class="name"><%= player.name %></td>
+        <td class="tier"><%= player.tier %></td>
+        <td class="wins"><%= player.wins %></td>
+        <td class="points"><%= player.league_points %></td>
       </tr>
-      <tr class="ladder">
-        <td class="rank">2 (0.01%)</td>
-        <td class="name">Some Other</td>
-        <td class="tier">Challenger</td>
-        <td class="wins">117</td>
-        <td class="points">1174</td>
-      </tr>
+    <% end %>
       </tbody>
     </table>
     <div class="col-md-12 ladder-pagination">

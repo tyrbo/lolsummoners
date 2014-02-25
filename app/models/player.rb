@@ -1,5 +1,8 @@
 class Player < ActiveRecord::Base
   attr_accessor :rank
+  delegate :tier, to: :player_league
+  delegate :wins, to: :player_league
+  delegate :league_points, to: :player_league
   has_one :player_league
 
   def self.find_by_ranked_ids(redis_results)
