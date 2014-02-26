@@ -26,4 +26,10 @@ feature 'User can view the ladder' do
     visit ladder_path(region: 'test2')
     expect(page).to have_css('tr.ladder', count: 5)
   end
+
+  scenario 'Viewing a region which does not exist' do
+    expect {
+      visit ladder_path(region: 'fakeregion')
+    }.to raise_error(ActionController::RoutingError)
+  end
 end
