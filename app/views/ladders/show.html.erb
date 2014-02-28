@@ -27,8 +27,8 @@
       </tbody>
     </table>
     <div class="col-md-12 ladder-pagination">
-      <a href="#" class="ladder-nav-button pull-left">Prev</a>
-      <a href="#" class="ladder-nav-button pull-right">Next</a>
+      <%= link_to 'Prev', ladder_path(page: params[:page] - 1), class: 'ladder-nav-button pull-left' if has_prev_page? %>
+      <%= link_to 'Next', ladder_path(page: params[:page] + 1), class: 'ladder-nav-button pull-right' if has_next_page? %>
     </div>
   </div>
 </div>

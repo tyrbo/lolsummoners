@@ -84,4 +84,8 @@ table.ladder {
   -moz-box-shadow: 0px 0px 0px 1px #474646;
   box-shadow: 0px 0px 0px 1px #474646;
   font-weight: bold;
+
+  &:hover {
+    text-decoration: none;
+  }
 }

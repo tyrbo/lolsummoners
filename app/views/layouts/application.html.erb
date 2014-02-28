@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>League of Legends Stats and Rankings | LOL Summoners</title>
 <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 <%= stylesheet_link_tag    params[:controller], media: "all", "data-turbolinks-track" => true %>
 <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 <%= csrf_meta_tags %>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <div class="container">
@@ -36,7 +39,7 @@
           <li><a href="/spectate">Spectate</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
-        <form class="navbar-form navbar-right">
+        <form class="navbar-form navbar-right clearfix">
           <input type="text" class="search" placeholder="Find Summoner...">
           <button type="submit" class="search"></button>
         </form>

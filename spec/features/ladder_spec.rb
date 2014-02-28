@@ -13,23 +13,18 @@ feature 'User can view the ladder' do
   end
 
   scenario 'Viewing page 1 of the global ladder' do
-    visit ladder_path(region: 'all')
+    visit ladder_path(id: 'all') # defaults are region: all and page: 1
     expect(page).to have_css('tr.ladder', count: 25)
   end
 
   scenario 'Viewing page 2 of the global ladder' do
-    visit ladder_path(region: 'all', page: 2)
+    visit ladder_path(id: 'all')
+    click_link('Next')
     expect(page).to have_css('tr.ladder', count: 10)
   end
 
-  scenario 'Viewing the test2 ladder' do
-    visit ladder_path(region: 'test2')
+  scenario 'Viewing an individual ladder' do
+    visit ladder_path(id: 'test2')
     expect(page).to have_css('tr.ladder', count: 5)
-  end
-
-  scenario 'Viewing a region which does not exist' do
-    expect {
-      visit ladder_path(region: 'fakeregion')
-    }.to raise_error(ActionController::RoutingError)
   end
 end

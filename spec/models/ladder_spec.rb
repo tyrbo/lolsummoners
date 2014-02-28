@@ -9,11 +9,11 @@ describe Ladder do
     end
   end
 
-  describe '.find_players_by_rank' do
+  describe '.find_redis_ranks' do
     it 'returns a paginated list of summoners' do
       ladder = Ladder.new('test')
-      expect(ladder.find_players_by_rank(1).count).to eq 25
-      expect(ladder.find_players_by_rank(2).count).to eq 5
+      expect(ladder.find_redis_ranks('test', 1).count).to eq 25
+      expect(ladder.find_redis_ranks('test', 2).count).to eq 5
     end
   end
 
@@ -22,6 +22,26 @@ describe Ladder do
       ladder = Ladder.new('test')
       first_player = ladder.combine_players_with_rank(Player.all).first
       expect(first_player.rank).to eq 0
+    end
+  end
+
+  describe '#has_next_page?' do
+    it 'returns true when next page exists' do
+      expect(Ladder.has_next_page?(id: 'test', page: 1)).to be true
+    end
+
+    it 'returns false when next page does not exist' do
+      expect(Ladder.has_next_page?(id: 'test', page: 2)).to be false
+    end
+  end
+
+  describe '#has_prev_page?' do
+    it 'returns true when prev page exists' do
+      expect(Ladder.has_prev_page?(page: 2)).to be true
+    end
+
+    it 'returns false when prev page does not exist' do
+      expect(Ladder.has_prev_page?(page: 1)).to be false
     end
   end
 end
