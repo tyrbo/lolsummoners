@@ -3,6 +3,8 @@ require 'spec_helper'
 feature 'User can view the ladder' do
   let(:redis) { Redis.current }
   before(:each) do
+    Redis.current.flushall
+
     30.times do |n|
       build_ladder_player(region: 'test')
     end
