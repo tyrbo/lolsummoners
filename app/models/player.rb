@@ -3,11 +3,11 @@ class Player < ActiveRecord::Base
   delegate :tier, to: :player_league
   delegate :wins, to: :player_league
   delegate :league_points, to: :player_league
-  has_one :player_league
+  has_one :player_league, dependent: :destroy
 
-  def self.find_players_by_region(redis_results)
+  def self.find_players_by_region(player_list)
     results = []
-    arranged_players = explode_redis_results(redis_results)
+    arranged_players = explode_redis_results(player_list)
     arranged_players.each do |region, summoners|
       results << Player.where(summoner_id: summoners, region: region)
     end

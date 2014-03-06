@@ -5,7 +5,7 @@ Lolsummoners::Application.routes.draw do
   get 'ladders/:id/(:page)', to: 'ladders#show',
                        defaults: { id: 'all', page: 1 },
                              as: 'ladder',
-                    constraints: { page: /\d/ }
+                    constraints: { page: /\d+/ }
 
   get 'ladders', to: 'ladders#show',
            defaults: { id: 'all', page: 1 }
