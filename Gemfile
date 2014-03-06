@@ -29,4 +29,5 @@ group :test do
   gem 'capybara'
   gem 'fakeredis'
   gem 'database_cleaner'
+  gem 'codeclimate-test-reporter'
 end
