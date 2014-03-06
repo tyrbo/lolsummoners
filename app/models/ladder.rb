@@ -24,12 +24,12 @@ class Ladder
     redis.zrevrange("rank_#{region}", (page - 1) * 25, (page * 25) - 1)
   end
 
-  def self.has_next_page?(opts)
+  def self.next_page?(opts)
     get_total_players(opts[:id])
     opts[:page].to_i < (@count / PER_PAGE)
   end
 
-  def self.has_prev_page?(opts)
+  def self.prev_page?(opts)
     opts[:page].to_i > 1
   end
 

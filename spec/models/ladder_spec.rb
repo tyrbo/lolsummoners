@@ -25,23 +25,23 @@ describe Ladder do
     end
   end
 
-  describe '#has_next_page?' do
+  describe '#next_page?' do
     it 'returns true when next page exists' do
-      expect(Ladder.has_next_page?(id: 'test', page: 1)).to be true
+      expect(Ladder.next_page?(id: 'test', page: 1)).to be true
     end
 
     it 'returns false when next page does not exist' do
-      expect(Ladder.has_next_page?(id: 'test', page: 2)).to be false
+      expect(Ladder.next_page?(id: 'test', page: 2)).to be false
     end
   end
 
-  describe '#has_prev_page?' do
+  describe '#prev_page?' do
     it 'returns true when prev page exists' do
-      expect(Ladder.has_prev_page?(page: 2)).to be true
+      expect(Ladder.prev_page?(page: 2)).to be true
     end
 
     it 'returns false when prev page does not exist' do
-      expect(Ladder.has_prev_page?(page: 1)).to be false
+      expect(Ladder.prev_page?(page: 1)).to be false
     end
   end
 end

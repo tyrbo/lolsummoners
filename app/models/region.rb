@@ -1,6 +1,6 @@
 class Region
   def self.available?(region)
     return true if region == 'all'
-    $regions.include?(region)
+    REGIONS.include?(region)
   end
 end

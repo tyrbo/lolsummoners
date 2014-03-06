@@ -1,5 +1,5 @@
 if Rails.env.test?
-  $regions = ['test', 'test2']
+  REGIONS = ['test', 'test2']
 else
-  $regions = ['na', 'euw', 'eune', 'tr', 'br', 'las', 'lan', 'oce', 'ru']
+  REGIONS = ['na', 'euw', 'eune', 'tr', 'br', 'las', 'lan', 'oce', 'ru']
 end
