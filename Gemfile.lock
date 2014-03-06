@@ -64,6 +64,9 @@ GEM
     fakeredis (0.4.3)
       redis (~> 3.0.0)
     fastercsv (1.5.5)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     haml (4.0.5)
       tilt
     highline (1.6.21)
@@ -187,6 +190,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   fakeredis
+  figaro
   jbuilder (~> 1.2)
   jquery-rails
   pg

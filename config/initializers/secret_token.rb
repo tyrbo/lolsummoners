@@ -9,4 +9,8 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Lolsummoners::Application.config.secret_key_base = '26dc5d2cc1fdc2c88dbac055bcaaa646d528c334f4a01f2449763615cd5373b3d40213271ba4cc5506b848b46711964c0c4d660dfa07daf8055ff654752d656c'
+Lolsummoners::Application.config.secret_key_base = if Rails.env.development? || Rails.env.test?
+                                                     ('x' * 30)
+                                                   else
+                                                     ENV['SECRET_KEY']
+                                                   end

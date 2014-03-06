@@ -13,6 +13,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'redis'
 gem 'puma'
 gem 'brakeman', require: false
+gem 'figaro'
 
 group :doc do
   gem 'sdoc', require: false
