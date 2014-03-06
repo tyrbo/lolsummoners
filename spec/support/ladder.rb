@@ -19,8 +19,8 @@ def create_new_player
 end
 
 def create_ranking
-  redis.pipelined do
-    redis.zadd("rank_#{@region}", @points, "#{@summoner_id}_#{@region}")
-    redis.zadd("rank_all", @points, "#{@summoner_id}_#{@region}")
+  Redis.current.pipelined do
+    Redis.current.zadd("rank_#{@region}", @points, "#{@summoner_id}_#{@region}")
+    Redis.current.zadd("rank_all", @points, "#{@summoner_id}_#{@region}")
   end
 end

@@ -25,8 +25,7 @@ class Ladder
   end
 
   def self.next_page?(opts)
-    get_total_players(opts[:id])
-    opts[:page].to_i < (@count / PER_PAGE)
+    opts[:page].to_i < (get_total_players(opts[:id]) / PER_PAGE)
   end
 
   def self.prev_page?(opts)
@@ -34,7 +33,7 @@ class Ladder
   end
 
   def self.get_total_players(id)
-    @count ||= Redis.current.zcard("rank_#{id}")
+    Redis.current.zcard("rank_#{id}")
   end
 
   private

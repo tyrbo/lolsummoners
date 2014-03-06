@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 describe Ladder do
-  let(:redis) { Redis.current }
   before(:each) do
-    redis.flushall
+    Redis.current.flushall
     30.times do
       build_ladder_player(region: 'test')
     end
