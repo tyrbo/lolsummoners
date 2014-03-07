@@ -76,13 +76,13 @@ input.search {
   border-radius: 4px;
   background: #fff;
   border: 1px solid #777;
-  font: 12px "Lucida Sans Unicode","Lucida Grande",sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   height: 32px;
   padding-left: 10px;
   color: #000000;
 }
 
-button.search {
+input.submit {
   float: left;
   background: image-url('btn-search.png');
   border: 0;
@@ -91,6 +91,17 @@ button.search {
   margin-left: 5px;
   text-align: center;
   width: 32px;
+}
+
+select.search {
+  float: left;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  margin-right: 5px;
+  height: 32px;
+  color: #000;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 .arrow-bar {
