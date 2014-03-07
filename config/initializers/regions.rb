@@ -1,5 +1,11 @@
 if Rails.env.test?
-  REGIONS = ['test', 'test2']
+  REGIONS = {
+    test: { name: 'Test', hasApi: true },
+    test2: { name: 'Test 2', hasApi: true }
+  }
 else
-  REGIONS = ['na', 'euw', 'eune', 'tr', 'br', 'las', 'lan', 'oce', 'ru']
+  REGIONS = {
+    na: { name: 'North America', hasApi: true },
+    euw: { name: 'Europe West', hasApi: true }
+  }
 end

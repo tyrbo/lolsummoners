@@ -1,6 +1,6 @@
 class Region
   def self.available?(region)
     return true if region == 'all'
-    REGIONS.include?(region)
+    REGIONS.key?(region.to_sym)
   end
 end
