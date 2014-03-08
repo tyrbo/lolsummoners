@@ -9,18 +9,18 @@ describe LaddersController do
     end
 
     it 'should set page to 1 as default' do
-      get :show, id: 'test'
+      get :show, id: 'all'
       expect(controller.params[:page]).to eq 1
     end
 
     it 'should set page to 1 when less than 1' do
-      get :show, id: 'test', page: 0
+      get :show, id: 'all', page: 0
       expect(controller.params[:page]).to eq 1
     end
 
     it 'should downcase id' do
-      get :show, id: 'Test', page: 1
-      expect(controller.params[:id]).to eq 'test'
+      get :show, id: 'ALL', page: 1
+      expect(controller.params[:id]).to eq 'all'
     end
   end
 end

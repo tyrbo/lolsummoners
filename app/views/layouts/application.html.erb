@@ -38,10 +38,10 @@
           <li><a href="/stats">Stats</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
-        <%= form_tag '/search', method: 'get', class: 'navbar-form navbar-right clearfix' do %>
+        <%= form_tag '/search', method: 'get', class: 'navbar-form navbar-right clearfix', id: 'search' do %>
           <%= select_tag 'region', options_for_select(REGIONS.collect {|n, _| [n.upcase, n] }), class: 'search' %>
           <%= text_field_tag 'name', nil, class: 'search', placeholder: 'Find Summoner...' %>
-          <%= submit_tag '', class: 'submit' %>
+          <%= submit_tag '', class: 'submit', id: 'submit' %>
         <% end %>
       </div>
       <div class="arrow-bar">
@@ -51,8 +51,8 @@
     <section class="row">
       <div class="wrapper">
         <%= yield %>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </div>
 <div class="container">

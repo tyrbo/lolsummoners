@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Region do
   describe '#available?' do
     it 'returns true for an available region' do
-      expect(Region.available?('test')).to eq true
+      expect(Region.available?('na')).to eq true
     end
 
     it 'returns false for an unavailable region' do

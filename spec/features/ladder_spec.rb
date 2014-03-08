@@ -6,11 +6,11 @@ feature 'User can view the ladder' do
     Redis.current.flushall
 
     30.times do |n|
-      build_ladder_player(region: 'test')
+      build_ladder_player(region: 'na')
     end
 
     5.times do |n|
-      build_ladder_player(region: 'test2')
+      build_ladder_player(region: 'euw')
     end
   end
 
@@ -26,7 +26,7 @@ feature 'User can view the ladder' do
   end
 
   scenario 'Viewing an individual ladder' do
-    visit ladder_path(id: 'test2')
+    visit ladder_path(id: 'euw')
     expect(page).to have_css('tr.ladder', count: 5)
   end
 end

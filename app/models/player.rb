@@ -1,9 +1,18 @@
 class Player < ActiveRecord::Base
+  scope :name_and_region, -> (internal_name, region) {
+    where('internal_name = ? and region = ?', internal_name, region)
+  }
+
+  scope :summoner_id_and_region, -> (summoner_id, region) {
+    where('summoner_id = ? and region = ?', summoner_id, region)
+  }
+
   attr_accessor :rank
   delegate :tier, to: :player_league
   delegate :wins, to: :player_league
   delegate :league_points, to: :player_league
   has_one :player_league, dependent: :destroy
+  before_save :prepare_name
 
   def self.find_players_by_region(player_list)
     results = []
@@ -15,6 +24,10 @@ class Player < ActiveRecord::Base
   end
 
   private
+
+  def prepare_name
+    self.internal_name = self.name.downcase.gsub(/\s+/, '')
+  end
 
   def self.explode_redis_results(redis_results)
     players_by_region = {}

@@ -3,6 +3,7 @@ include ApplicationHelper
 def build_ladder_player(opts)
   @region = opts[:region]
   @summoner_id, @points = randomize_player_values
+  @name = opts[:name] || "A#{Random.new.rand(1...1000000)}"
   create_new_player
   create_ranking
 end
@@ -13,7 +14,7 @@ def randomize_player_values
 end
 
 def create_new_player
-  player = build(:player, summoner_id: @summoner_id, region: @region)
+  player = build(:player, summoner_id: @summoner_id, region: @region, name: @name)
   player.build_player_league(tier: 'Test', league_points: @points)
   player.save
 end

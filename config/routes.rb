@@ -9,4 +9,8 @@ Lolsummoners::Application.routes.draw do
 
   get '/ladders', to: 'ladders#show',
            defaults: { id: 'all', page: 1 }
+
+  get '/search', to: 'searches#show'
+
+  get '/player/:region/:summoner_id', to: 'players#show', as: 'player'
 end
