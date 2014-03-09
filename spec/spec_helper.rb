@@ -6,6 +6,8 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'fakeredis/rspec'
 require 'database_cleaner'
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: false)
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -67,5 +69,19 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+
+  config.before(:each) do
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/ajsdfoabsdfouabsdfiouweroi?api_key=20278aab-6dd9-4ed5-9e92-da38dbbcc62c").
+         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
+         to_return(:status => 404, :body => "", :headers => {})
+
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/pentakill?api_key=20278aab-6dd9-4ed5-9e92-da38dbbcc62c").
+         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
+         to_return(:status => 200, :body => '{"pentakill":{"id":1,"name":"Pentakill","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
+
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/peak?api_key=20278aab-6dd9-4ed5-9e92-da38dbbcc62c").
+         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
+         to_return(:status => 200, :body => '{"peak":{"id":21848947,"name":"Peak","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
   end
 end

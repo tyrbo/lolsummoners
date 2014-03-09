@@ -30,4 +30,5 @@ group :test do
   gem 'fakeredis'
   gem 'database_cleaner'
   gem 'codeclimate-test-reporter'
+  gem 'webmock'
 end

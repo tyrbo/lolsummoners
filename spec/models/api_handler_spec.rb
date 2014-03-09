@@ -27,8 +27,8 @@ describe ApiHandler do
     end
 
     it 'cannot search for the same player too frequently' do
-      expect(handler.player_search('test')).to eq true
-      expect(handler.player_search('test')).to eq false
+      expect(handler.player_search('peak')).to eq true
+      expect(handler.player_search('peak')).to eq false
     end
   end
 end
