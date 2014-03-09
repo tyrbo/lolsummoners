@@ -26,11 +26,11 @@ describe Ladder do
 
   describe '#next_page?' do
     it 'returns true when next page exists' do
-      expect(Ladder.next_page?(id: 'test', page: 1)).to be true
+      expect(Ladder.next_page?(region: 'test', page: 1)).to be true
     end
 
     it 'returns false when next page does not exist' do
-      expect(Ladder.next_page?(id: 'test', page: 2)).to be false
+      expect(Ladder.next_page?(region: 'test', page: 2)).to be false
     end
   end
 

@@ -25,7 +25,7 @@ class Ladder
   end
 
   def self.next_page?(opts)
-    opts[:page].to_i < (get_total_players(opts[:id]) / PER_PAGE)
+    opts[:page].to_i < (get_total_players(opts[:region]) / PER_PAGE)
   end
 
   def self.prev_page?(opts)

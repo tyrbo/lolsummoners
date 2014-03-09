@@ -2,15 +2,16 @@ include ApplicationHelper
 
 def build_ladder_player(opts)
   @region = opts[:region]
-  @summoner_id, @points = randomize_player_values
+  @summoner_id = opts[:summoner_id] || randomize_value
+  @points = opts[:points] || randomize_value
   @name = opts[:name] || "A#{Random.new.rand(1...1000000)}"
   create_new_player
   create_ranking
 end
 
-def randomize_player_values
+def randomize_value
   r = Random.new
-  [r.rand(1...1000000), r.rand(1...1000)]
+  r.rand(1...10000000)
 end
 
 def create_new_player
