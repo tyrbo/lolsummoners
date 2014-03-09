@@ -72,16 +72,20 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/ajsdfoabsdfouabsdfiouweroi?api_key=20278aab-6dd9-4ed5-9e92-da38dbbcc62c").
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/ajsdfoabsdfouabsdfiouweroi?api_key=#{ENV['RIOT_API']}").
          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
          to_return(:status => 404, :body => "", :headers => {})
 
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/pentakill?api_key=20278aab-6dd9-4ed5-9e92-da38dbbcc62c").
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/pentakill?api_key=#{ENV['RIOT_API']}").
          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
          to_return(:status => 200, :body => '{"pentakill":{"id":1,"name":"Pentakill","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
 
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/peak?api_key=20278aab-6dd9-4ed5-9e92-da38dbbcc62c").
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/peak?api_key=#{ENV['RIOT_API']}").
          with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
          to_return(:status => 200, :body => '{"peak":{"id":21848947,"name":"Peak","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
+  end
+
+  config.after(:suite) do
+    WebMock.disable!
   end
 end
