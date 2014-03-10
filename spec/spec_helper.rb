@@ -6,10 +6,11 @@ CodeClimate::TestReporter.start
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
-require 'fakeredis/rspec'
+Capybara.javascript_driver = :webkit
 require 'database_cleaner'
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: false)
+require 'sidekiq/testing'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -59,14 +60,13 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.start
+    Redis.current.select(1)
+    Redis.current.flushdb
   end
 
   config.before(:each, :js => true) do
     DatabaseCleaner.strategy = :truncation
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
   end
 
   config.after(:each) do
@@ -75,27 +75,29 @@ RSpec.configure do |config|
 
   config.before(:each) do
     stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/ajsdfoabsdfouabsdfiouweroi?api_key=#{ENV['RIOT_API']}").
-         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
-         to_return(:status => 404, :body => "", :headers => {})
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 404, :body => "", :headers => {})
 
     stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/pentakill?api_key=#{ENV['RIOT_API']}").
-         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
-         to_return(:status => 200, :body => '{"pentakill":{"id":0,"name":"Pentakill","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => '{"pentakill":{"id":0,"name":"Pentakill","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
 
     stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/peak?api_key=#{ENV['RIOT_API']}").
-         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
-         to_return(:status => 200, :body => '{"peak":{"id":21848947,"name":"Peak","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => '{"peak":{"id":21848947,"name":"Peak","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
 
     stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.3/league/by-summoner/0/entry?api_key=#{ENV['RIOT_API']}").
-         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
-         to_return(:status => 404, :body => "", :headers => {})
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 404, :body => "", :headers => {})
 
     stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.3/league/by-summoner/21848947/entry?api_key=#{ENV['RIOT_API']}").
-         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
-         to_return(:status => 200, :body => '[{"isHotStreak": false,"isFreshBlood": false,"leagueName": "Taric\'s Zealots","isVeteran": false,"tier": "PLATINUM","lastPlayed": -1,"playerOrTeamId": "21848947","leaguePoints": 37,"rank": "IV","isInactive": false,"queueType": "RANKED_SOLO_5x5","playerOrTeamName": "Peak","wins": 7}]', :headers => {})
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'prod.api.pvp.net', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => '[{"isHotStreak": false,"isFreshBlood": false,"leagueName": "Taric\'s Zealots","isVeteran": false,"tier": "PLATINUM","lastPlayed": -1,"playerOrTeamId": "21848947","leaguePoints": 37,"rank": "IV","isInactive": false,"queueType": "RANKED_SOLO_5x5","playerOrTeamName": "Peak","wins": 7}]', :headers => {})
   end
 
   config.after(:suite) do
     WebMock.disable!
+    Redis.current.select(1)
+    Redis.current.flushdb
   end
 end

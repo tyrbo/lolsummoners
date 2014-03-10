@@ -21,8 +21,8 @@ class RiotApi
   def league_for(summoner_id)
     response = get("v2.3/league/by-summoner/#{summoner_id}/entry")
     if !response.nil? && response.code == '200'
-      league = JSON.parse(response.body)
-      return league.first
+      leagues = JSON.parse(response.body)
+      return leagues.detect { |league| league['queueType'] == 'RANKED_SOLO_5x5' }
     else
       nil
     end
@@ -33,8 +33,12 @@ class RiotApi
   def get(resource)
     begin
       uri = URI(build_url(resource))
-      return Net::HTTP.get_response(uri)
-    rescue StandardError
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.read_timeout = 10
+      http.use_ssl = true
+      return http.request(Net::HTTP::Get.new(uri))
+    rescue StandardError => e
+      puts e
       nil
     end
   end

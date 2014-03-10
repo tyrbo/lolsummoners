@@ -14,6 +14,8 @@ gem 'redis'
 gem 'puma'
 gem 'brakeman', require: false
 gem 'figaro'
+gem 'sidekiq'
+gem 'tubesock'
 
 group :doc do
   gem 'sdoc', require: false
@@ -27,9 +29,10 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'fakeredis'
+  #gem 'fakeredis'
   gem 'database_cleaner'
   gem 'codeclimate-test-reporter'
   gem 'webmock'
   gem 'coveralls', require: false
+  gem 'capybara-webkit'
 end
