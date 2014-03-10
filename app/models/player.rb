@@ -7,9 +7,10 @@ class Player < ActiveRecord::Base
     where(summoner_id: summoner_id, region: region)
   }
 
-  attr_accessor :rank
+  attr_accessor :ladder
   delegate :tier, to: :player_league
   delegate :wins, to: :player_league
+  delegate :rank, to: :player_league
   delegate :league_points, to: :player_league
   has_one :player_league, dependent: :destroy
   before_save :prepare_name

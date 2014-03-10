@@ -38,7 +38,7 @@ table.ladder {
       text-align: center;
       border-right: 1px solid #2a2a2a;
 
-      &.rank, &.name {
+      &.rank, &.name, &.name a {
         color: orange;
       }
 

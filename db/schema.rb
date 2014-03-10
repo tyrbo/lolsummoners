@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309213820) do
+ActiveRecord::Schema.define(version: 20140310010603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20140309213820) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "leagues", ["name", "region", "tier", "queue"], name: "index_leagues_on_name_and_region_and_tier_and_queue", using: :btree
 
   create_table "player_leagues", force: true do |t|
     t.boolean  "is_fresh_blood"
@@ -42,8 +44,10 @@ ActiveRecord::Schema.define(version: 20140309213820) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "player_id"
+    t.integer  "league_id"
   end
 
+  add_index "player_leagues", ["league_id"], name: "index_player_leagues_on_league_id", using: :btree
   add_index "player_leagues", ["player_id"], name: "index_player_leagues_on_player_id", using: :btree
 
   create_table "players", force: true do |t|

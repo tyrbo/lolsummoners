@@ -14,7 +14,17 @@ class RiotApi
       player = JSON.parse(response.body)
       return player[name]
     else
-      return nil
+      nil
+    end
+  end
+
+  def league_for(summoner_id)
+    response = get("v2.3/league/by-summoner/#{summoner_id}/entry")
+    if !response.nil? && response.code == '200'
+      league = JSON.parse(response.body)
+      return league.first
+    else
+      nil
     end
   end
 

@@ -1,1 +1,6 @@
 <%= @player.name %>
+<% if @player.player_league %>
+  <%= "#{@player.player_league.tier.capitalize} #{@player.player_league.rank}" %>
+<% else %>
+  Not Ranked
+<% end %>

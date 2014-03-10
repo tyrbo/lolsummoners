@@ -7,19 +7,21 @@
     <table class="ladder">
       <thead>
         <tr>
+          <th class="col-md-1">Region</th>
           <th class="col-md-2">Rank</th>
           <th class="col-md-3">Summoner</th>
           <th class="col-md-3">Tier</th>
           <th class="col-md-2">Wins</th>
-          <th class="col-md-2">Points</th>
+          <th class="col-md-1">Points</th>
         </tr>
       </thead>
       <tbody>
       <% @players.each do |player| %>
         <tr class="ladder">
-          <td class="rank"><%= player.rank + 1 %></td>
-          <td class="name"><%= player.name %></td>
-          <td class="tier"><%= player.tier.capitalize %></td>
+          <td class="region"><%= player.region.upcase %></td>
+          <td class="rank"><%= player.ladder + 1 %></td>
+          <td class="name"><%= link_to player.name, player_path(region: player.region, summoner_id: player.summoner_id) %></td>
+          <td class="tier"><%= "#{player.tier.capitalize} #{player.rank}" %></td>
           <td class="wins"><%= player.wins %></td>
           <td class="points"><%= player.league_points %></td>
         </tr>
