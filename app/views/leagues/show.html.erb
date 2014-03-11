@@ -1,15 +1,33 @@
 <div class="col-md-8">
   <div class="content-container clearfix">
     <div class="header">Leagues</div>
-    <div class="row">
-      <div class="league col-md-12">
+    <div class="league col-md-12">
+      <div class="row">
         <div class="col-md-2">
-          <%= image_tag "medals/#{@league.tier.downcase}_1.png", class: 'league-icon' %>
+          <div class="league-icon">
+            <%= image_tag "medals/#{@league.tier.downcase}_1.png", class: 'img-responsive center-block' %>
+          </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-8 clearfix">
           <div class="description">
             <p class="name"><%= @league.name %></p>
             <p class="tier"><%= @league.tier.capitalize %></p>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <div class="division">
+            <div class="btn-group">
+              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                I <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">I</a></li>
+                <li><a href="#">II</a></li>
+                <li><a href="#">III</a></li>
+                <li><a href="#">IV</a></li>
+                <li><a href="#">V</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -18,13 +36,23 @@
       <thead>
         <tr>
           <th class="col-md-1">Rank</th>
-          <th class="col-md-2">Change</th>
-          <th class="col-md-3">Summoner</th>
-          <th class="col-md-2">Emblems</th>
+          <th class="col-md-4">Summoner</th>
+          <th class="col-md-3">Emblems</th>
           <th class="col-md-1">Wins</th>
-          <th class="col-md-2">Points</th>
+          <th class="col-md-3">Points</th>
         </tr>
       </thead>
+      <tbody>
+      <% @players.take_while { |p| p.rank == 'I' }.each do |player| %>
+        <tr class="ladder">
+        <td class="rank">#</td>
+        <td class="name"><%= player.name %></td>
+        <td class="emblems">TODO</td>
+        <td class="wins"><%= player.wins %></td>
+        <td class="points"><%= player.league_points %></td>
+      </tr>
+    <% end %>
+      </tbody>
     </table>
   </div>
 </div>

@@ -6,10 +6,9 @@ $ ->
 
   socket.onmessage = (event) ->
     if event.data.length
-      $('#loading').html(event.data)
       if event.data.indexOf('done') != -1
         split = event.data.split(' ')
-        window.location = "/player/#{region}/#{split[1]}"
+        #window.location = "/players/#{region}/#{split[1]}"
       else if event.data == 'fail'
-        socket.close()
         alert('Something went wrong.')
+        #socket.close()

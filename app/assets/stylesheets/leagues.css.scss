@@ -1,13 +1,73 @@
 .league {
+  margin-top: 18px;
+  padding-bottom: 6px;
+  text-align: center;
+
   .league-icon {
-    width: 100px;
-    height: 100px;
+    margin-top: -12px;
   }
 
-  .description {
-    margin-top: 10px;
-    .name {
+  .division {
+    .btn {
+      background: #fff;
+      border: 1px solid #222222;
+      -moz-border-radius: 10px;
+      -o-border-radius: 10px;
+      border-radius: 10px;
       font-size: 30px;
+      font-family: 'Fenix';
+      color: black;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+  //
+  //        ul {
+    //          background: #02476f;
+    //          background: -webkit-linear-gradient(top, #02476f 2%, #0477ba 98%);
+    //          background: -moz-linear-gradient(top, #02476f 2%, #0477ba 98%);
+    //          background: -o-linear-gradient(top, #02476f 2%, #0477ba 98%);
+    //          background: -ms-linear-gradient(top, #02476f 2%, #0477ba 98%);
+    //          background: linear-gradient(top, #02476f 2%, #0477ba 98%);
+    //          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffa61b',endColorstr='#fb7100',GradientType=0);
+    //
+    //          -webkit-transition: all 0.3s ease-out;
+    //          -moz-transition: all 0.3s ease-out;
+    //          -ms-transition: all 0.3s ease-out;
+    //          -o-transition: all 0.3s ease-out;
+    //          transition: all 0.3s ease-out;
+    //
+    //          z-index: 1;
+    //          position: absolute;
+    //          visibility: hidden;
+    //          opacity: 0;
+    //          font-size: 15px;
+    //          width: 38px;
+    //
+    //          li {
+      //            font-size: 15px;
+      //            text-shadow: 1px 1px 0px #006ead;
+      //
+      //            a {
+        //              border-bottom: 1px solid #000;
+        //              color: #00273d;
+        //              font-weight: bold;
+        //              display: block;
+        //              line-height: 24px;
+        //              padding: 7px 0 3px 0;
+        //              text-decoration: none;
+      //            }
+    //          }
+  //        }
+//      }
+    //    }
+  //  }
+
+  .description {
+    .name {
+      font-size: 20px;
       font-weight: bold;
     }
 

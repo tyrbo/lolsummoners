@@ -8,7 +8,7 @@ class ApiHandler
     key_name = key_name_for(opts)
     message = 'fail'
     RateLimit.set("limited_#{key_name}", 60 * 30)
-    player_data = @api.by_name(opts[:id])
+    player_data = @api.by_name(opts['id'])
     unless player_data.nil?
       player = build_player(player_data)
       message = "done #{player.summoner_id}"
