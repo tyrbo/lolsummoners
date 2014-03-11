@@ -1,0 +1,30 @@
+<div class="col-md-8">
+  <div class="content-container clearfix">
+    <div class="header">Leagues</div>
+    <div class="row">
+      <div class="league col-md-12">
+        <div class="col-md-2">
+          <%= image_tag "medals/#{@league.tier.downcase}_1.png", class: 'league-icon' %>
+        </div>
+        <div class="col-md-10">
+          <div class="description">
+            <p class="name"><%= @league.name %></p>
+            <p class="tier"><%= @league.tier.capitalize %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="ladder">
+      <thead>
+        <tr>
+          <th class="col-md-1">Rank</th>
+          <th class="col-md-2">Change</th>
+          <th class="col-md-3">Summoner</th>
+          <th class="col-md-2">Emblems</th>
+          <th class="col-md-1">Wins</th>
+          <th class="col-md-2">Points</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>

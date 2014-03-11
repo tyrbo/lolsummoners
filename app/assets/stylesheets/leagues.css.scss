@@ -1,0 +1,20 @@
+.league {
+  .league-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .description {
+    margin-top: 10px;
+    .name {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .tier {
+      margin-top: -10px;
+      font-size: 18px;
+      font-weight: normal;
+    }
+  }
+}

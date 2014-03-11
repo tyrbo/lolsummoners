@@ -1,4 +1,8 @@
 class League < ActiveRecord::Base
+  scope :id_and_region, -> (id, region) {
+    where(id: id, region: region)
+  }
+
   has_many :player_leagues
   has_many :players, through: :player_leagues
 

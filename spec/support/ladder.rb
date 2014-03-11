@@ -5,6 +5,7 @@ def build_ladder_player(opts)
   @summoner_id = opts[:summoner_id] || randomize_value
   @points = opts[:points] || randomize_value
   @name = opts[:name] || "A#{Random.new.rand(1...1000000)}"
+  @league = build(:league)
   create_new_player
   create_ranking
 end
@@ -16,7 +17,7 @@ end
 
 def create_new_player
   player = build(:player, summoner_id: @summoner_id, region: @region, name: @name)
-  player.build_player_league(tier: 'Test', league_points: @points)
+  player.build_player_league(tier: 'Test', league_points: @points, league: @league)
   player.save
 end
 

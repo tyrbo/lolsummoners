@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :league do
-    name "MyString"
-    queue "MyString"
-    tier "MyString"
-    region "MyString"
+    name "Peak's Testers"
+    queue "RANKED_SOLO_5x5"
+    tier "Challenger"
+    region "na"
   end
 end

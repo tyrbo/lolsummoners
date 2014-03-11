@@ -12,6 +12,7 @@ class Player < ActiveRecord::Base
   delegate :wins, to: :player_league
   delegate :rank, to: :player_league
   delegate :league_points, to: :player_league
+  delegate :league_id, to: :player_league
   has_one :player_league, dependent: :destroy
   before_save :prepare_name
 
