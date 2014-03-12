@@ -1,10 +1,9 @@
 require 'net/http'
 
 class RiotApi
-  BASE_URL = 'https://prod.api.pvp.net/api/lol'
-
   def initialize(region)
     @region = region
+    @has_api = Region.api?(@region)
   end
 
   def by_name(name)
@@ -35,7 +34,7 @@ class RiotApi
       uri = URI(build_url(resource))
       http = Net::HTTP.new(uri.host, uri.port)
       http.read_timeout = 10
-      http.use_ssl = true
+      http.use_ssl = true if @has_api
       return http.request(Net::HTTP::Get.new(uri))
     rescue StandardError => e
       puts e
@@ -44,7 +43,19 @@ class RiotApi
   end
 
   def build_url(resource)
-    "#{BASE_URL}/#{@region}/#{resource}?api_key=#{ENV['RIOT_API']}"
+    if @has_api
+      "#{base_url}/#{@region}/#{resource}?api_key=#{ENV['RIOT_API']}"
+    else
+      "#{base_url}/#{@region}/#{resource}"
+    end
+  end
+
+  def base_url
+    if @has_api
+      'https://prod.api.pvp.net/api/lol'
+    else
+      'http://127.0.0.1:1337/api/lol'
+    end
   end
 
 end

@@ -7,12 +7,23 @@ class Player < ActiveRecord::Base
     where(summoner_id: summoner_id, region: region)
   }
 
+  scope :region_and_tier_count, -> (region, tier) {
+    joins(:player_league).
+    where(region: region).
+    where(player_leagues: { tier: tier }).
+    count
+  }
+
   attr_accessor :ladder
   delegate :tier, to: :player_league
   delegate :wins, to: :player_league
   delegate :rank, to: :player_league
   delegate :league_points, to: :player_league
   delegate :league_id, to: :player_league
+  delegate :is_veteran, to: :player_league
+  delegate :is_hot_streak, to: :player_league
+  delegate :is_fresh_blood, to: :player_league
+  delegate :mini_series, to: :player_league
   has_one :player_league, dependent: :destroy
   before_save :prepare_name
 

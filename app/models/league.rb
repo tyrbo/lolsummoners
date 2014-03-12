@@ -50,4 +50,20 @@ class League < ActiveRecord::Base
       0
     end
   end
+
+  def self.rank_from_points(points)
+    adjusted_points = points % 5000
+    case
+    when adjusted_points >= 3900
+      'I'
+    when adjusted_points >= 2900
+      'II'
+    when adjusted_points >= 1900
+      'III'
+    when adjusted_points >= 900
+      'IV'
+    when adjusted_points < 900
+      'V'
+    end
+  end
 end

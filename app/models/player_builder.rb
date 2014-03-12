@@ -10,4 +10,13 @@ class PlayerBuilder
     player.save
     player
   end
+
+  def self.create(attributes, region)
+    player = Player.new
+    attributes['region'] = region
+    attributes = Rehash.remap_hash(attributes, PLAYER_MAPPINGS)
+    player.update_attributes(attributes)
+    player.save
+    player
+  end
 end

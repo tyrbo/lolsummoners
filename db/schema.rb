@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310010603) do
+ActiveRecord::Schema.define(version: 20140312201358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140310010603) do
 
   add_index "player_leagues", ["league_id"], name: "index_player_leagues_on_league_id", using: :btree
   add_index "player_leagues", ["player_id"], name: "index_player_leagues_on_player_id", using: :btree
+  add_index "player_leagues", ["tier"], name: "index_player_leagues_on_tier", using: :btree
 
   create_table "players", force: true do |t|
     t.integer  "summoner_id",     limit: 8
@@ -70,6 +71,12 @@ ActiveRecord::Schema.define(version: 20140310010603) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "stats", force: true do |t|
+    t.string  "name"
+    t.integer "value"
+    t.string  "region"
   end
 
 end

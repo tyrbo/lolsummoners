@@ -110,6 +110,18 @@ select.search {
     top: -8px;
     left: 40px;
     z-index: 301;
+
+    &.ladders, &.leagues {
+      left: 120px;
+    }
+
+    &.stats {
+      left: 196px;
+    }
+
+    &.contact {
+      left: 276px;
+    }
   }
 
   position: relative;
@@ -117,6 +129,15 @@ select.search {
   background: #0477ba;
   height: 6px;
   margin-top: -4px;
+}
+
+.region-picker {
+  margin: 10px 0;
+
+  .btn {
+    background: #fff;
+    color: #000;
+  }
 }
 
 .content-container {

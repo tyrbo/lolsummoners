@@ -35,10 +35,6 @@ class ApiHandler
   end
 
   def api_for(region)
-    if Region.api?(region)
-      return RiotApi.new(region)
-    else
-      return NodeApi.new(region)
-    end
+    return RiotApi.new(region)
   end
 end

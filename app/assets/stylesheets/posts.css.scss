@@ -137,24 +137,12 @@
         background: linear-gradient(top, #fb9f32 2%, #ff8a01 98%);
 
         th {
+          text-align: center;
           padding: 12px 0;
-          padding-left: 12px;
           font-size: 14px;
           font-weight: bold;
           color: black;
           text-shadow: 1px 1px 0px #fdc620;
-
-          .rank {
-            width: 15%;
-          }
-
-          .summoner {
-            width: 70%;
-          }
-
-          .points {
-            width: 15%;
-          }
         }
       }
     }
@@ -169,19 +157,19 @@
         box-shadow: inset 2px 0px 0px #000;
       }
 
-      td:first-child {
+      td.rank {
         color: orange;
         box-shadow: inset 1px 0px 0px #000;
       }
 
-      td:nth-child(2) {
+      td.name {
         a{
           color: orange;
           font-weight: bold;
         }
       }
 
-      td:nth-child(3){
+      td.points {
         color: #616161;
       }
     }

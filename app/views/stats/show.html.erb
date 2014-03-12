@@ -1,0 +1,28 @@
+<div class="col-md-12">
+  <div class="content-container clearfix">
+    <div class="header">Solo Queue Stats</div>
+    <%= render 'region_picker' %>
+    <div class="chart-container" id="chart">
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+var chart = new CanvasJS.Chart('chart', {
+    theme: null,
+data: [
+{
+type: 'column',
+dataPoints: [
+{ label: 'Bronze', y: <%= @stats['bronze'] %>, color: '#665d1e' },
+{ label: 'Silver', y: <%= @stats['silver'] %>, color: '#cccccc' },
+{ label: 'Gold', y: <%= @stats['gold'] %>, color: '#b19f07' },
+{ label: 'Platinum', y: <%= @stats['platinum'] %>, color: '#007a7c' },
+{ label: 'Diamond', y: <%= @stats['diamond'] %>, color: '#7abaee' },
+{ label: 'Challenger', y: <%= @stats['challenger'] %>, color: '#fff600' },
+]
+}
+]
+});
+
+chart.render();
+</script>

@@ -15,20 +15,22 @@
           </div>
         </div>
         <div class="col-md-1">
-          <div class="division">
+          <% unless @league.tier == "CHALLENGER" %>
+            <div class="division">
             <div class="btn-group">
-              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+              <button type="button" class="btn dropdown-toggle" id="btn" data-toggle="dropdown">
                 I <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">I</a></li>
-                <li><a href="#">II</a></li>
-                <li><a href="#">III</a></li>
-                <li><a href="#">IV</a></li>
-                <li><a href="#">V</a></li>
+                <li><a>I</a></li>
+                <li><a>II</a></li>
+                <li><a>III</a></li>
+                <li><a>IV</a></li>
+                <li><a>V</a></li>
               </ul>
             </div>
           </div>
+        <% end %>
         </div>
       </div>
     </div>
@@ -42,17 +44,7 @@
           <th class="col-md-3">Points</th>
         </tr>
       </thead>
-      <tbody>
-      <% @players.take_while { |p| p.rank == 'I' }.each do |player| %>
-        <tr class="ladder">
-        <td class="rank">#</td>
-        <td class="name"><%= player.name %></td>
-        <td class="emblems">TODO</td>
-        <td class="wins"><%= player.wins %></td>
-        <td class="points"><%= player.league_points %></td>
-      </tr>
-    <% end %>
-      </tbody>
+      <%= render 'table', players: @players %>
     </table>
   </div>
 </div>

@@ -1,19 +1,7 @@
 <div class="col-md-8">
   <div class="content-container clearfix">
-    <div class="header">Test</div>
-    <div class="region-picker pull-right">
-      <div class="btn-group">
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-          <%= Region.name(params[:region]) %> <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><%= link_to 'Global', ladder_path(region: 'all') %></li>
-          <% REGIONS.each do |region, data| %>
-            <li><%= link_to data[:name], ladder_path(region: region) %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+    <div class="header">Solo Queue Ladder</div>
+    <%= render 'region_picker' %>
     <table class="ladder">
       <thead>
         <tr>
@@ -29,23 +17,21 @@
       <% @players.each do |player| %>
         <tr class="ladder">
         <td class="region"><%= player.region.upcase %></td>
-        <td class="rank"><%= player.ladder + 1 %></td>
+        <td class="rank"><%= number_with_delimiter(player.ladder + 1) %></td>
         <td class="name"><%= link_to player.name, league_path(region: player.region, id: player.league_id) %></td>
         <td class="tier"><%= "#{player.tier.capitalize} #{player.rank}" %></td>
         <td class="wins"><%= player.wins %></td>
-        <td class="points"><%= player.league_points %></td>
+        <td class="points"><%= number_with_delimiter(player.league_points) %></td>
       </tr>
     <% end %>
       </tbody>
     </table>
     <div class="col-md-12 ladder-pagination">
-      <%= link_to 'Prev', ladder_path(page: params[:page] - 1), class: 'ladder-nav-button pull-left' if prev_page? %>
-      <%= link_to 'Next', ladder_path(page: params[:page] + 1), class: 'ladder-nav-button pull-right' if next_page? %>
+      <%= link_to 'Prev', ladder_path(region: params[:region], page: params[:page] - 1), class: 'ladder-nav-button pull-left' if prev_page? %>
+      <%= link_to 'Next', ladder_path(region: params[:region], page: params[:page] + 1), class: 'ladder-nav-button pull-right' if next_page? %>
     </div>
   </div>
 </div>
 <div class="col-md-4">
-  <div class="content-container">
-    <div class="header">Stats and Stuff</div>
-  </div>
+  <%= render 'stats_sidebar' %>
 </div>

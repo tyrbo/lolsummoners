@@ -1,7 +1,9 @@
-module ApplicationHelper
-  def get_stats(region)
-    stats_hash(Stats.by_region(params[:region]))
+class StatsController < ApplicationController
+  def show
+    @stats = stats_hash(Stats.by_region(params[:region]))
   end
+
+  private
 
   def stats_hash(stats)
     hash = {}
