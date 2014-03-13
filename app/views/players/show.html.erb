@@ -50,8 +50,8 @@
 <div class="col-md-4">
   <div class="content-container profile-nav clearfix">
     <ul>
-      <li class="active"><span class="glyphicon glyphicon-user"></span> Profile</li>
-      <li><%= link_to '<span class="glyphicon glyphicon-user"></span> League'.html_safe, league_path(region: @player.region, id: @player.player_league.league_id) if @player.player_league %></li>
+      <li class="active"><span class="glyphicon glyphicon-home"></span> Profile</li>
+      <li><%= link_to '<span class="glyphicon glyphicon-signal"></span> League'.html_safe, league_path(region: @player.region, id: @player.player_league.league_id) if @player.player_league %></li>
     </ul>
   </div>
 </div>
