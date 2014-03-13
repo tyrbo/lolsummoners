@@ -25,7 +25,7 @@ class Ladder
   end
 
   def self.rank_for(region, player)
-    Redis.current.zrevrank("rank_#{region}", "#{player.summoner_id}_#{player.region}")
+    Redis.current.zrevrank("rank_#{region}", "#{player.summoner_id}_#{player.region}") + 1
   end
 
   def self.next_page?(opts)

@@ -13,7 +13,7 @@ class ApiHandler
       player = build_player(player_data)
       message = "done #{player.summoner_id}"
     end
-    push(key_name, message)
+    push(key_name, message, opts['caller'])
   end
 
   private
@@ -29,9 +29,9 @@ class ApiHandler
     "#{@region}_#{opts['id']}"
   end
 
-  def push(key_name, message)
+  def push(key_name, message, call)
     #PubSub.publish(key_name, message)
-    RateLimit.set("response_#{key_name}", 60 * 30, message)
+    RateLimit.set("response_#{key_name}", 60 * 30, "#{message} #{call}")
   end
 
   def api_for(region)
