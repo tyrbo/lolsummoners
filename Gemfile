@@ -16,6 +16,9 @@ gem 'brakeman', require: false
 gem 'figaro'
 gem 'sidekiq'
 gem 'tubesock', git: 'git://github.com/ngauthier/tubesock.git', branch: 'master'
+gem 'mail_form'
+gem 'recaptcha', require: 'recaptcha/rails'
+gem 'humane-rails'
 
 group :doc do
   gem 'sdoc', require: false

@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require jquery.tipsy
 //= require canvasjs.min
+//= require humane-rails
 //= require turbolinks
 //= require bootstrap

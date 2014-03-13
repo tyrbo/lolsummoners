@@ -10,4 +10,23 @@ module ApplicationHelper
     end
     hash
   end
+
+  def roman_to_numeral(roman)
+    case roman
+    when 'I'
+      1
+    when 'II'
+      2
+    when 'III'
+      3
+    when 'IV'
+      4
+    when 'V'
+      5
+    end
+  end
+
+  def rank_for(region, player)
+    Ladder.rank_for(region, player)
+  end
 end

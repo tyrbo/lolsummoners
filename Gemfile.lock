@@ -96,6 +96,8 @@ GEM
       tilt
     highline (1.6.21)
     hike (1.2.3)
+    humane-rails (5.0.2)
+      rails (>= 3.1.0)
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -107,6 +109,9 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mail_form (1.5.0)
+      actionmailer (>= 3.2, < 5)
+      activemodel (>= 3.2, < 5)
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
@@ -136,6 +141,7 @@ GEM
     rake (10.1.1)
     rdoc (4.1.1)
       json (~> 1.4)
+    recaptcha (0.3.6)
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
@@ -242,11 +248,14 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   figaro
+  humane-rails
   jbuilder (~> 1.2)
   jquery-rails
+  mail_form
   pg
   puma
   rails (= 4.0.3)
+  recaptcha
   redis
   rspec-rails (~> 3.0.0.beta)
   sass-rails (~> 4.0.0)

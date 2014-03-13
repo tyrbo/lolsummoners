@@ -31,7 +31,7 @@ class PlayerLeagueBuilder
 
   def self.stringify_mini_series(series)
     unless series.nil?
-      "#{series['target']},#{series['wins']},#{series['losses']},#{series['timeLeftToPlayMillis']}"
+      "#{series['target']},#{series['timeLeftToPlayMillis']},#{series['wins']},#{series['losses']}"
     else
       nil
     end

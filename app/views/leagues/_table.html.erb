@@ -1,12 +1,9 @@
-<tbody class="by-rank" id="I">
-<% last_points, cur_rank, inc_amount = -1000, 0, 1 %>
-<% players.find_all { |p| p.rank == 'I' }.each do |player| %>
-  <% cur_rank = cur_rank + inc_amount unless last_points == player.league_points %>
-<% inc_amount = if last_points == player.league_points then inc_amount + 1 else 1 end %>
-<% last_points = player.league_points %>
-<tr class="ladder">
-  <td class="rank"><%= cur_rank %></td>
-  <td class="name"><%= player.name %></td>
+<% players.each do |rank, players_array| %>
+  <tbody class="by-rank" id="<%= rank %>">
+<% players_array.each_with_index do |player, i| %>
+  <tr class="ladder">
+    <td class="rank"><%= i + 1 %></td>
+  <td class="name"><%= link_to player.name, player_path(summoner_id: player.summoner_id) %></td>
   <td class="emblems">
     <div class="emblems veteran<%= ' active' if player.is_veteran %>" title="Veteran"></div>
     <div class="emblems winstreak<%= ' active' if player.is_hot_streak %>" title="Hot Streak"></div>
@@ -17,79 +14,4 @@
 </tr>
 <% end %>
 </tbody>
-<tbody class="by-rank" id="II">
-<% last_points, cur_rank, inc_amount = -1000, 0, 1 %>
-<% players.find_all { |p| p.rank == 'II' }.each do |player| %>
-  <% cur_rank = cur_rank + inc_amount unless last_points == player.league_points %>
-<% inc_amount = if last_points == player.league_points then inc_amount + 1 else 1 end %>
-<% last_points = player.league_points %>
-<tr class="ladder">
-  <td class="rank"><%= cur_rank %></td>
-  <td class="name"><%= player.name %></td>
-  <td class="emblems">
-    <div class="emblems veteran<%= ' active' if player.is_veteran %>" title="Veteran"></div>
-    <div class="emblems winstreak<%= ' active' if player.is_hot_streak %>" title="Hot Streak"></div>
-    <div class="emblems freshblood<%= ' active' if player.is_fresh_blood %>" title="Fresh Blood"></div>
-  </td>
-  <td class="wins"><%= player.wins %></td>
-  <td class="points"><%= points_for(player) %></td>
-</tr>
 <% end %>
-</tbody>
-<tbody class="by-rank" id="III">
-<% last_points, cur_rank, inc_amount = -1000, 0, 1 %>
-<% players.find_all { |p| p.rank == 'III' }.each do |player| %>
-  <% cur_rank = cur_rank + inc_amount unless last_points == player.league_points %>
-<% inc_amount = if last_points == player.league_points then inc_amount + 1 else 1 end %>
-<% last_points = player.league_points %>
-<tr class="ladder">
-  <td class="rank"><%= cur_rank %></td>
-  <td class="name"><%= player.name %></td>
-  <td class="emblems">
-    <div class="emblems veteran<%= ' active' if player.is_veteran %>" title="Veteran"></div>
-    <div class="emblems winstreak<%= ' active' if player.is_hot_streak %>" title="Hot Streak"></div>
-    <div class="emblems freshblood<%= ' active' if player.is_fresh_blood %>" title="Fresh Blood"></div>
-  </td>
-  <td class="wins"><%= player.wins %></td>
-  <td class="points"><%= points_for(player) %></td>
-</tr>
-<% end %>
-</tbody>
-<tbody class="by-rank" id="IV">
-<% last_points, cur_rank, inc_amount = -1000, 0, 1 %>
-<% players.find_all { |p| p.rank == 'IV' }.each do |player| %>
-  <% cur_rank = cur_rank + inc_amount unless last_points == player.league_points %>
-<% inc_amount = if last_points == player.league_points then inc_amount + 1 else 1 end %>
-<% last_points = player.league_points %>
-<tr class="ladder">
-  <td class="rank"><%= cur_rank %></td>
-  <td class="name"><%= player.name %></td>
-  <td class="emblems">
-    <div class="emblems veteran<%= ' active' if player.is_veteran %>" title="Veteran"></div>
-    <div class="emblems winstreak<%= ' active' if player.is_hot_streak %>" title="Hot Streak"></div>
-    <div class="emblems freshblood<%= ' active' if player.is_fresh_blood %>" title="Fresh Blood"></div>
-  </td>
-  <td class="wins"><%= player.wins %></td>
-  <td class="points"><%= points_for(player) %></td>
-</tr>
-<% end %>
-</tbody>
-<tbody class="by-rank" id="V">
-<% last_points, cur_rank, inc_amount = -1000, 0, 1 %>
-<% players.find_all { |p| p.rank == 'V' }.each do |player| %>
-  <% cur_rank = cur_rank + inc_amount unless last_points == player.league_points %>
-<% inc_amount = if last_points == player.league_points then inc_amount + 1 else 1 end %>
-<% last_points = player.league_points %>
-<tr class="ladder">
-  <td class="rank"><%= cur_rank %></td>
-  <td class="name"><%= player.name %></td>
-  <td class="emblems">
-    <div class="emblems veteran<%= ' active' if player.is_veteran %>" title="Veteran"></div>
-    <div class="emblems winstreak<%= ' active' if player.is_hot_streak %>" title="Hot Streak"></div>
-    <div class="emblems freshblood<%= ' active' if player.is_fresh_blood %>" title="Fresh Blood"></div>
-  </td>
-  <td class="wins"><%= player.wins %></td>
-  <td class="points"><%= points_for(player) %></td>
-</tr>
-<% end %>
-</tbody>

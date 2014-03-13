@@ -24,6 +24,10 @@ class Ladder
     redis.zrevrange("rank_#{@region}", (page - 1) * 25, (page * 25) - 1)
   end
 
+  def self.rank_for(region, player)
+    Redis.current.zrevrank("rank_#{region}", "#{player.summoner_id}_#{player.region}")
+  end
+
   def self.next_page?(opts)
     opts[:page].to_i < (get_total_players(opts[:region]) / PER_PAGE)
   end

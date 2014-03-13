@@ -140,6 +140,14 @@ select.search {
   }
 }
 
+.field_with_errors input,textarea {
+  border: 1px solid red;
+}
+
+.form-group label {
+  font-size: 16px;
+}
+
 .content-container {
   background-color: #0f0f0f;
   border: 1px solid black;

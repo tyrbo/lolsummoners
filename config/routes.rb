@@ -1,6 +1,7 @@
 Lolsummoners::Application.routes.draw do
   root 'posts#index'
   resources :posts, only: [:index, :show]
+  resource :contact, only: [:new, :create]
 
   get '/ladders/:region(/:page)', to: 'ladders#show',
                        defaults: { region: 'all', page: 1 },

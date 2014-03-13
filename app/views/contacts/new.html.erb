@@ -1,0 +1,28 @@
+<div class="col-md-8">
+  <div class="content-container clearfix">
+    <div class="header">Contact Us</div>
+    <div class="contact-us">
+      <%= form_for(@contact, url: contact_path) do |f| %>
+        <p>Your message will be answered as quickly as possible.</p>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.text_field :email, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :subject %>
+          <%= f.text_field :subject, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :message %>
+          <%= f.text_area :message, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= recaptcha_tags %>
+        </div>
+        <%= f.submit 'Send Message', class: 'btn btn-default' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+</div>

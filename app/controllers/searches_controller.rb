@@ -3,6 +3,10 @@ class SearchesController < ApplicationController
   before_action :rate_limited?
 
   def show
+    unless params[:name].present? && params[:region].present?
+      flash[:error] = 'You need to specify a name to search for.'
+      redirect_to root_path
+    end
     player = Player.name_and_region(params[:name], params[:region]).first
     if player
       redirect_to player_path(region: player.region, summoner_id: player.summoner_id)
@@ -16,8 +20,6 @@ class SearchesController < ApplicationController
   private
 
   def prepare_params
-    params.require(:name)
-    params.require(:region)
     params[:name] = params[:name].downcase.gsub(/\s+/, '')
   end
 

@@ -15,9 +15,13 @@
       </thead>
       <tbody>
       <% @players.each do |player| %>
+        <% rank = player.ladder + 1 %>
+        <% percentage = number_with_precision(rank / @total, precision: 2).to_f %>
+        <% percentage = percentage * 100 %>
+        <% percentage = 0.01 if percentage < 0.01 %>
         <tr class="ladder">
         <td class="region"><%= player.region.upcase %></td>
-        <td class="rank"><%= number_with_delimiter(player.ladder + 1) %></td>
+        <td class="rank"><%= number_with_delimiter(rank) %> (<%= percentage %>%)</td>
         <td class="name"><%= link_to player.name, league_path(region: player.region, id: player.league_id) %></td>
         <td class="tier"><%= "#{player.tier.capitalize} #{player.rank}" %></td>
         <td class="wins"><%= player.wins %></td>

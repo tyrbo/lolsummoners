@@ -17,7 +17,7 @@ end
 
 def create_new_player
   player = build(:player, summoner_id: @summoner_id, region: @region, name: @name)
-  player.build_player_league(tier: 'Test', league_points: @points, league: @league)
+  player.build_player_league(tier: 'Test', rank: 'I', league_points: @points, league: @league)
   player.save
 end
 

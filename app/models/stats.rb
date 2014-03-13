@@ -19,6 +19,8 @@ class Stats < ActiveRecord::Base
       stat.value = value
       stat.save
     end
+
+    update_count
   end
 
   def self.update_stat(region, tier)
@@ -26,5 +28,18 @@ class Stats < ActiveRecord::Base
     stat.value = Player.region_and_tier_count(region, tier)
     stat.save
     stat.value
+  end
+
+  def self.update_count
+    total_count = 0
+    REGIONS.each do |region, _|
+      count = 0
+      Stats.by_region(region).each do |stat|
+        count = count + stat.value
+        total_count = total_count + stat.value
+      end
+      Redis.current.set("total_#{region}", count)
+    end
+    Redis.current.set('total_all', total_count)
   end
 end

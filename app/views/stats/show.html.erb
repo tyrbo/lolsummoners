@@ -1,10 +1,13 @@
-<div class="col-md-12">
+<div class="col-md-8">
   <div class="content-container clearfix">
     <div class="header">Solo Queue Stats</div>
     <%= render 'region_picker' %>
     <div class="chart-container" id="chart">
     </div>
   </div>
+</div>
+<div class="col-md-4">
+  <%= render 'stats_sidebar' %>
 </div>
 <script type="text/javascript">
 var chart = new CanvasJS.Chart('chart', {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="utf-8">
 <title>League of Legends Stats and Rankings | LOL Summoners</title>
 <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 <%= stylesheet_link_tag    params[:controller], media: "all", "data-turbolinks-track" => true %>
@@ -8,11 +9,11 @@
 <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 <%= javascript_include_tag params[:controller] %>
 <%= csrf_meta_tags %>
-<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<%=raw humane_flash_messages %>
 <div class="container">
   <div class="row">
     <div class="wrapper hidden-xs">
@@ -35,19 +36,19 @@
       </div>
       <div class="collapse navbar-collapse" id="menu">
         <ul class="nav navbar-nav">
-          <li><a href="/">Home</a></li>
-          <li><a href="/ladders">Ladders</a></li>
-          <li><a href="/stats">Stats</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to 'Ladders', ladders_path %></li>
+          <li><%= link_to 'Stats', stats_path %></li>
+          <li><%= link_to 'Contact', new_contact_path %></li>
         </ul>
         <%= form_tag '/search', method: 'get', class: 'navbar-form navbar-right clearfix', id: 'search' do %>
           <%= select_tag 'region', options_for_select(REGIONS.collect {|n, _| [n.upcase, n] }), class: 'search' %>
-          <%= text_field_tag 'name', nil, class: 'search', placeholder: 'Find Summoner...' %>
-          <%= submit_tag '', class: 'submit', id: 'submit' %>
-        <% end %>
+        <%= text_field_tag 'name', nil, class: 'search', placeholder: 'Find Summoner...' %>
+        <%= submit_tag '', class: 'submit', id: 'submit' %>
+      <% end %>
       </div>
       <div class="arrow-bar">
-      <div class="arrow <%= controller_name %> hidden-xs"></div>
+        <div class="arrow <%= controller_name %> hidden-xs"></div>
       </div>
     </nav>
     <section class="row">

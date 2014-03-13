@@ -1,6 +1,57 @@
-<%= @player.name %>
-<% if @player.player_league %>
-  <%= "#{@player.player_league.tier.capitalize} #{@player.player_league.rank}" %>
-<% else %>
-  Not Ranked
-<% end %>
+<div class="col-md-8">
+  <div class="content-container clearfix">
+    <div class="header"><%= @player.name %></div>
+    <div class="ratings">
+      <div class="col-md-4">
+        <div class="rating">
+          <div class="queue-type">Team 3v3</div>
+          <div class="points">
+            Unavailable
+          </div>
+          <%= image_tag 'placing.png', class: 'img-responsive center-block' %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rating clearfix">
+          <div class="queue-type">Solo Queue</div>
+          <div class="points">
+            <% if @player.player_league %>
+              <strong><%= "#{@player.player_league.tier.capitalize} #{@player.player_league.rank}" %></strong>
+          <% else %>
+              Not Ranked
+          <% end %>
+          </div>
+          <%= image_tag "medals/#{@player.tier.downcase}_#{roman_to_numeral(@player.rank)}.png", class: 'img-responsive center-block' if @player.player_league %>
+          <%= image_tag 'placing.png', class: 'img-responsive center-block' unless @player.player_league %>
+          <div class="rank">
+            <div class="col-md-6">
+              <div class="title"><%= @player.region.upcase %></div>
+              <%= number_with_delimiter(rank_for(@player.region, @player)) %>
+            </div>
+            <div class="col-md-6">
+              <div class="title"><%= Region.name('all') %></div>
+              <%= number_with_delimiter(rank_for('all', @player)) %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rating">
+          <div class="queue-type">Team 5v5</div>
+          <div class="points">
+            Unavailable
+          </div>
+          <%= image_tag 'placing.png', class: 'img-responsive center-block' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-4">
+  <div class="content-container profile-nav clearfix">
+    <ul>
+      <li class="active"><span class="glyphicon glyphicon-user"></span> Profile</li>
+      <li><%= link_to '<span class="glyphicon glyphicon-user"></span> League'.html_safe, league_path(region: @player.region, id: @player.player_league.league_id) if @player.player_league %></li>
+    </ul>
+  </div>
+</div>

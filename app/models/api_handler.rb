@@ -6,9 +6,9 @@ class ApiHandler
 
   def player_search(opts)
     key_name = key_name_for(opts)
-    message = 'fail'
-    RateLimit.set("limited_#{key_name}", 60 * 30)
-    player_data = @api.by_name(opts['id'])
+    player_data, response = @api.by_name(opts['id'])
+    message = "fail #{response}"
+    RateLimit.set("limited_#{key_name}", 60 * 30) if response == '200' || response == '404'
     unless player_data.nil?
       player = build_player(player_data)
       message = "done #{player.summoner_id}"
@@ -30,8 +30,8 @@ class ApiHandler
   end
 
   def push(key_name, message)
-    PubSub.publish(key_name, message)
-    RateLimit.set("limited_#{key_name}", 60 * 30, message)
+    #PubSub.publish(key_name, message)
+    RateLimit.set("response_#{key_name}", 60 * 30, message)
   end
 
   def api_for(region)

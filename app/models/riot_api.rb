@@ -9,11 +9,15 @@ class RiotApi
   def by_name(name)
     escaped_name = CGI::escape(name)
     response = get("v1.3/summoner/by-name/#{escaped_name}")
-    if !response.nil? && response.code == '200'
-      player = JSON.parse(response.body)
-      return player[name]
+    if !response.nil?
+      if response.code == '200'
+        player = JSON.parse(response.body)
+        return [player[name], '200']
+      else
+        return [nil, response.code]
+      end
     else
-      nil
+      [nil, '0']
     end
   end
 

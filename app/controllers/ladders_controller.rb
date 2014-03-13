@@ -3,6 +3,7 @@ class LaddersController < ApplicationController
 
   def show
     @players = Ladder.new(params[:region]).find_by_page(params[:page])
+    @total = Redis.current.get("total_#{params[:region]}").to_f
   end
 
   private

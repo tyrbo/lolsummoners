@@ -5,18 +5,18 @@ describe RiotApi do
 
   describe '#by_name' do
     it 'returns a hash for a valid player' do
-      expected_hash = {
+      expected_hash = [{
         'id' => 0,
         'name' => 'Pentakill',
         'profileIconId' => 28,
         'revisionDate' => 0,
         'summonerLevel' => 30
-      }
+      }, '200']
       expect(api.by_name('pentakill')).to eq expected_hash
     end
 
     it 'returns nil for an invalid player' do
-      expect(api.by_name('ajsdfoabsdfouabsdfiouweroi')).to eq nil
+      expect(api.by_name('ajsdfoabsdfouabsdfiouweroi')).to eq [nil, '404']
     end
   end
 
