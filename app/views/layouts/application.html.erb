@@ -41,8 +41,9 @@
           <li><%= link_to 'Stats', stats_path %></li>
           <li><%= link_to 'Contact', new_contact_path %></li>
         </ul>
+        <% region_id = REGIONS.detect { |k, _| k == session[:region] } %>
         <%= form_tag '/search', method: 'get', class: 'navbar-form navbar-right clearfix', id: 'search' do %>
-          <%= select_tag 'region', options_for_select(REGIONS.collect {|n, _| [n.upcase, n] }), class: 'search' %>
+          <%= select_tag 'region', options_for_select(REGIONS.collect {|n, _| [n.upcase, n] }, region_id), class: 'search' %>
         <%= text_field_tag 'name', nil, class: 'search', placeholder: 'Find Summoner...' %>
         <%= submit_tag '', class: 'submit', id: 'submit' %>
       <% end %>
@@ -53,6 +54,9 @@
     </nav>
     <section class="row">
       <div class="col-md-12">
+        <div class="col-md-12">
+          <div class="alert alert-info"><strong>Full updates</strong> will resume <strong>tomorrow</strong>. Individual players <strong>will be updated</strong> as they are viewed.</div>
+        </div>
         <%= yield %>
       </div>
     </section>

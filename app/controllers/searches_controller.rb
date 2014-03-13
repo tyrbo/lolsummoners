@@ -7,6 +7,7 @@ class SearchesController < ApplicationController
       flash[:error] = 'You need to specify a name to search for.'
       redirect_to root_path
     end
+    session[:region] = params[:region].to_sym
     player = Player.name_and_region(params[:name], params[:region]).first
     if player
       redirect_to player_path(region: player.region, summoner_id: player.summoner_id)

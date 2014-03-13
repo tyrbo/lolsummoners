@@ -4,6 +4,11 @@ $ ->
   updating = $('#update-value').data('update')
 
   if updating == true
+    timeout = setTimeout ( ->
+    socket.close()
+      humane.error('We were unable to update the player at this time.')
+    ), 5000
+
     socket = new WebSocket "ws://#{window.location.host}/queue/#{region}/#{name}"
 
     socket.onmessage = (event) ->
