@@ -19,6 +19,7 @@ gem 'tubesock', git: 'git://github.com/ngauthier/tubesock.git', branch: 'master'
 gem 'mail_form'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'humane-rails'
+gem 'foreman'
 
 group :doc do
   gem 'sdoc', require: false
