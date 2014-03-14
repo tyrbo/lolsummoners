@@ -23,6 +23,7 @@
           </div>
           <%= image_tag "medals/#{@player.tier.downcase}_#{roman_to_numeral(@player.rank)}.png", class: 'img-responsive center-block' if @player.player_league %>
           <%= image_tag 'placing.png', class: 'img-responsive center-block' unless @player.player_league %>
+          <% if @player.player_league %>
           <div class="rank">
             <div class="col-md-6">
               <div class="title"><%= @player.region.upcase %></div>
@@ -33,6 +34,7 @@
               <%= number_with_delimiter(rank_for('all', @player)) %>
             </div>
           </div>
+          <% end %>
         </div>
       </div>
       <div class="col-md-4">
