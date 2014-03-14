@@ -2,7 +2,7 @@ class SearchesController < ApplicationController
   before_action :rate_limited?
 
   def show
-    if params[:name].blank?
+    if params[:region].blank? || params[:name].blank?
       flash[:error] = 'You need to specify a name to search for.'
       redirect_to root_path
     else
