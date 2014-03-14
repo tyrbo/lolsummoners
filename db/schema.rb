@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314035439) do
+ActiveRecord::Schema.define(version: 20140314053834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140314035439) do
     t.boolean  "is_hot_streak"
     t.boolean  "is_inactive"
     t.boolean  "is_veteran"
-    t.integer  "last_played"
+    t.integer  "last_played",         limit: 8
     t.integer  "league_points"
     t.string   "mini_series"
     t.string   "player_or_team_id"
