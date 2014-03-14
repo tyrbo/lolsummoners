@@ -5,7 +5,7 @@ $ ->
 
   if updating == true
     timeout = setTimeout ( ->
-    socket.close()
+      socket.close()
       humane.error('We were unable to update the player at this time.')
     ), 5000
 
