@@ -21,5 +21,13 @@ module Lolsummoners
     # config.i18n.default_locale = :de
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
     config.i18n.enforce_available_locales = true
+
+    config.middleware.insert_before(Rack::Lock, Rack::Rewrite) do
+      r302 %r{/stats/rankings/(.*)}, '/stats/$1'
+      r302 '/stats/rankings', '/stats'
+      r302 %r{/ladder/(.*)/(.*)}, '/ladders/$1/$2'
+      r302 %r{/ladder/(.*)}, '/ladders/$1'
+      r302 '/ladder', '/ladders'
+    end
   end
 end

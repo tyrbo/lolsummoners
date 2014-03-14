@@ -21,6 +21,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'humane-rails'
 gem 'foreman'
 gem 'newrelic_rpm'
+gem 'rack-rewrite'
 
 group :doc do
   gem 'sdoc', require: false
