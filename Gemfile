@@ -20,6 +20,7 @@ gem 'mail_form'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'humane-rails'
 gem 'foreman'
+gem 'newrelic_rpm'
 
 group :doc do
   gem 'sdoc', require: false
