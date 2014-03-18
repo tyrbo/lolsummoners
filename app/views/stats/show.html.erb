@@ -15,13 +15,34 @@ var chart = new CanvasJS.Chart('chart', {
 data: [
 {
 type: 'column',
+toolTipContent: '{y}',
 dataPoints: [
-{ label: 'Bronze', y: <%= @stats['bronze'] %>, color: '#665d1e' },
-{ label: 'Silver', y: <%= @stats['silver'] %>, color: '#cccccc' },
-{ label: 'Gold', y: <%= @stats['gold'] %>, color: '#b19f07' },
-{ label: 'Platinum', y: <%= @stats['platinum'] %>, color: '#007a7c' },
-{ label: 'Diamond', y: <%= @stats['diamond'] %>, color: '#7abaee' },
-{ label: 'Challenger', y: <%= @stats['challenger'] %>, color: '#fff600' },
+{ label: 'Bronze', indexLabel: 'V', y: <%= @stats['bronze']['V'] %>, color: '#645b1c' },
+{ label: 'Bronze', indexLabel: 'IV', y: <%= @stats['bronze']['IV'] %>, color: '#645b1c' },
+{ label: 'Bronze', indexLabel: 'III', y: <%= @stats['bronze']['III'] %>, color: '#645b1c' },
+{ label: 'Bronze', indexLabel: 'II', y: <%= @stats['bronze']['II'] %>, color: '#645b1c' },
+{ label: 'Bronze', indexLabel: 'I', y: <%= @stats['bronze']['I'] %>, color: '#645b1c' },
+{ label: 'Silver', indexLabel: 'V', y: <%= @stats['silver']['V'] %>, color: '#cccccc' },
+{ label: 'Silver', indexLabel: 'IV', y: <%= @stats['silver']['IV'] %>, color: '#cccccc' },
+{ label: 'Silver', indexLabel: 'III', y: <%= @stats['silver']['III'] %>, color: '#cccccc' },
+{ label: 'Silver', indexLabel: 'II', y: <%= @stats['silver']['II'] %>, color: '#cccccc' },
+{ label: 'Silver', indexLabel: 'I', y: <%= @stats['silver']['I'] %>, color: '#cccccc' },
+{ label: 'Gold', indexLabel: 'V', y: <%= @stats['gold']['V'] %>, color: '#b19f07' },
+{ label: 'Gold', indexLabel: 'IV', y: <%= @stats['gold']['IV'] %>, color: '#b19f07' },
+{ label: 'Gold', indexLabel: 'III', y: <%= @stats['gold']['III'] %>, color: '#b19f07' },
+{ label: 'Gold', indexLabel: 'II', y: <%= @stats['gold']['II'] %>, color: '#b19f07' },
+{ label: 'Gold', indexLabel: 'I', y: <%= @stats['gold']['I'] %>, color: '#b19f07' },
+{ label: 'Platinum', indexLabel: 'V', y: <%= @stats['platinum']['V'] %>, color: '#007a7c' },
+{ label: 'Platinum', indexLabel: 'IV', y: <%= @stats['platinum']['IV'] %>, color: '#007a7c' },
+{ label: 'Platinum', indexLabel: 'III', y: <%= @stats['platinum']['III'] %>, color: '#007a7c' },
+{ label: 'Platinum', indexLabel: 'II', y: <%= @stats['platinum']['II'] %>, color: '#007a7c' },
+{ label: 'Platinum', indexLabel: 'I', y: <%= @stats['platinum']['I'] %>, color: '#007a7c' },
+{ label: 'Diamond', indexLabel: 'V', y: <%= @stats['diamond']['V'] %>, color: '#7abaee' },
+{ label: 'Diamond', indexLabel: 'IV', y: <%= @stats['diamond']['IV'] %>, color: '#7abaee' },
+{ label: 'Diamond', indexLabel: 'III', y: <%= @stats['diamond']['III'] %>, color: '#7abaee' },
+{ label: 'Diamond', indexLabel: 'II', y: <%= @stats['diamond']['II'] %>, color: '#7abaee' },
+{ label: 'Diamond', indexLabel: 'I', y: <%= @stats['diamond']['I'] %>, color: '#7abaee' },
+{ label: 'Challenger', indexLabel: 'I', y: <%= @stats['challenger']['I'] %>, color: '#000' }
 ]
 }
 ]

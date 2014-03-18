@@ -13,27 +13,27 @@
     <tbody>
     <tr>
       <td class="name">Bronze</td>
-      <td><%= number_with_delimiter(stats['bronze']) %></td>
+      <td><%= number_with_delimiter(stats['bronze']['total']) %> (<%= percentage_for(params[:region], stats['bronze']['total']) %>%)</td>
     </tr>
     <tr>
       <td class="name">Silver</td>
-      <td><%= number_with_delimiter(stats['silver']) %></td>
+      <td><%= number_with_delimiter(stats['silver']['total']) %> (<%= percentage_for(params[:region], stats['silver']['total']) %>%)</td>
     </tr>
     <tr>
       <td class="name">Gold</td>
-      <td><%= number_with_delimiter(stats['gold']) %></td>
+      <td><%= number_with_delimiter(stats['gold']['total']) %> (<%= percentage_for(params[:region], stats['gold']['total']) %>%)</td>
     </tr>
     <tr>
       <td class="name">Platinum</td>
-      <td><%= number_with_delimiter(stats['platinum']) %></td>
+      <td><%= number_with_delimiter(stats['platinum']['total']) %> (<%= percentage_for(params[:region], stats['platinum']['total']) %>%)</td>
     </tr>
     <tr>
       <td class="name">Diamond</td>
-      <td><%= number_with_delimiter(stats['diamond']) %></td>
+      <td><%= number_with_delimiter(stats['diamond']['total']) %> (<%= percentage_for(params[:region], stats['diamond']['total']) %>%)</td>
     </tr>
     <tr>
       <td class="name">Challenger</td>
-      <td><%= number_with_delimiter(stats['challenger']) %></td>
+      <td><%= number_with_delimiter(stats['challenger']['total']) %> (<%= percentage_for(params[:region], stats['challenger']['total']) %>%)</td>
     </tr>
     </tbody>
   </table>

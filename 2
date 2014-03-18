@@ -1,0 +1,43 @@
+<div class="content-container clearfix">
+  <div class="header">
+    Statistics
+  </div>
+  <% stats = get_stats(params[:region]) %>
+  <table class="col-md-12 ladder">
+    <thead>
+      <tr>
+        <th class="col-md-7">Tier</th>
+        <th class="col-md-5">Count</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% stats.each do |name, stat| %>
+      <%= "#{name}: #{stat['I']}" %>
+    <% end %>
+    <tr>
+      <td class="name">Bronze</td>
+      <td><%= stats['bronze'][0] %></td>
+    </tr>
+    <tr>
+      <td class="name">Silver</td>
+      <td><%= number_with_delimiter(stats['silver']) %></td>
+    </tr>
+    <tr>
+      <td class="name">Gold</td>
+      <td><%= number_with_delimiter(stats['gold']) %></td>
+    </tr>
+    <tr>
+      <td class="name">Platinum</td>
+      <td><%= number_with_delimiter(stats['platinum']) %></td>
+    </tr>
+    <tr>
+      <td class="name">Diamond</td>
+      <td><%= number_with_delimiter(stats['diamond']) %></td>
+    </tr>
+    <tr>
+      <td class="name">Challenger</td>
+      <td><%= number_with_delimiter(stats['challenger']) %></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

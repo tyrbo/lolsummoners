@@ -8,7 +8,7 @@ class StatsController < ApplicationController
   def stats_hash(stats)
     hash = {}
     stats.each do |stat|
-      hash[stat.name] = stat.value
+      hash[stat.name] = JSON.parse(stat.value)
     end
     hash
   end

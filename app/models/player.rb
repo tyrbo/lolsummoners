@@ -7,10 +7,10 @@ class Player < ActiveRecord::Base
     where(summoner_id: summoner_id, region: region)
   }
 
-  scope :region_and_tier_count, -> (region, tier) {
-    includes(:player_league).
+  scope :region_tier_and_division_count, -> (region, tier, division) {
+    joins(:player_league).
     where(region: region).
-    where(player_leagues: { tier: tier }).
+    where(player_leagues: { tier: tier, rank: division }).
     count
   }
 

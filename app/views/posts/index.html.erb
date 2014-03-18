@@ -1,6 +1,6 @@
 <div class="col-md-8">
 	<% @posts.each do |entry| %>
-		<div class="news"> 
+		<div class="news<%= ' type-2' if entry.id.even? %>"> 
 		<div class="ribbon">
 			<div class="rib beg"></div>
 			<div class="rib cont"><%= time_ago_in_words(entry.created_at) %> ago</div>
