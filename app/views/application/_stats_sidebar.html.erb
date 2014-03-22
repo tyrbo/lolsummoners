@@ -3,7 +3,8 @@
     Statistics
   </div>
   <% stats = get_stats(params[:region]) %>
-  <table class="col-md-12 ladder">
+  <% unless stats.empty? %>
+    <table class="col-md-12 ladder">
     <thead>
       <tr>
         <th class="col-md-7">Tier</th>
@@ -37,4 +38,5 @@
     </tr>
     </tbody>
   </table>
+<% end %>
 </div>

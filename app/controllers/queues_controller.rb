@@ -5,7 +5,7 @@ class QueuesController < ApplicationController
     hijack do |tubesock|
       host = ENV['REDIS_HOST'] || '127.0.0.1'
       @redis = Redis.new(host: host)
-      key_name = "#{params[:region]}_#{params[:name]}"
+      key_name = "#{params[:region]}_#{params[:by]}_#{params[:name]}"
 
       Thread.new do
         current = nil

@@ -3,7 +3,7 @@ class SearchWorker
   sidekiq_options retry: false
 
   def self.queue(opts)
-    key_name = "limited_#{opts[:region]}_#{opts[:id]}"
+    key_name = "limited_#{opts[:region]}_#{opts[:by]}_#{opts[:id]}"
     unless RateLimit.limited?(key_name)
       self.perform_async(opts)
       return true

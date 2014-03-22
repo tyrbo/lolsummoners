@@ -6,7 +6,12 @@ class ApiHandler
 
   def player_search(opts)
     key_name = key_name_for(opts)
-    player_data, response = @api.by_name(opts['id'])
+    player_data, response = nil, nil
+    if opts['by'] == 'name'
+      player_data, response = @api.by_name(opts['id'])
+    elsif opts['by'] == 'sid'
+      player_data, response = @api.by_summoner_id(opts['id'])
+    end
     message = "fail #{response}"
     RateLimit.set("limited_#{key_name}", 60 * 30) if response == '200' || response == '404'
     unless player_data.nil?
@@ -19,14 +24,14 @@ class ApiHandler
   private
 
   def build_player(player_data)
-      player = PlayerBuilder.create_or_update(player_data, @region)
-      league_data = @api.league_for(player.summoner_id)
-      PlayerLeagueBuilder.create_or_update(player, league_data, @region) unless league_data.nil?
-      player
+    player = PlayerBuilder.create_or_update(player_data, @region)
+    league_data = @api.league_for(player.summoner_id)
+    PlayerLeagueBuilder.create_or_update(player, league_data, @region) unless league_data.nil?
+    player
   end
 
   def key_name_for(opts)
-    "#{@region}_#{opts['id']}"
+    "#{@region}_#{opts['by']}_#{opts['id']}"
   end
 
   def push(key_name, message, call)

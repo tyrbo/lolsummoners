@@ -9,16 +9,12 @@ class RiotApi
   def by_name(name)
     escaped_name = CGI::escape(name)
     response = get("v1.3/summoner/by-name/#{escaped_name}")
-    if !response.nil?
-      if response.code == '200'
-        player = JSON.parse(response.body)
-        return [player[name], '200']
-      else
-        return [nil, response.code]
-      end
-    else
-      [nil, '0']
-    end
+    handle_summoner(response, name)
+  end
+
+  def by_summoner_id(summoner_id)
+    response = get("v1.3/summoner/#{summoner_id}")
+    handle_summoner(response, summoner_id)
   end
 
   def league_for(summoner_id)
@@ -32,6 +28,20 @@ class RiotApi
   end
 
   private
+
+  def handle_summoner(response, arg)
+    arg = arg.to_s
+    if !response.nil?
+      if response.code == '200'
+        player = JSON.parse(response.body)
+        return [player[arg], '200']
+      else
+        return [nil, response.code]
+      end
+    else
+      [nil, '0']
+    end
+  end
 
   def get(resource)
     begin

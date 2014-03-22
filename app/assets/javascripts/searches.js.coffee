@@ -7,7 +7,7 @@ $ ->
     $('#loading').html('<h1>Uh oh.</h1><p>We took too long to find that player. Try again later.')
   ), 5000
 
-  socket = new WebSocket "ws://#{window.location.host}/queue/#{region}/#{name}"
+  socket = new WebSocket "ws://#{window.location.host}/queue/#{region}/#{name}?by=name"
 
   socket.onmessage = (event) ->
     clearTimeout timeout
