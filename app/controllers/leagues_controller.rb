@@ -1,7 +1,7 @@
 class LeaguesController < ApplicationController
   def show
     @league = League.id_and_region(params[:id], params[:region]).first
-    @players = player_hash(@league.players.sort_by { |player| player.league_points }.reverse!)
+    @players = player_hash(@league.players)
   end
 
   private
