@@ -3,7 +3,7 @@ class League < ActiveRecord::Base
     where(id: id, region: region)
   }
 
-  has_many :player_leagues, order: 'league_points DESC'
+  has_many :player_leagues, -> { order 'league_points DESC' }
   has_many :players, through: :player_leagues
 
   def self.set_rank(region, summoner_id, attributes)

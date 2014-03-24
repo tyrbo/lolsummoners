@@ -36,6 +36,10 @@
       <td class="name">Challenger</td>
       <td><%= number_with_delimiter(stats['challenger']['total']) %> (<%= percentage_for(params[:region], stats['challenger']['total']) %>%)</td>
     </tr>
+    <tr>
+      <td class="name">Total</td>
+      <td><%= number_with_delimiter(stats['total']) %></td>
+    </tr>
     </tbody>
   </table>
 <% end %>

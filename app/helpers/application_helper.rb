@@ -5,9 +5,12 @@ module ApplicationHelper
 
   def stats_hash(stats)
     hash = {}
+    total = 0
     stats.each do |stat|
       hash[stat.name] = JSON.parse(stat.value)
+      total = total + hash[stat.name]['total']
     end
+    hash['total'] = total
     hash
   end
 
@@ -35,9 +38,9 @@ module ApplicationHelper
   end
 
   def percentage_for(region, rank)
-    percentage = number_with_precision(rank / total_for(region)).to_f
+    percentage = rank / total_for(region).to_f
     percentage = percentage * 100
     percentage = 0.01 if percentage < 0.01
-    percentage
+    number_with_precision(percentage, precision: 2)
   end
 end
