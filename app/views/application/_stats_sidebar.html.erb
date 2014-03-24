@@ -3,7 +3,7 @@
     Statistics
   </div>
   <% stats = get_stats(params[:region]) %>
-  <% unless stats.empty? %>
+  <% unless stats['total'] == 0 %>
     <table class="col-md-12 ladder">
     <thead>
       <tr>

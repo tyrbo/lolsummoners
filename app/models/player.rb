@@ -8,7 +8,7 @@ class Player < ActiveRecord::Base
   }
 
   scope :region_tier_and_division_count, -> (region, tier, division) {
-    joins(:player_league).
+    includes(:player_league).
     where(region: region).
     where(player_leagues: { tier: tier, rank: division }).
     count

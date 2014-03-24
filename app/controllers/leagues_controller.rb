@@ -1,6 +1,6 @@
 class LeaguesController < ApplicationController
   def show
-    @league = League.id_and_region(params[:id], params[:region]).first
+    @league = League.includes(players: :player_league).find(params[:id])
     @players = player_hash(@league.players)
   end
 
