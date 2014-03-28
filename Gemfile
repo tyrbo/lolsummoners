@@ -22,6 +22,7 @@ gem 'humane-rails'
 gem 'foreman'
 gem 'newrelic_rpm'
 gem 'rack-rewrite'
+gem 'curb'
 
 group :doc do
   gem 'sdoc', require: false

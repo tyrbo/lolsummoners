@@ -7,7 +7,7 @@ class Ladder
 
   def find_by_page(page)
     redis_ids = find_redis_ranks(@region, page)
-    players = Player.find_players_by_region(redis_ids)
+    players = Player.includes(:player_league).find_players_by_region(redis_ids)
     combine_players_with_rank(players)
   end
 

@@ -3,16 +3,6 @@ require 'spec_helper'
 describe ApiHandler do
   let(:handler) { ApiHandler.new('na') }
 
-  #describe '#api_for' do
-  #  it 'uses RiotApi when region is available' do
-  #    expect(handler.api_for('na')).to be_kind_of RiotApi
-  #  end
-
-  #  it 'uses NodeApi when region api is unavailable' do
-  #    expect(handler.api_for('euw')).to be_kind_of NodeApi
-  #  end
-  #end
-
   describe '#player_search' do
     it 'creates a new player' do
       handler.player_search('id' => 'pentakill', 'by' => 'name')

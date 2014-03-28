@@ -1,4 +1,4 @@
-require 'net/http'
+require 'curb'
 
 class RiotApi
   def initialize(region)
@@ -19,11 +19,15 @@ class RiotApi
 
   def league_for(summoner_id)
     response = get("v2.3/league/by-summoner/#{summoner_id}/entry")
-    if !response.nil? && response.code == '200'
-      leagues = JSON.parse(response.body)
-      return leagues.detect { |league| league['queueType'] == 'RANKED_SOLO_5x5' }
+    if !response.nil?
+      if response.response_code == 200
+        leagues = JSON.parse(response.body_str)
+        [leagues.detect { |league| league['queueType'] == 'RANKED_SOLO_5x5' }, 200]
+      else
+        [nil, response.response_code]
+      end
     else
-      nil
+      [nil, 0]
     end
   end
 
@@ -32,24 +36,21 @@ class RiotApi
   def handle_summoner(response, arg)
     arg = arg.to_s
     if !response.nil?
-      if response.code == '200'
-        player = JSON.parse(response.body)
-        return [player[arg], '200']
+      if response.response_code == 200
+        player = JSON.parse(response.body_str)
+        [player[arg], 200]
       else
-        return [nil, response.code]
+        [nil, response.response_code]
       end
     else
-      [nil, '0']
+      [nil, 0]
     end
   end
 
   def get(resource)
     begin
-      uri = URI(build_url(resource))
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.read_timeout = 10
-      http.use_ssl = true if @has_api
-      return http.request(Net::HTTP::Get.new(uri))
+      address = build_url(resource)
+      Curl.get(address)
     rescue StandardError => e
       puts e
       nil
