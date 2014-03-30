@@ -10,7 +10,7 @@ describe ApiHandler do
     end
 
     it 'updates an existing player' do
-      build_ladder_player(region: 'na', name: 'PeAk', summoner_id: 21848947)
+      create(:player, name: 'PeAk', summoner_id: 21848947)
       handler.player_search('id' => 'peak', 'by' => 'name')
       player = Player.name_and_region('peak', 'na').first
       expect(player.name).to eq 'Peak'

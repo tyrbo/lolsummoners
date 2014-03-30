@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :player do
-    summoner_id 1
-    name "SummonerName"
+    sequence(:summoner_id) {|n| n}
+    sequence(:name) {|n| "Summoner{#n}"}
     profile_icon_id 1
     revision_date 1
     summoner_level 30

@@ -2,9 +2,11 @@ require 'spec_helper'
 
 feature 'User can view a league' do
   before(:each) do
-    30.times do |n|
-      build_ladder_player(region: 'na')
-    end
+    league = create(:league)
+    player = create(:player, region: 'na')
+    player.region = 'na'
+    player.player_league = create(:player_league, player: player, league: league)
+    player.save
   end
 
   scenario 'Navigating through a ladder' do

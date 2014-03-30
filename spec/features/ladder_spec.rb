@@ -2,12 +2,21 @@ require 'spec_helper'
 
 feature 'User can view the ladder' do
   before(:each) do
-    30.times do |n|
-      build_ladder_player(region: 'na')
+    league_na = create(:league)
+    league_euw = create(:league, region: 'euw')
+
+    players = create_list(:player, 30)
+    players.each do |player|
+      player.region = 'na'
+      player.player_league = create(:player_league, player: player, league: league_na)
+      player.save
     end
 
-    5.times do |n|
-      build_ladder_player(region: 'euw')
+    players = create_list(:player, 5)
+    players.each do |player|
+      player.region = 'euw'
+      player.player_league = create(:player_league, player: player, league: league_euw)
+      player.save
     end
   end
 

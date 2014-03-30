@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe Ladder do
   before(:each) do
-    30.times do
-      build_ladder_player(region: 'test')
+    players = create_list(:player, 30)
+    players.each do |player|
+      create(:player_league, player: player)
     end
   end
 
