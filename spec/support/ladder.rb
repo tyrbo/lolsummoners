@@ -6,4 +6,5 @@ def player_with_league(opts = {})
   player_league = create(:player_league, opts)
   p.player_league = player_league
   p.save
+  p
 end

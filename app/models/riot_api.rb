@@ -18,11 +18,26 @@ class RiotApi
   end
 
   def league_for(summoner_id)
-    response = get("v2.3/league/by-summoner/#{summoner_id}/entry")
+    response = get("v2.3/league/by-summoner/#{summoner_id}/entry", true)
     if !response.nil?
       if response.response_code == 200
         leagues = JSON.parse(response.body_str)
         [leagues.detect { |league| league['queueType'] == 'RANKED_SOLO_5x5' }, 200]
+      else
+        [nil, response.response_code]
+      end
+    else
+      [nil, 0]
+    end
+  end
+
+  def league_for_full(summoner_id)
+    response = get("v2.3/league/by-summoner/#{summoner_id}", true)
+    if !response.nil?
+      if response.response_code == 200
+        leagues = JSON.parse(response.body_str)
+        league = leagues.detect { |league| league['queue'] == 'RANKED_SOLO_5x5' }
+        [league, 200]
       else
         [nil, response.response_code]
       end
@@ -47,9 +62,9 @@ class RiotApi
     end
   end
 
-  def get(resource)
+  def get(resource, bypass = false)
     begin
-      address = build_url(resource)
+      address = build_url(resource, bypass)
       Curl.get(address)
     rescue StandardError => e
       puts e
@@ -57,16 +72,16 @@ class RiotApi
     end
   end
 
-  def build_url(resource)
-    if @has_api
-      "#{base_url}/#{@region}/#{resource}?api_key=#{ENV['RIOT_API']}"
+  def build_url(resource, bypass)
+    if @has_api || bypass
+      "#{base_url(bypass)}/#{@region}/#{resource}?api_key=#{ENV['RIOT_API']}"
     else
       "#{base_url}/#{@region}/#{resource}"
     end
   end
 
-  def base_url
-    if @has_api
+  def base_url(bypass = false)
+    if @has_api || bypass
       'https://prod.api.pvp.net/api/lol'
     else
       'http://127.0.0.1:1337/api/lol'
