@@ -1,7 +1,7 @@
 class ErrorWatch
   def self.check
     begin
-      player = nil
+      player = PlayerLeague.new
       PlayerLeague.all.find_each do |player|
         r = player.region
       end
