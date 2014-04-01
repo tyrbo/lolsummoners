@@ -14,9 +14,10 @@ class PlayerLeague < ActiveRecord::Base
   private
 
   def update_ranking
+    modified_points = League.points_for_ranking({'league_points' => league_points, 'tier' => tier, 'rank' => rank})
     Redis.current.pipelined do
-      Redis.current.zadd("rank_#{region}", league_points, "#{summoner_id}_#{region}")
-      Redis.current.zadd("rank_all", league_points, "#{summoner_id}_#{region}")
+      Redis.current.zadd("rank_#{region}", modified_points, "#{summoner_id}_#{region}")
+      Redis.current.zadd("rank_all", modified_points, "#{summoner_id}_#{region}")
     end
   end
 end
