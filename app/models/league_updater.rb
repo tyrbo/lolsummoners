@@ -3,6 +3,7 @@ class LeagueUpdater
     loop do
       player = find_player_to_update
       if player
+        puts "Updating with: #{player.player_id}"
         update_players(player)
       else
         sleep(300)
