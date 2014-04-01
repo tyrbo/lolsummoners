@@ -3,7 +3,7 @@ require 'spec_helper'
 describe LeagueUpdater do
   describe '#update_players' do
     it 'updates the given player' do
-      player = player_with_league(player_or_team_id: '442232', updated_at: 3.hours.ago)
+      player = player_with_league(player_or_team_id: '442232', updated_at: 5.hours.ago)
       player.region = 'na'
       player.summoner_id = 442232
       player.save
@@ -17,7 +17,7 @@ describe LeagueUpdater do
     end
 
     it 'creates or updates additional players' do
-      player = player_with_league(player_or_team_id: '442232', updated_at: 3.hours.ago)
+      player = player_with_league(player_or_team_id: '442232', updated_at: 5.hours.ago)
       player.region = 'na'
       player.summoner_id = 442232
       player.save
@@ -33,7 +33,7 @@ describe LeagueUpdater do
 
   describe '#find_player_to_update' do
     it 'returns a player to update' do
-      player_with_league(updated_at: 3.hours.ago)
+      player_with_league(updated_at: 5.hours.ago)
       player = LeagueUpdater.new.find_player_to_update
       expect(player).to_not be nil
     end
