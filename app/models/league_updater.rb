@@ -35,7 +35,7 @@ class LeagueUpdater
   def handle_response(response, league, region)
     i = 0
     response.each do |attr|
-      i++
+      i = i + 1
       process(attr, league, region)
     end
     puts "Updated: #{i}"

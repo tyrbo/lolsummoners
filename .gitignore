@@ -20,3 +20,5 @@
 
 # Ignore coverage
 /coverage
+
+*.swp
