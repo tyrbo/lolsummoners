@@ -12,9 +12,10 @@ class LeagueUpdater
 
   def update_players(player)
     response, code = get_league(player)
+    region = player.region
     if code == 200
-      league = LeagueBuilder.create_or_update(response['name'], response['tier'], response['queue'], player.region)
-      handle_response(response['entries'], league, player.region)
+      league = LeagueBuilder.create_or_update(response['name'], response['tier'], response['queue'], region)
+      handle_response(response['entries'], league, region)
     else
       player.touch
     end
