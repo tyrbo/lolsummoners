@@ -4,6 +4,7 @@ class LeagueUpdater
       player = find_player_to_update
       if player
         puts "Updating with: #{player.player_id}"
+        player.touch
         update_players(player)
       else
         sleep(300)
@@ -17,8 +18,6 @@ class LeagueUpdater
     if code == 200
       league = LeagueBuilder.create_or_update(response['name'], response['tier'], response['queue'], region)
       handle_response(response['entries'], league, region)
-    else
-      player.touch
     end
   end
 
