@@ -8,7 +8,11 @@ class PlayerLeagueBuilder
     if player.player_league.nil?
       player.create_player_league(attributes)
     else
-      player.player_league.update_attributes(attributes) if has_changed(player.player_league, attributes)
+      if has_changed(player.player_league, attributes)
+        player.player_league.update_attributes(attributes)
+      else
+        player.player_league.touch
+      end
     end
   end
 
