@@ -33,9 +33,12 @@ class LeagueUpdater
   end
 
   def handle_response(response, league, region)
+    i = 0
     response.each do |attr|
+      i++
       process(attr, league, region)
     end
+    puts "Updated: #{i}"
   end
 
   def process(attr, league, region)
