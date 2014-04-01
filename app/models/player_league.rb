@@ -7,7 +7,8 @@ class PlayerLeague < ActiveRecord::Base
   delegate :region, to: :player
 
   def self.player_to_update
-    where('updated_at < ?', 30.minutes.ago)
+    includes(:player).
+      where('player_leagues.updated_at < ?', 2.hours.ago)
       .first
   end
 

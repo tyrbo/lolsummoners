@@ -34,16 +34,18 @@ class LeagueUpdater
 
   def handle_response(response, league, region)
     i = 0
+    summoners = response.collect { |n| n['playerOrTeamId'].to_i }
+    existing_summoners = Player.includes(:player_league).where(summoner_id: summoners, region: region)
     response.each do |attr|
       i = i + 1
-      process(attr, league, region)
+      process(attr, existing_summoners.find {|n| n.summoner_id == attr['playerOrTeamId'].to_i}, league, region)
     end
     puts "Updated: #{i}"
   end
 
-  def process(attr, league, region)
+  def process(attr, player = nil, league, region)
     hash = { 'id' => attr['playerOrTeamId'], 'name' => attr['playerOrTeamName'], 'summonerLevel' => 30 }
-    player = PlayerBuilder.create_or_update(hash, region)
+    player = PlayerBuilder.create_or_update(hash, region, player)
     PlayerLeagueBuilder.create_or_update(player, attr, region, league)
   end
 end
