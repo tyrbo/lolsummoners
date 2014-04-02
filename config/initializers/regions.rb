@@ -14,7 +14,6 @@ else
     las: { name: 'LA South', has_api: true },
     oce: { name: 'Oceania', has_api: true },
     ru: { name: 'Russia', has_api: false },
-    tr: { name: 'Turkey', has_api: false },
-    kr: { name: 'Korea', has_api: true }
+    tr: { name: 'Turkey', has_api: false }
   }
 end
