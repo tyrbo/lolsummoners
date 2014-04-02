@@ -40,6 +40,8 @@ class LeagueUpdater
       i = i + 1
       process(attr, existing_summoners.find {|n| n.summoner_id == attr['playerOrTeamId'].to_i}, league, region)
     end
+    leagues = existing_summoners.collect { |n| n.player_league.id }
+    PlayerLeague.where(id: leagues).update_all(updated_at: Time.now)
     puts "Updated: #{i}"
   end
 

@@ -10,8 +10,6 @@ class PlayerLeagueBuilder
     else
       if has_changed(player.player_league, attributes)
         player.player_league.update_attributes(attributes)
-      else
-        player.player_league.touch
       end
     end
   end
