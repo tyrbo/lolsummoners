@@ -4,7 +4,10 @@ class LeagueUpdater
       player = find_player_to_update
       if player
         puts "Updating with: #{player.player_id}"
-        update_players(player)
+        ActiveRecord::Base.transaction do
+          update_players(player)
+          player.touch
+        end
       else
         sleep(300)
       end
@@ -17,8 +20,6 @@ class LeagueUpdater
     if code == 200
       league = LeagueBuilder.create_or_update(response['name'], response['tier'], response['queue'], region)
       handle_response(response['entries'], league, region)
-    else
-      player.touch
     end
   end
 
@@ -37,14 +38,12 @@ class LeagueUpdater
     i = 0
     summoners = response.collect { |n| n['playerOrTeamId'].to_i }
     existing_summoners = Player.includes(:player_league).where(summoner_id: summoners, region: region)
-    ActiveRecord::Base.transaction do
-      response.each do |attr|
-        i = i + 1
-        process(attr, existing_summoners.find {|n| n.summoner_id == attr['playerOrTeamId'].to_i}, league, region)
-      end
-      leagues = existing_summoners.collect { |n| n.player_league.id }
-      PlayerLeague.where(id: leagues).update_all(updated_at: Time.now)
+    response.each do |attr|
+      i = i + 1
+      process(attr, existing_summoners.find {|n| n.summoner_id == attr['playerOrTeamId'].to_i}, league, region)
     end
+    leagues = existing_summoners.collect { |n| n.player_league.id }
+    PlayerLeague.where(id: leagues).update_all(updated_at: Time.now)
     puts "Updated: #{i}"
   end
 
