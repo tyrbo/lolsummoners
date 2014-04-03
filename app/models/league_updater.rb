@@ -36,12 +36,14 @@ class LeagueUpdater
     i = 0
     summoners = response.collect { |n| n['playerOrTeamId'].to_i }
     existing_summoners = Player.includes(:player_league).where(summoner_id: summoners, region: region)
-    response.each do |attr|
-      i = i + 1
-      process(attr, existing_summoners.find {|n| n.summoner_id == attr['playerOrTeamId'].to_i}, league, region)
+    ActiveRecord::Base.transaction do
+      response.each do |attr|
+        i = i + 1
+        process(attr, existing_summoners.find {|n| n.summoner_id == attr['playerOrTeamId'].to_i}, league, region)
+      end
+      leagues = existing_summoners.collect { |n| n.player_league.id }
+      PlayerLeague.where(id: leagues).update_all(updated_at: Time.now)
     end
-    leagues = existing_summoners.collect { |n| n.player_league.id }
-    PlayerLeague.where(id: leagues).update_all(updated_at: Time.now)
     puts "Updated: #{i}"
   end
 
