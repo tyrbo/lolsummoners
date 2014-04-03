@@ -4,10 +4,8 @@ class LeagueUpdater
       player = find_player_to_update
       if player
         puts "Updating with: #{player.player_id}"
-        ActiveRecord::Base.transaction do
-          update_players(player)
-          player.touch
-        end
+        update_players(player)
+        player.touch
       else
         sleep(300)
       end
@@ -18,8 +16,10 @@ class LeagueUpdater
     response, code = get_league(player)
     region = player.region
     if code == 200
-      league = LeagueBuilder.create_or_update(response['name'], response['tier'], response['queue'], region)
-      handle_response(response['entries'], league, region)
+      ActiveRecord::Base.transaction do
+        league = LeagueBuilder.create_or_update(response['name'], response['tier'], response['queue'], region)
+        handle_response(response['entries'], league, region)
+      end
     end
   end
 
