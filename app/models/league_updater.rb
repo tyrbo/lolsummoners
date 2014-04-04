@@ -1,13 +1,15 @@
 class LeagueUpdater
   def update_loop
+    time = 24.hours.ago
     loop do
-      player = find_player_to_update
+      player = find_player_to_update(time)
       if player
         puts "Updating with: #{player.player_id}"
         update_players(player)
         player.touch
       else
-        sleep(300)
+        time = 24.hours.ago
+        sleep(30)
       end
     end
   end
@@ -23,8 +25,8 @@ class LeagueUpdater
     end
   end
 
-  def find_player_to_update
-    PlayerLeague.player_to_update.first
+  def find_player_to_update(time = 24.hours.ago)
+    PlayerLeague.player_to_update(time).first
   end
 
   private
