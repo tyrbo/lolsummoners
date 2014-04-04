@@ -37,6 +37,8 @@ class LeagueUpdater
   def handle_response(response, league, region)
     i = 0
     summoners = response.collect { |n| n['playerOrTeamId'].to_i }
+    summoners.each {|n| print "#{n} "}
+    puts ""
     existing_summoners = Player.includes(:player_league).where(summoner_id: summoners, region: region)
     response.each do |attr|
       i = i + 1
