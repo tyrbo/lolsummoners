@@ -7,6 +7,7 @@ class PlayerLeague < ActiveRecord::Base
   delegate :region, to: :player
 
   def self.player_to_update
+    puts 24.hours.ago
     includes(:player).
       where('updated_at < ? and is_inactive = false', 24.hours.ago)
       .first
