@@ -8,7 +8,7 @@ class PlayerLeague < ActiveRecord::Base
 
   def self.player_to_update
     includes(:player).
-      where('updated_at < ?', 1.hours.ago)
+      where('updated_at < ? and is_inactive = false', 24.hours.ago)
       .first
   end
 
