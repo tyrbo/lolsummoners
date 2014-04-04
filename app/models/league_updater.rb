@@ -24,7 +24,7 @@ class LeagueUpdater
   end
 
   def find_player_to_update
-    PlayerLeague.player_to_update
+    PlayerLeague.player_to_update.first
   end
 
   private
