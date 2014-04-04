@@ -44,6 +44,7 @@ class LeagueUpdater
     end
     leagues = existing_summoners.collect { |n| n.player_league.id }
     PlayerLeague.where(id: leagues).update_all(updated_at: Time.now)
+    puts "Existing: #{existing_summoners.length}"
     puts "Updated: #{i}"
   end
 
