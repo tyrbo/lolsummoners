@@ -25,6 +25,12 @@ feature 'User can view the ladder' do
     expect(page).to have_css('tr.ladder', count: 25)
   end
 
+  scenario 'Viewing the ladder repeatedly' do
+    visit ladder_path(region: 'all')
+    click_link('Ladders')
+    expect(page).to have_css('tr.ladder', count: 25)
+  end
+
   scenario 'Viewing page 2 of the global ladder' do
     visit ladder_path(region: 'all')
     click_link('Next')
