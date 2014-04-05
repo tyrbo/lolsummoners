@@ -12,6 +12,7 @@ class PlayerLeagueBuilder
         player.player_league.update_attributes(attributes)
       end
     end
+    player.player_league
   end
 
   def self.prepare_attributes(attributes)

@@ -13,7 +13,7 @@ class ApiHandler
       player_data, response = @api.by_summoner_id(opts['id'])
     end
     message = "fail #{response}"
-    RateLimit.set("limited_#{key_name}", 60 * 30) if response == 200 || response == 404
+    RateLimit.set("limited_#{key_name}", 30.minutes) if response == 200 || response == 404
     unless player_data.nil?
       player = build_player(player_data)
       message = "done #{player.summoner_id}"
@@ -26,7 +26,7 @@ class ApiHandler
   def build_player(player_data)
     player = PlayerBuilder.create_or_update(player_data, @region)
     league_data, _ = @api.league_for(player.summoner_id)
-    PlayerLeagueBuilder.create_or_update(player, league_data, @region) unless league_data.nil?
+    player_league = PlayerLeagueBuilder.create_or_update(player, league_data, @region) unless league_data.nil?
     player
   end
 
