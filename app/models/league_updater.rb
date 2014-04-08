@@ -1,7 +1,7 @@
 class LeagueUpdater
   def update_loop
     loop do
-      player = find_player_to_update(2.hours.ago)
+      player = find_player_to_update(4.hours.ago)
       if player
         puts "Updating with: #{player.id}"
         update_players(player)
