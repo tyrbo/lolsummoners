@@ -6,7 +6,7 @@ class PlayerLeague < ActiveRecord::Base
   delegate :summoner_id, to: :player
   delegate :region, to: :player
 
-  def self.player_to_update(time = 24.hours.ago)
+  def self.player_to_update(time = 1.hours.ago)
     includes(:player).
       where('updated_at < ? and is_inactive = false', time).
       order(nil)
