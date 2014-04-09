@@ -1,13 +1,15 @@
 class LeagueUpdater
   def update_loop
+    time = 4.hours.ago
     loop do
-      player = find_player_to_update(4.hours.ago)
+      player = find_player_to_update(time)
       if player
         puts "Updating with: #{player.id}"
         update_players(player)
         player.touch
       else
         puts "Cooldown! No one to update yet..."
+        time = 4.hours.ago
         sleep(30)
       end
     end
