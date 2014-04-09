@@ -1,6 +1,7 @@
 class LeagueUpdater
   def update_loop
     time = 4.hours.ago
+    puts "Updated before #{time}"
     loop do
       player = find_player_to_update(time)
       if player
