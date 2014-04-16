@@ -8,12 +8,12 @@ class RiotApi
 
   def by_name(name)
     escaped_name = CGI::escape(name)
-    response = get("v1.3/summoner/by-name/#{escaped_name}")
+    response = get("v1.4/summoner/by-name/#{escaped_name}")
     handle_summoner(response, name)
   end
 
   def by_summoner_id(summoner_id)
-    response = get("v1.3/summoner/#{summoner_id}")
+    response = get("v1.4/summoner/#{summoner_id}")
     handle_summoner(response, summoner_id)
   end
 
