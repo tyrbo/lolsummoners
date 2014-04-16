@@ -82,10 +82,12 @@ class RiotApi
 
   def base_url(bypass = false)
     if @has_api || bypass
-      unless @region == 'kr'
-      'https://prod.api.pvp.net/api/lol'
-      else
+      if @region == 'kr'
         'https://asia.api.pvp.net/api/lol'
+      elsif @region == 'tr' || @region == 'ru'
+        'https://eu.api.pvp.net/api/lol'
+      else
+        'https://prod.api.pvp.net/api/lol'
       end
     else
       'http://127.0.0.1:1337/api/lol'
