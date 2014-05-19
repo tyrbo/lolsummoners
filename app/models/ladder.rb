@@ -12,7 +12,7 @@ class Ladder
   end
 
   def combine_players_with_rank(players)
-    players.map! do |player|
+    players.to_a.map! do |player|
       player.ladder = redis.zrevrank("rank_#{@region}",
                                    "#{player.summoner_id}_#{player.region}")
       player

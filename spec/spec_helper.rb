@@ -50,7 +50,7 @@ RSpec.configure do |config|
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
-  #     --seed 1234
+  #     --seed 1.44
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
 
@@ -77,13 +77,13 @@ RSpec.configure do |config|
     stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.3/league/by-summoner/442232?api_key=#{ENV['RIOT_API']}").
     to_return(:status => 200, :body => '[{"queue":"RANKED_SOLO_5x5","leagueName":"Taric\'s Enforcers","tier":"CHALLENGER","entries":[{"playerOrTeamId":"442232","playerOrTeamName":"aphromoo","leagueName":"Taric\'s Enforcers","queueType":"RANKED_SOLO_5x5","tier":"CHALLENGER","rank":"I","leaguePoints":748,"wins":168,"isHotStreak":false,"isVeteran":true,"isFreshBlood":false,"isInactive":false,"lastPlayed":-1},{"playerOrTeamId":"23459413","playerOrTeamName":"Suffix","leagueName":"Taric\'s Enforcers","queueType":"RANKED_SOLO_5x5","tier":"CHALLENGER","rank":"I","leaguePoints":51,"wins":166,"isHotStreak":false,"isVeteran":false,"isFreshBlood":true,"isInactive":false,"lastPlayed":-1}]}]', :headers => {})
 
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/ajsdfoabsdfouabsdfiouweroi?api_key=#{ENV['RIOT_API']}").
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.4/summoner/by-name/ajsdfoabsdfouabsdfiouweroi?api_key=#{ENV['RIOT_API']}").
       to_return(:status => 404, :body => "", :headers => {})
 
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/pentakill?api_key=#{ENV['RIOT_API']}").
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.4/summoner/by-name/pentakill?api_key=#{ENV['RIOT_API']}").
       to_return(:status => 200, :body => '{"pentakill":{"id":0,"name":"Pentakill","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
 
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.3/summoner/by-name/peak?api_key=#{ENV['RIOT_API']}").
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.4/summoner/by-name/peak?api_key=#{ENV['RIOT_API']}").
       to_return(:status => 200, :body => '{"peak":{"id":21848947,"name":"Peak","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
 
     stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.3/league/by-summoner/0/entry?api_key=#{ENV['RIOT_API']}").
