@@ -12,7 +12,7 @@ class League < ActiveRecord::Base
 
   def self.points_for_ranking(attributes)
     points = attributes['league_points']
-    points + add_points_for_tier(attributes['tier']) + add_points_for_rank(attributes['rank'])
+    points + add_points_for_tier(attributes['tier']) + add_points_for_rank(attributes['division'])
   end
 
   def self.add_points_for_tier(tier)
@@ -32,8 +32,8 @@ class League < ActiveRecord::Base
     end
   end
 
-  def self.add_points_for_rank(rank)
-    case rank
+  def self.add_points_for_rank(division)
+    case division
     when 'I'
       4000
     when 'II'

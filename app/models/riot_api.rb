@@ -18,7 +18,7 @@ class RiotApi
   end
 
   def league_for(summoner_id)
-    response = get("v2.3/league/by-summoner/#{summoner_id}/entry", true)
+    response = get("v2.4/league/by-summoner/#{summoner_id}/entry", true)
     if !response.nil?
       if response.response_code == 200
         leagues = JSON.parse(response.body_str)
@@ -32,7 +32,7 @@ class RiotApi
   end
 
   def league_for_full(summoner_id)
-    response = get("v2.3/league/by-summoner/#{summoner_id}", true)
+    response = get("v2.4/league/by-summoner/#{summoner_id}", true)
     if !response.nil?
       if response.response_code == 200
         leagues = JSON.parse(response.body_str)

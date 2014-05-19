@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408002515) do
+ActiveRecord::Schema.define(version: 20140519104907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140408002515) do
     t.string   "player_or_team_id"
     t.string   "player_or_team_name"
     t.string   "queue_type"
-    t.string   "rank"
+    t.string   "division"
     t.string   "tier"
     t.integer  "wins"
     t.datetime "created_at"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20140408002515) do
   add_index "player_leagues", ["id", "updated_at", "is_inactive"], name: "index_player_leagues_on_id_and_updated_at_and_is_inactive", using: :btree
   add_index "player_leagues", ["league_id"], name: "index_player_leagues_on_league_id", using: :btree
   add_index "player_leagues", ["player_id"], name: "index_player_leagues_on_player_id", unique: true, using: :btree
-  add_index "player_leagues", ["tier", "rank"], name: "index_player_leagues_on_tier_and_rank", using: :btree
+  add_index "player_leagues", ["tier", "division"], name: "index_player_leagues_on_tier_and_division", using: :btree
 
   create_table "players", force: true do |t|
     t.integer  "summoner_id",     limit: 8

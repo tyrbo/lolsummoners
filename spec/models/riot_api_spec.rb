@@ -29,7 +29,7 @@ describe RiotApi do
         'lastPlayed' => -1,
         'playerOrTeamId' => '21848947',
         'leaguePoints' => 37,
-        'rank' => 'IV',
+        'division' => 'IV',
         'isInactive' => false,
         'queueType' => 'RANKED_SOLO_5x5',
         'playerOrTeamName' => 'Peak',

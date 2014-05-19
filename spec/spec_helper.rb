@@ -74,8 +74,8 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.3/league/by-summoner/442232?api_key=#{ENV['RIOT_API']}").
-    to_return(:status => 200, :body => '[{"queue":"RANKED_SOLO_5x5","leagueName":"Taric\'s Enforcers","tier":"CHALLENGER","entries":[{"playerOrTeamId":"442232","playerOrTeamName":"aphromoo","leagueName":"Taric\'s Enforcers","queueType":"RANKED_SOLO_5x5","tier":"CHALLENGER","rank":"I","leaguePoints":748,"wins":168,"isHotStreak":false,"isVeteran":true,"isFreshBlood":false,"isInactive":false,"lastPlayed":-1},{"playerOrTeamId":"23459413","playerOrTeamName":"Suffix","leagueName":"Taric\'s Enforcers","queueType":"RANKED_SOLO_5x5","tier":"CHALLENGER","rank":"I","leaguePoints":51,"wins":166,"isHotStreak":false,"isVeteran":false,"isFreshBlood":true,"isInactive":false,"lastPlayed":-1}]}]', :headers => {})
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.4/league/by-summoner/442232?api_key=#{ENV['RIOT_API']}").
+    to_return(:status => 200, :body => '[{"queue":"RANKED_SOLO_5x5","leagueName":"Taric\'s Enforcers","tier":"CHALLENGER","entries":[{"playerOrTeamId":"442232","playerOrTeamName":"aphromoo","leagueName":"Taric\'s Enforcers","queueType":"RANKED_SOLO_5x5","tier":"CHALLENGER","division":"I","leaguePoints":748,"wins":168,"isHotStreak":false,"isVeteran":true,"isFreshBlood":false,"isInactive":false,"lastPlayed":-1},{"playerOrTeamId":"23459413","playerOrTeamName":"Suffix","leagueName":"Taric\'s Enforcers","queueType":"RANKED_SOLO_5x5","tier":"CHALLENGER","division":"I","leaguePoints":51,"wins":166,"isHotStreak":false,"isVeteran":false,"isFreshBlood":true,"isInactive":false,"lastPlayed":-1}]}]', :headers => {})
 
     stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.4/summoner/by-name/ajsdfoabsdfouabsdfiouweroi?api_key=#{ENV['RIOT_API']}").
       to_return(:status => 404, :body => "", :headers => {})
@@ -86,11 +86,11 @@ RSpec.configure do |config|
     stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.4/summoner/by-name/peak?api_key=#{ENV['RIOT_API']}").
       to_return(:status => 200, :body => '{"peak":{"id":21848947,"name":"Peak","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
 
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.3/league/by-summoner/0/entry?api_key=#{ENV['RIOT_API']}").
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.4/league/by-summoner/0/entry?api_key=#{ENV['RIOT_API']}").
       to_return(:status => 404, :body => "", :headers => {})
 
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.3/league/by-summoner/21848947/entry?api_key=#{ENV['RIOT_API']}").
-      to_return(:status => 200, :body => '[{"isHotStreak": false,"isFreshBlood": false,"leagueName": "Taric\'s Zealots","isVeteran": false,"tier": "PLATINUM","lastPlayed": -1,"playerOrTeamId": "21848947","leaguePoints": 37,"rank": "IV","isInactive": false,"queueType": "RANKED_SOLO_5x5","playerOrTeamName": "Peak","wins": 7}]', :headers => {})
+    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.4/league/by-summoner/21848947/entry?api_key=#{ENV['RIOT_API']}").
+      to_return(:status => 200, :body => '[{"isHotStreak": false,"isFreshBlood": false,"leagueName": "Taric\'s Zealots","isVeteran": false,"tier": "PLATINUM","lastPlayed": -1,"playerOrTeamId": "21848947","leaguePoints": 37,"division": "IV","isInactive": false,"queueType": "RANKED_SOLO_5x5","playerOrTeamName": "Peak","wins": 7}]', :headers => {})
   end
 
   config.after(:suite) do

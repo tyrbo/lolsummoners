@@ -15,7 +15,7 @@ class LeaguesController < ApplicationController
       'V' => []
     }
     players.each do |player|
-      hash[player.rank] << player
+      hash[player.division] << player
     end
     hash
   end
