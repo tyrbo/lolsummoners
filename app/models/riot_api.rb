@@ -6,59 +6,41 @@ class RiotApi
     @has_api = Region.api?(@region)
   end
 
-  def by_name(name)
-    escaped_name = CGI::escape(name)
-    response = get("v1.4/summoner/by-name/#{escaped_name}")
-    handle_summoner(response, name)
+  def by_name(names)
+    escaped_names = names.map { |n| CGI::escape(n) }.join(',')
+    response = get("v1.4/summoner/by-name/#{escaped_names}")
+    handle_response(response)
   end
 
-  def by_summoner_id(summoner_id)
-    response = get("v1.4/summoner/#{summoner_id}")
-    handle_summoner(response, summoner_id)
+  def by_summoner_id(summoner_ids)
+    ids = summoner_ids.join(',')
+    response = get("v1.4/summoner/#{ids}")
+    handle_response(response)
   end
 
-  def league_for(summoner_id)
-    response = get("v2.4/league/by-summoner/#{summoner_id}/entry", true)
-    if !response.nil?
-      if response.response_code == 200
-        leagues = JSON.parse(response.body_str)
-        [leagues[summoner_id].detect { |league| league['queueType'] == 'RANKED_SOLO_5x5' }, 200]
-      else
-        [nil, response.response_code]
-      end
-    else
-      [nil, 0]
-    end
+  def league_for(summoner_ids)
+    ids = summoner_ids.join(',')
+    response = get("v2.4/league/by-summoner/#{ids}/entry", true)
+    handle_response(response)
   end
 
-  def league_for_full(summoner_id)
-    response = get("v2.4/league/by-summoner/#{summoner_id}", true)
-    if !response.nil?
-      if response.response_code == 200
-        leagues = JSON.parse(response.body_str)
-        league = leagues.detect { |league| league['queue'] == 'RANKED_SOLO_5x5' }
-        [league, 200]
-      else
-        [nil, response.response_code]
-      end
-    else
-      [nil, 0]
-    end
+  def league_for_full(summoner_ids)
+    ids = summoner_ids.join(',')
+    response = get("v2.4/league/by-summoner/#{ids}", true)
+    handle_response(response)
   end
 
   private
 
-  def handle_summoner(response, arg)
-    arg = arg.to_s
+  def handle_response(response)
     if !response.nil?
       if response.response_code == 200
-        player = JSON.parse(response.body_str)
-        [player[arg], 200]
+        [JSON.parse(response.body_str)]
       else
-        [nil, response.response_code]
+        [nil]
       end
     else
-      [nil, 0]
+      [nil]
     end
   end
 

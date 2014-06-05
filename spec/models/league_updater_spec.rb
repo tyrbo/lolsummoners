@@ -26,8 +26,8 @@ describe LeagueUpdater do
       player = updater.find_player_to_update
       updater.update_players(player)
 
-      player = Player.includes(:player_league).summoner_id_and_region(23459413, 'na').first
-      expect(player.name).to eq 'Suffix'
+      player = Player.includes(:player_league).summoner_id_and_region(19877155, 'na').first
+      expect(player.name).to eq 'cesuna'
     end
   end
 

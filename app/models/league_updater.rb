@@ -17,12 +17,17 @@ class LeagueUpdater
   end
 
   def update_players(player)
-    response, code = get_league(player)
+    responses, code = get_league(player)
     region = player.region
     if code == 200
-      ActiveRecord::Base.transaction do
-        league = LeagueBuilder.create_or_update(response['name'], response['tier'], response['queue'], region)
-        handle_response(response['entries'], league, region)
+      responses.each do |response|
+        data = response.last.detect { |r| r['queue'] == 'RANKED_SOLO_5x5' }
+        if data
+          ActiveRecord::Base.transaction do
+            league = LeagueBuilder.create_or_update(data['name'], data['tier'], data['queue'], region)
+            handle_response(data['entries'], league, region)
+          end
+        end
       end
     end
   end

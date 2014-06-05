@@ -2,8 +2,8 @@ require 'spec_helper'
 
 feature 'User can view the ladder' do
   before(:each) do
-    league_na = create(:league)
-    league_euw = create(:league, region: 'euw')
+    league_na = create(:league, tier: 'GOLD')
+    league_euw = create(:league, tier: 'SILVER', region: 'euw')
 
     players = create_list(:player, 30)
     players.each do |player|

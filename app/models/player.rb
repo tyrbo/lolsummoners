@@ -15,7 +15,6 @@ class Player < ActiveRecord::Base
   }
 
   attr_accessor :ladder
-  delegate :tier, to: :player_league
   delegate :wins, to: :player_league
   delegate :division, to: :player_league
   delegate :league_points, to: :player_league
