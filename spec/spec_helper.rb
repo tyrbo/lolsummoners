@@ -8,8 +8,8 @@ require 'rspec/rails'
 require 'capybara/rspec'
 Capybara.javascript_driver = :webkit
 require 'database_cleaner'
-require 'webmock/rspec'
-WebMock.disable_net_connect!(allow_localhost: false)
+#require 'webmock/rspec'
+#WebMock.disable_net_connect!(allow_localhost: false)
 require 'sidekiq/testing'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -73,28 +73,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  config.before(:each) do
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.4/league/by-summoner/442232?api_key=#{ENV['RIOT_API']}").
-    to_return(:status => 200, :body => '{"442232":[{"name":"Taric\'s Enforcers","tier":"CHALLENGER","queue":"RANKED_SOLO_5x5","entries":[{"playerOrTeamId":"442232","playerOrTeamName":"aphromoo","division":"I","leaguePoints":847,"wins":194,"isHotStreak":false,"isVeteran":true,"isFreshBlood":false,"isInactive":false},{"playerOrTeamId":"19877155","playerOrTeamName":"cesuna","division":"I","leaguePoints":235,"wins":129,"isHotStreak":false,"isVeteran":false,"isFreshBlood":true,"isInactive":false}],"participantId":"442232"}]}', :headers => {})
-
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.4/summoner/by-name/ajsdfoabsdfouabsdfiouweroi?api_key=#{ENV['RIOT_API']}").
-      to_return(:status => 404, :body => "", :headers => {})
-
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.4/summoner/by-name/pentakill?api_key=#{ENV['RIOT_API']}").
-      to_return(:status => 200, :body => '{"pentakill":{"id":0,"name":"Pentakill","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
-
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v1.4/summoner/by-name/peak?api_key=#{ENV['RIOT_API']}").
-      to_return(:status => 200, :body => '{"peak":{"id":21848947,"name":"Peak","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
-
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.4/league/by-summoner/0/entry?api_key=#{ENV['RIOT_API']}").
-      to_return(:status => 404, :body => "", :headers => {})
-
-    stub_request(:get, "https://prod.api.pvp.net/api/lol/na/v2.4/league/by-summoner/21848947/entry?api_key=#{ENV['RIOT_API']}").
-      to_return(:status => 200, :body => '{"21848947": [{"name": "Tryndamere\'s Deceivers","tier": "GOLD","queue": "RANKED_SOLO_5x5","entries": [{"playerOrTeamId": "21848947","playerOrTeamName": "Peak","division": "I","leaguePoints": 30,"wins": 52,"isHotStreak": false,"isVeteran": false,"isFreshBlood": false,"isInactive": false}]}]}', :headers => {})
-  end
-
   config.after(:suite) do
-    WebMock.disable!
     Redis.current.select(1)
     Redis.current.flushdb
   end

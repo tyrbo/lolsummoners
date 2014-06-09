@@ -35,12 +35,12 @@ class RiotApi
   def handle_response(response)
     if !response.nil?
       if response.response_code == 200
-        [JSON.parse(response.body_str)]
+        JSON.parse(response.body_str)
       else
-        [nil]
+        {}
       end
     else
-      [nil]
+      {}
     end
   end
 

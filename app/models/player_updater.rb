@@ -24,7 +24,7 @@ class PlayerUpdater
 
   def update(response)
     response.each do |batch|
-      batch.first.each do |player|
+      batch.each do |player|
         PlayerBuilder.create_or_update(player.last, @region, nil)
       end
     end
