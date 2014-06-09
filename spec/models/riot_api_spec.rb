@@ -9,12 +9,12 @@ describe RiotApi do
         'profileIconId' => 28,
         'revisionDate' => 0,
         'summonerLevel' => 30
-      }}, 200]
+      }}]
       expect(RiotApi.new('na').by_name(['pentakill'])).to eq expected_hash
     end
 
     it 'returns nil for an invalid player' do
-      expect(RiotApi.new('na').by_name(['ajsdfoabsdfouabsdfiouweroi'])).to eq [nil, 404]
+      expect(RiotApi.new('na').by_name(['ajsdfoabsdfouabsdfiouweroi'])).to eq [nil]
     end
   end
 
@@ -35,12 +35,12 @@ describe RiotApi do
           "isFreshBlood" => false,
           "isInactive" => false
         }]
-      }]}, 200]
+      }]}]
       expect(RiotApi.new('na').league_for([21848947])).to eq expected_hash
     end
 
     it 'returns nil for a player not in a league' do
-      expect(RiotApi.new('na').league_for([0])).to eq [nil, 404]
+      expect(RiotApi.new('na').league_for([0])).to eq [nil]
     end
   end
 end
