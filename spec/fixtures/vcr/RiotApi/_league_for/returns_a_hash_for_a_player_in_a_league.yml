@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://prod.api.pvp.net/api/lol/na/v2.4/league/by-summoner/21848947/entry?api_key=20278aab-6dd9-4ed5-9e92-da38dbbcc62c
+    uri: https://na.api.pvp.net/api/lol/na/v2.4/league/by-summoner/21848947/entry?api_key=20278aab-6dd9-4ed5-9e92-da38dbbcc62c
     body:
       encoding: US-ASCII
       string: ''
@@ -21,13 +21,13 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Tue, 10 Jun 2014 17:33:26 GMT
+      - Tue, 10 Jun 2014 17:59:27 GMT
       Server:
       - Jetty(9.1.1.v20140108)
       X-Newrelic-App-Data:
-      - PxQFWFFSDwQTVVZSBwAGVkYdFGQHBDcQUQxLA1tMXV1dORYzVBJHNQFUZAQUFVFQVThOA0dYa0kIXlpvTR0RB1cLVwxFZBtEAUsNPR4NVgMDQ1I9SQFBHkMRDA9YX1IUOB5NQBcLDg1eB0orXEtJbhwAVxVDGBNKI3NjSERPCB0ASFFMBwEBVFQJDwFWSk5THEBaVgAJAQYKXVoEA1YDWwUUag==
-      Content-Length:
-      - '579'
+      - PxQFWFFSDwQTVVZSBwAGVkYdFGQHBDcQUQxLA1tMXV1dORYzVBJHNQFUZAQUFVFQVThOA0dYa0kIXlpvTR0RB1cLVwxFZBtEAUsNPR4NVgMDQ1I9SQFBHkMRDA9YX1IUOB5NQBcLDg1eB0orXEtJbhwAVxVDGBNKI3NjSERPCB0ASFFMBwEBVF0BBAVaSk5THEAAWgkBUVBWB1oHVVkBBgEOFTw=
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
@@ -36,5 +36,5 @@ http_interactions:
         IV''s Lancers","tier":"GOLD","queue":"RANKED_TEAM_5x5","entries":[{"playerOrTeamId":"TEAM-fe57e300-b3d7-11e3-a02a-782bcb4d0bb2","playerOrTeamName":"fecal
         fingers","division":"IV","leaguePoints":72,"wins":43,"isHotStreak":false,"isVeteran":false,"isFreshBlood":false,"isInactive":false}]}]}'
     http_version: 
-  recorded_at: Tue, 10 Jun 2014 17:33:27 GMT
+  recorded_at: Tue, 10 Jun 2014 17:59:29 GMT
 recorded_with: VCR 2.9.2

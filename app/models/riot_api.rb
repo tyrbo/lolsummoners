@@ -3,7 +3,6 @@ require 'curb'
 class RiotApi
   def initialize(region)
     @region = region
-    @has_api = Region.api?(@region)
   end
 
   def by_name(names)
@@ -20,13 +19,13 @@ class RiotApi
 
   def league_for(summoner_ids)
     ids = summoner_ids.join(',')
-    response = get("v2.4/league/by-summoner/#{ids}/entry", true)
+    response = get("v2.4/league/by-summoner/#{ids}/entry")
     handle_response(response)
   end
 
   def league_for_full(summoner_ids)
     ids = summoner_ids.join(',')
-    response = get("v2.4/league/by-summoner/#{ids}", true)
+    response = get("v2.4/league/by-summoner/#{ids}")
     handle_response(response)
   end
 
@@ -44,35 +43,20 @@ class RiotApi
     end
   end
 
-  def get(resource, bypass = false)
+  def get(resource)
     begin
-      address = build_url(resource, bypass)
+      address = build_url(resource)
       Curl.get(address)
     rescue StandardError => e
       puts e
     end
   end
 
-  def build_url(resource, bypass)
-    if @has_api || bypass
-      "#{base_url(bypass)}/#{@region}/#{resource}?api_key=#{ENV['RIOT_API']}"
-    else
-      "#{base_url}/#{@region}/#{resource}"
-    end
+  def build_url(resource)
+    "#{base_url}/#{@region}/#{resource}?api_key=#{ENV['RIOT_API']}"
   end
 
-  def base_url(bypass = false)
-    if @has_api || bypass
-      if @region == 'kr'
-        'https://asia.api.pvp.net/api/lol'
-      elsif @region == 'tr' || @region == 'ru'
-        'https://eu.api.pvp.net/api/lol'
-      else
-        'https://prod.api.pvp.net/api/lol'
-      end
-    else
-      'http://127.0.0.1:1337/api/lol'
-    end
+  def base_url
+    "#{Region.base_url(@region)}/api/lol"
   end
-
 end

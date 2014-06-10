@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://prod.api.pvp.net/api/lol/na/v1.4/summoner/by-name/riotfakename?api_key=20278aab-6dd9-4ed5-9e92-da38dbbcc62c
+    uri: https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/riotfakename?api_key=20278aab-6dd9-4ed5-9e92-da38dbbcc62c
     body:
       encoding: US-ASCII
       string: ''
@@ -23,13 +23,11 @@ http_interactions:
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Tue, 10 Jun 2014 17:33:25 GMT
+      - Tue, 10 Jun 2014 17:57:05 GMT
       Server:
       - Jetty(9.1.1.v20140108)
-      X-Newrelic-App-Data:
-      - PxQFWFFSDwQTVVdUBAgAVkYdFGQHBDcQUQxLA1tMXV1dORYzVBBGBxdCdhUSEVFRRRAEPhhQRw84HlpcDjpMDFE+FxQJFgBuHE9lTlMYHgwFW1I9SUkaHwBKUU4HHwdQVAMOBVVVT08BThoGDV0FBQcGWwdSAgBaAA8HQzs=
-      Content-Length:
-      - '1363'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
@@ -49,5 +47,5 @@ http_interactions:
         \                                               \n<br/>                                                \n<br/>
         \                                               \n\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Tue, 10 Jun 2014 17:33:27 GMT
+  recorded_at: Tue, 10 Jun 2014 17:57:07 GMT
 recorded_with: VCR 2.9.2
