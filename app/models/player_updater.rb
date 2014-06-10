@@ -10,23 +10,23 @@ class PlayerUpdater
       response << @api.by_name(names)
     end
     update(response)
-    response
   end
 
   def by_id(values)
     response = []
-    values.each_slice(2) do |ids|
+    values.each_slice(50) do |ids|
       response << @api.by_summoner_id(ids)
     end
     update(response)
-    response
   end
 
   def update(response)
+    result = {}
     response.each do |batch|
       batch.each do |player|
-        PlayerBuilder.create_or_update(player.last, @region, nil)
+        result.store(player.first, PlayerBuilder.create_or_update(player.last, @region, nil))
       end
     end
+    result
   end
 end

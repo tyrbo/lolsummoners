@@ -17,17 +17,18 @@ class LeagueUpdater
   end
 
   def update_players(player)
-    responses, code = get_league(player)
+    responses = get_league(player)
     region = player.region
-    if code == 200
-      responses.each do |response|
-        data = response.last.detect { |r| r['queue'] == 'RANKED_SOLO_5x5' }
-        if data
-          ActiveRecord::Base.transaction do
-            league = LeagueBuilder.create_or_update(data['name'], data['tier'], data['queue'], region)
-            handle_response(data['entries'], league, region)
-          end
-        end
+    responses.each do |response|
+      response.each do |player|
+        puts player
+        #data = response.last.detect { |r| r['queue'] == 'RANKED_SOLO_5x5' }
+        #if data
+        #  ActiveRecord::Base.transaction do
+        #    league = LeagueBuilder.create_or_update(data['name'], data['tier'], data['queue'], region)
+        #    handle_response(data['entries'], league, region)
+        #  end
+        #end
       end
     end
   end
@@ -40,7 +41,7 @@ class LeagueUpdater
 
   def get_league(player)
     api = RiotApi.new(player.region)
-    api.league_for_full(player.player_or_team_id)
+    api.league_for([player.player_or_team_id])
   end
 
   def handle_response(response, league, region)

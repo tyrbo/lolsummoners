@@ -3,17 +3,18 @@ require 'spec_helper'
 describe LeagueUpdater do
   describe '#update_players' do
     it 'updates the given player' do
-      player = player_with_league(player_or_team_id: '442232', updated_at: 31.hours.ago)
+      puts Player.count
+      player = player_with_league(player_or_team_id: '21848947', updated_at: 31.hours.ago)
       player.region = 'na'
-      player.summoner_id = 442232
+      player.summoner_id = 21848947
       player.save
 
       updater = LeagueUpdater.new
       player = updater.find_player_to_update
       updater.update_players(player)
 
-      player = Player.includes(:player_league).summoner_id_and_region(442232, 'na').first
-      expect(player.name).to eq 'aphromoo'
+      player = Player.includes(:player_league).summoner_id_and_region(21848947, 'na').first
+      expect(player.name).to eq 'Peak'
     end
 
     it 'creates or updates additional players' do

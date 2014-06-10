@@ -8,9 +8,9 @@ require 'rspec/rails'
 require 'capybara/rspec'
 Capybara.javascript_driver = :webkit
 require 'database_cleaner'
-#require 'webmock/rspec'
-#WebMock.disable_net_connect!(allow_localhost: false)
+require 'webmock/rspec'
 require 'sidekiq/testing'
+require 'vcr'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -33,7 +33,6 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
-
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -53,6 +52,7 @@ RSpec.configure do |config|
   #     --seed 1.44
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
+  config.include WebMock::API
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation

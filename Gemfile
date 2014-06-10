@@ -40,6 +40,8 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'webmock'
+  gem 'vcr'
   #gem 'fakeredis'
   gem 'database_cleaner'
   gem 'codeclimate-test-reporter'

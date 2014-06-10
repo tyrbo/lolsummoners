@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe RiotApi do
+describe RiotApi, vcr: true do
   describe '#by_name' do
     it 'returns a single response for a valid player' do
       expect(RiotApi.new('na').by_name(['pentakill']).count).to eq 1

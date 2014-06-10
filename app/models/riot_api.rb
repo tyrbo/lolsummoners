@@ -50,7 +50,6 @@ class RiotApi
       Curl.get(address)
     rescue StandardError => e
       puts e
-      nil
     end
   end
 
