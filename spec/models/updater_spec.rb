@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Updater do
+describe Updater, vcr: true do
   describe '#initialize' do
     it 'should require a region as an argument' do
       expect { Updater.new }.to raise_error(ArgumentError)

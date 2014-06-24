@@ -1,16 +1,22 @@
 require 'spec_helper'
 
-describe PlayerUpdater do
+describe PlayerUpdater, vcr: true do
+  describe '#initialize' do
+    it 'should require a region as an argument' do
+      expect { PlayerUpdater.new }.to raise_error(ArgumentError)
+    end
+  end
+  
   describe '#by_name' do
     it 'returns a result for a single name' do
       p = PlayerUpdater.new('na')
-      response = p.by_name(['peak'])
+      response = p.by_name(['pentakill'])
       expect(response.count).to eq 1
     end
 
     it 'returns results for multiple names' do
       p = PlayerUpdater.new('na')
-      response = p.by_name(['peak', 'aphromoo'])
+      response = p.by_name(['pentakill', 'aphromoo'])
       expect(response.count).to eq 2
     end
 
