@@ -9,6 +9,10 @@ class Region
     REGIONS[region.to_sym][:name]
   end
 
+  def self.base_url(region)
+    "https://#{region.downcase}.api.pvp.net"
+  end
+ 
   def self.api?(region)
     return false unless self.available?(region)
     REGIONS[region.to_sym][:has_api]

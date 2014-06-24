@@ -18,7 +18,7 @@ class RiotApi
   end
 
   def league_for(summoner_id)
-    response = get("v2.3/league/by-summoner/#{summoner_id}/entry", true)
+    response = get("v2.3/league/by-summoner/#{summoner_id}/entry")
     if !response.nil?
       if response.response_code == 200
         leagues = JSON.parse(response.body_str)
@@ -32,7 +32,7 @@ class RiotApi
   end
 
   def league_for_full(summoner_id)
-    response = get("v2.3/league/by-summoner/#{summoner_id}", true)
+    response = get("v2.3/league/by-summoner/#{summoner_id}")
     if !response.nil?
       if response.response_code == 200
         leagues = JSON.parse(response.body_str)
@@ -62,36 +62,21 @@ class RiotApi
     end
   end
 
-  def get(resource, bypass = false)
+  def get(resource)
     begin
-      address = build_url(resource, bypass)
+      address = build_url(resource)
       Curl.get(address)
     rescue StandardError => e
       puts e
-      nil
     end
   end
 
-  def build_url(resource, bypass)
-    if @has_api || bypass
-      "#{base_url(bypass)}/#{@region}/#{resource}?api_key=#{ENV['RIOT_API']}"
-    else
-      "#{base_url}/#{@region}/#{resource}"
-    end
+  def build_url(resource)
+    "#{base_url}/#{@region}/#{resource}?api_key=#{ENV['RIOT_API']}"
   end
 
-  def base_url(bypass = false)
-    if @has_api || bypass
-      if @region == 'kr'
-        'https://asia.api.pvp.net/api/lol'
-      elsif @region == 'tr' || @region == 'ru'
-        'https://eu.api.pvp.net/api/lol'
-      else
-        'https://prod.api.pvp.net/api/lol'
-      end
-    else
-      'http://127.0.0.1:1337/api/lol'
-    end
+  def base_url
+    "#{Region.base_url(@region)}/api/lol"
   end
 
 end
