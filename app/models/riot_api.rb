@@ -18,10 +18,10 @@ class RiotApi
   end
 
   def league_for(summoner_id)
-    response = get("v2.3/league/by-summoner/#{summoner_id}/entry")
+    response = get("v2.4/league/by-summoner/#{summoner_id}/entry")
     if !response.nil?
       if response.response_code == 200
-        leagues = JSON.parse(response.body_str)
+        leagues = JSON.parse(response.body_str).fetch(summoner_id.to_s)
         [leagues.detect { |league| league['queueType'] == 'RANKED_SOLO_5x5' }, 200]
       else
         [nil, response.response_code]
@@ -32,10 +32,10 @@ class RiotApi
   end
 
   def league_for_full(summoner_id)
-    response = get("v2.3/league/by-summoner/#{summoner_id}")
+    response = get("v2.4/league/by-summoner/#{summoner_id}")
     if !response.nil?
       if response.response_code == 200
-        leagues = JSON.parse(response.body_str)
+        leagues = JSON.parse(response.body_str).fetch(summoner_id.to_s)
         league = leagues.detect { |league| league['queue'] == 'RANKED_SOLO_5x5' }
         [league, 200]
       else

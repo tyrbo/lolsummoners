@@ -17,9 +17,11 @@ class PlayerLeagueBuilder
 
   def self.prepare_attributes(attributes)
     attributes = Rehash.remap_hash(attributes)
+    attributes['rank'] = attributes['division']
     attributes['mini_series'] = stringify_mini_series(attributes['mini_series'])
     attributes['league_points'] = 110 unless attributes['mini_series'].nil?
     attributes.delete('league_name')
+    attributes.delete('division')
     attributes
   end
 
