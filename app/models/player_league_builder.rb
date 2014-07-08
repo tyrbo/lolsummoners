@@ -2,9 +2,15 @@ require 'rehash'
 
 class PlayerLeagueBuilder
   def self.create_or_update(player, attributes, region, league = nil)
-    attributes['league_id'] =
-      league || LeagueBuilder.create_or_update(attributes['leagueName'], attributes['tier'], attributes['queue'], region)
+    if league
+      attributes['league_id'] = league.id
+    else
+      league = LeagueBuilder.create_or_update(attributes['leagueName'], attributes['tier'], attributes['queue'], region)
+      attributes['league_id'] = league.id
+    end
     attributes = prepare_attributes(attributes)
+    attributes['tier'] = league.tier
+    attributes['queue'] = league.queue
     if player.player_league.nil?
       player.create_player_league(attributes)
     else
