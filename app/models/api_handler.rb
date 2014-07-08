@@ -26,7 +26,10 @@ class ApiHandler
   def build_player(player_data)
     player = PlayerBuilder.create_or_update(player_data, @region)
     league_data, _ = @api.league_for(player.summoner_id)
-    player_league = PlayerLeagueBuilder.create_or_update(player, league_data, @region) unless league_data.nil?
+    if league_data
+      league = LeagueBuilder.create_or_update(league_data['name'], league_data['tier'], league_data['queue'], @region)
+      player_league = PlayerLeagueBuilder.create_or_update(player, league_data.fetch('entries').first, @region, league)
+    end
     player
   end
 

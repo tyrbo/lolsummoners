@@ -1,13 +1,8 @@
 require 'rehash'
 
 class PlayerLeagueBuilder
-  def self.create_or_update(player, attributes, region, league = nil)
-    if league
-      attributes['league_id'] = league.id
-    else
-      league = LeagueBuilder.create_or_update(attributes['leagueName'], attributes['tier'], attributes['queue'], region)
-      attributes['league_id'] = league.id
-    end
+  def self.create_or_update(player, attributes, region, league)
+    attributes['league_id'] = league.id
     attributes = prepare_attributes(attributes)
     attributes['tier'] = league.tier
     attributes['queue'] = league.queue
