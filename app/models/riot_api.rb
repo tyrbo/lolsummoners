@@ -22,7 +22,7 @@ class RiotApi
     if !response.nil?
       if response.response_code == 200
         leagues = JSON.parse(response.body_str).fetch(summoner_id.to_s)
-        [leagues.detect { |league| league['queueType'] == 'RANKED_SOLO_5x5' }, 200]
+        [leagues.detect { |league| league['queue'] == 'RANKED_SOLO_5x5' }, 200]
       else
         [nil, response.response_code]
       end

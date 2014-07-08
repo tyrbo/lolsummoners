@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408002515) do
+ActiveRecord::Schema.define(version: 20140708162610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140408002515) do
     t.string   "mini_series"
     t.string   "player_or_team_id"
     t.string   "player_or_team_name"
-    t.string   "queue_type"
+    t.string   "queue"
     t.string   "rank"
     t.string   "tier"
     t.integer  "wins"

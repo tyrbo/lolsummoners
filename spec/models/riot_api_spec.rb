@@ -31,7 +31,7 @@ describe RiotApi do
         'leaguePoints' => 37,
         'division' => 'IV',
         'isInactive' => false,
-        'queueType' => 'RANKED_SOLO_5x5',
+        'queue' => 'RANKED_SOLO_5x5',
         'playerOrTeamName' => 'Peak',
         'wins' => 7
       }, 200]
