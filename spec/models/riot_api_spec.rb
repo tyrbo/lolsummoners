@@ -21,19 +21,21 @@ describe RiotApi do
   describe '#league_for' do
     it 'returns a hash for a player in a league' do
       expected_hash = [{
-        'isHotStreak' => false,
-        'isFreshBlood' => false,
-        'leagueName' => "Taric's Zealots",
-        'isVeteran' => false,
-        'tier' => 'PLATINUM',
-        'lastPlayed' => -1,
-        'playerOrTeamId' => '21848947',
-        'leaguePoints' => 37,
-        'division' => 'IV',
-        'isInactive' => false,
+        'name' => 'asdf',
         'queue' => 'RANKED_SOLO_5x5',
-        'playerOrTeamName' => 'Peak',
-        'wins' => 7
+        'tier' => 'GOLD',
+        'entries' => [{
+          'isHotStreak' => false,
+          'isFreshBlood' => false,
+          'isVeteran' => false,
+          'lastPlayed' => -1,
+          'playerOrTeamId' => '21848947',
+          'leaguePoints' => 37,
+          'division' => 'IV',
+          'isInactive' => false,
+          'playerOrTeamName' => 'Peak',
+          'wins' => 7
+        }]
       }, 200]
       expect(RiotApi.new('na').league_for(21848947)).to eq expected_hash
     end
