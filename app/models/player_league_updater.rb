@@ -8,7 +8,7 @@ class PlayerLeagueUpdater
     response = []
     players.each_slice(50) do |batch|
       ids = batch.map(&:summoner_id)
-      response << @api.league_for_full(ids)
+      response << @api.league_for(ids)
     end
     handle(response)
   end
@@ -17,7 +17,7 @@ class PlayerLeagueUpdater
     result = {}
     response.each do |batch|
       batch.each do |player|
-        update(player)
+        update(player.last)
         #result.store(player.first, PlayerBuilder.create_or_update(player.last, @region, nil))
       end
     end
@@ -25,9 +25,9 @@ class PlayerLeagueUpdater
   end
 
   def update(player)
-    league = player.last.find { |league| league['queue'] == 'RANKED_SOLO_5x5' }
+    league = player.detect { |league| league['queue'] == 'RANKED_SOLO_5x5' }
     if !league.nil?
-      puts league
+      p league
     end
   end
 end
