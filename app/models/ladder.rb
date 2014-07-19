@@ -6,7 +6,7 @@ class Ladder
   end
 
   def find_by_page(page)
-    redis_ids = find_redis_ranks(@region, page)
+    redis_ids = find_redis_ranks(page)
     players = Player.includes(:player_league).find_players_by_region(redis_ids)
     combine_players_with_rank(players)
   end
@@ -20,7 +20,7 @@ class Ladder
     players.sort_by { |hash| hash.ladder }
   end
 
-  def find_redis_ranks(region, page)
+  def find_redis_ranks(page)
     redis.zrevrange("rank_#{@region}", (page - 1) * 25, (page * 25) - 1)
   end
 

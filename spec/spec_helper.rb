@@ -55,26 +55,21 @@ RSpec.configure do |config|
   config.include WebMock::API
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :transaction
   end
 
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.start
-    Redis.current.select(1)
-    Redis.current.flushdb
   end
 
   config.before(:each, :js => true) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :transaction
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
-  config.after(:suite) do
     Redis.current.select(1)
     Redis.current.flushdb
+    DatabaseCleaner.clean
   end
 end

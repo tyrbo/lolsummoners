@@ -5,6 +5,7 @@ class PlayerLeague < ActiveRecord::Base
 
   delegate :summoner_id, to: :player
   delegate :region, to: :player
+  delegate :tier, to: :league
 
   def self.player_to_update(time = 1.hours.ago)
     includes(:player).

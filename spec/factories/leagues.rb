@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :league do
     name "Peak's Testers"
     queue "RANKED_SOLO_5x5"
-    tier "Challenger"
+    tier "CHALLENGER"
     region "na"
   end
 end

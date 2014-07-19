@@ -13,7 +13,6 @@ FactoryGirl.define do
     player_or_team_name ''
     queue_type 'RANKED_SOLO_5X5'
     division 'I'
-    tier 'CHALLENGER'
     wins 1
   end
 end
