@@ -27,7 +27,7 @@ describe PlayerLeagueUpdater, vcr: true do
       p.by_player([player1, player2])
 
       expect(PlayerLeague.all.map(&:player_or_team_id)).to include('21848947', '442232')
-      expect(PlayerLeague.count).to eq 378
+      expect(PlayerLeague.count).to eq 380
     end
   end
 end
