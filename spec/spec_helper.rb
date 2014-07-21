@@ -59,6 +59,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
+    Redis.current.select(1)
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.start
   end

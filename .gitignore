@@ -20,6 +20,3 @@
 
 # Ignore coverage
 /coverage
-
-# Ignore vcr fixtures, since they include our API key
-/spec/fixtures/vcr
