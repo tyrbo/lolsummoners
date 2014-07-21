@@ -4,8 +4,6 @@ class PlayerLeagueBuilder
   def self.create_or_update(player, attributes, region, league)
     attributes['league_id'] = league.id
     attributes = prepare_attributes(attributes)
-    attributes['tier'] = league.tier
-    attributes['queue'] = league.queue
     if player.player_league.nil?
       player.create_player_league(attributes)
     else
@@ -19,11 +17,9 @@ class PlayerLeagueBuilder
 
   def self.prepare_attributes(attributes)
     attributes = Rehash.remap_hash(attributes)
-    attributes['rank'] = attributes['division']
     attributes['mini_series'] = stringify_mini_series(attributes['mini_series'])
     attributes['league_points'] = 110 if !attributes['mini_series'].nil?
     attributes.delete('league_name')
-    attributes.delete('division')
     attributes
   end
 
