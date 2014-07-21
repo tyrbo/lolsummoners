@@ -9,8 +9,9 @@ class PlayerLeagueBuilder
     if player.player_league.nil?
       player.create_player_league(attributes)
     else
-      if has_changed(player.player_league, attributes)
-        player.player_league.update_attributes(attributes)
+      player.player_league.assign_attributes(attributes)
+      if player.changed?
+        player.player_league.save
       end
     end
     player.player_league
@@ -20,32 +21,15 @@ class PlayerLeagueBuilder
     attributes = Rehash.remap_hash(attributes)
     attributes['rank'] = attributes['division']
     attributes['mini_series'] = stringify_mini_series(attributes['mini_series'])
-    attributes['league_points'] = 110 unless attributes['mini_series'].nil?
+    attributes['league_points'] = 110 if !attributes['mini_series'].nil?
     attributes.delete('league_name')
     attributes.delete('division')
     attributes
   end
 
   def self.stringify_mini_series(series)
-    unless series.nil?
+    if series
       "#{series['target']},#{series['timeLeftToPlayMillis']},#{series['wins']},#{series['losses']}"
-    else
-      nil
     end
-  end
-
-  def self.has_changed(player, attributes)
-    return true if player.is_fresh_blood != attributes['is_fresh_blood']
-    return true if player.is_hot_streak != attributes['is_hot_streak']
-    return true if player.is_inactive != attributes['is_inactive']
-    return true if player.is_veteran != attributes['is_veteran']
-    return true if player.league_points != attributes['league_points']
-    return true if player.mini_series != attributes['mini_series']
-    return true if player.player_or_team_name != attributes['player_or_team_name']
-    return true if player.rank != attributes['rank']
-    return true if player.tier != attributes['tier']
-    return true if player.wins != attributes['wins']
-    return true if player.league_id != attributes['league_id']
-    false
   end
 end

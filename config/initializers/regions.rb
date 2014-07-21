@@ -1,20 +1,20 @@
 if Rails.env.test?
   REGIONS = {
-    na: { name: 'North America', has_api: true },
-    euw: { name: 'Europe West', has_api: false },
-    oce: { name: 'Oceania', has_api: false }
+    na: { name: 'North America' },
+    euw: { name: 'Europe West' },
+    oce: { name: 'Oceania' }
   }
 else
   REGIONS = {
-    na: { name: 'North America', has_api: true },
-    euw: { name: 'Europe West', has_api: true },
-    eune: { name: 'Europe Nordic', has_api: true },
-    br: { name: 'Brazil', has_api: true },
-    lan: { name: 'LA North', has_api: true },
-    las: { name: 'LA South', has_api: true },
-    oce: { name: 'Oceania', has_api: true },
-    ru: { name: 'Russia', has_api: true },
-    tr: { name: 'Turkey', has_api: true },
-    kr: { name: 'Korea', has_api: true }
+    na: { name: 'North America' },
+    euw: { name: 'Europe West' },
+    eune: { name: 'Europe Nordic' },
+    br: { name: 'Brazil' },
+    lan: { name: 'LA North' },
+    las: { name: 'LA South' },
+    oce: { name: 'Oceania' },
+    ru: { name: 'Russia' },
+    tr: { name: 'Turkey' },
+    kr: { name: 'Korea' }
   }
 end

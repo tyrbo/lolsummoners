@@ -1,47 +1,47 @@
 require 'spec_helper'
 
-describe RiotApi do
+describe RiotApi, vcr: true do
+  before(:all) { @api = RiotApi.new('na') }
+
   describe '#by_name' do
-    it 'returns a hash for a valid player' do
-      expected_hash = [{
-        'id' => 0,
-        'name' => 'Pentakill',
-        'profileIconId' => 28,
-        'revisionDate' => 0,
-        'summonerLevel' => 30
-      }, 200]
-      expect(RiotApi.new('na').by_name('pentakill')).to eq expected_hash
+    it 'returns a hash with single entry for each valid player' do
+      expect(@api.by_name(['pentakill']).count).to eq 1
     end
 
-    it 'returns nil for an invalid player' do
-      expect(RiotApi.new('na').by_name('ajsdfoabsdfouabsdfiouweroi')).to eq [nil, 404]
+    it 'returns multiple information for multiple players' do
+      expect(@api.by_name(['pentakill', 'peak']).count).to eq 2
+    end
+
+    it 'returns {} for an invalid player' do
+      expect(@api.by_name(['riotfakename'])).to eq Hash.new
     end
   end
 
   describe '#league_for' do
-    it 'returns a hash for a player in a league' do
-      expected_hash = [{
-        'name' => 'asdf',
-        'queue' => 'RANKED_SOLO_5x5',
-        'tier' => 'GOLD',
-        'entries' => [{
-          'isHotStreak' => false,
-          'isFreshBlood' => false,
-          'isVeteran' => false,
-          'lastPlayed' => -1,
-          'playerOrTeamId' => '21848947',
-          'leaguePoints' => 37,
-          'division' => 'IV',
-          'isInactive' => false,
-          'playerOrTeamName' => 'Peak',
-          'wins' => 7
-        }]
-      }, 200]
-      expect(RiotApi.new('na').league_for(21848947)).to eq expected_hash
+    it "returns a hash with single entry for a player's league" do
+      expect(@api.league_for([21848947]).count).to eq 1
     end
 
-    it 'returns nil for a player not in a league' do
-      expect(RiotApi.new('na').league_for(0)).to eq [nil, 404]
+    it 'can return multiple information for multiple players' do
+      expect(@api.league_for([21848947, 442232]).count).to eq 2
+    end
+
+    it 'returns {} for a player not in a league' do
+      expect(@api.league_for([0])).to eq Hash.new
+    end
+  end
+
+  describe '#league_for_full' do
+    it 'returns a single entry with the full league for a player' do
+      expect(@api.league_for_full([21848947]).count).to eq 1
+    end
+
+    it 'can return multiple entries for multiple players' do
+      expect(@api.league_for_full([21848947, 442232]).count).to eq 2
+    end
+
+    it 'returns {} for a player not in a league' do
+      expect(@api.league_for_full([0])).to eq Hash.new
     end
   end
 end

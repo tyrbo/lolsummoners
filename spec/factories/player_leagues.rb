@@ -11,9 +11,8 @@ FactoryGirl.define do
     mini_series nil
     player_or_team_id 'MyString'
     player_or_team_name ''
-    queue 'RANKED_SOLO_5X5'
-    rank 'I'
-    tier 'CHALLENGER'
+    queue_type 'RANKED_SOLO_5X5'
+    division 'I'
     wins 1
   end
 end

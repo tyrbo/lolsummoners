@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://na.api.pvp.net/api/lol/na/v2.4/league/by-summoner/0?api_key=11270efd-6cbd-42c0-a55f-0ebae96feb24
+    uri: https://na.api.pvp.net/api/lol/na/v2.4/league/by-summoner/0?api_key=<API_KEY>
     body:
       encoding: US-ASCII
       string: ''
@@ -23,13 +23,11 @@ http_interactions:
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Fri, 11 Jul 2014 15:18:55 GMT
+      - Fri, 11 Jul 2014 19:04:13 GMT
       Server:
       - Jetty(9.1.1.v20140108)
-      X-Newrelic-App-Data:
-      - PxQFWFFSDwQTVVZSBwAGVkYdFGQHBDcQUQxLA1tMXV1dORYzVBJHNQFUZAQUFVFQVThOA0dYa0kIXlpvTR0RB1cLVwxFZBtEAUsNPR4NVgMDQ1I9SQFBHkMRDA9YX1IUOB5NQBcLDg1eB0orXEtJEhsifDUYQx9SSgYbUUhTCgoAUlhTAgMbS1UdFAQEVFBSBVMIAFlaBAFWA19DbA==
-      Content-Length:
-      - '1354'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
@@ -49,5 +47,5 @@ http_interactions:
         \                                               \n<br/>                                                \n<br/>
         \                                               \n\n</body>\n</html>\n"
     http_version: 
-  recorded_at: Fri, 11 Jul 2014 15:18:55 GMT
+  recorded_at: Fri, 11 Jul 2014 19:04:13 GMT
 recorded_with: VCR 2.9.2

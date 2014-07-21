@@ -9,8 +9,8 @@ require 'capybara/rspec'
 Capybara.javascript_driver = :webkit
 require 'database_cleaner'
 require 'webmock/rspec'
-WebMock.disable_net_connect!(allow_localhost: false)
 require 'sidekiq/testing'
+require 'vcr'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -33,7 +33,6 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
-
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -54,49 +53,25 @@ RSpec.configure do |config|
   #     --seed 1.44
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
+  config.include WebMock::API
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :transaction
   end
 
   config.before(:each) do
+    Redis.current.select(1)
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.start
-    Redis.current.select(1)
-    Redis.current.flushdb
   end
 
   config.before(:each, :js => true) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :transaction
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
-  config.before(:each) do
-    stub_request(:get, "https://na.api.pvp.net/api/lol/na/v2.4/league/by-summoner/442232?api_key=#{ENV['RIOT_API']}").
-      to_return(:status => 200, :body => '{"442232":[{"queue":"RANKED_SOLO_5x5","leagueName":"Taric\'s Enforcers","tier":"CHALLENGER","entries":[{"playerOrTeamId":"442232","playerOrTeamName":"aphromoo","leagueName":"Taric\'s Enforcers","queue":"RANKED_SOLO_5x5","tier":"CHALLENGER","division":"I","leaguePoints":748,"wins":168,"isHotStreak":false,"isVeteran":true,"isFreshBlood":false,"isInactive":false,"lastPlayed":-1},{"playerOrTeamId":"23459413","playerOrTeamName":"Suffix","leagueName":"Taric\'s Enforcers","queue":"RANKED_SOLO_5x5","tier":"CHALLENGER","division":"I","leaguePoints":51,"wins":166,"isHotStreak":false,"isVeteran":false,"isFreshBlood":true,"isInactive":false,"lastPlayed":-1}]}]}', :headers => {})
-
-      stub_request(:get, "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/ajsdfoabsdfouabsdfiouweroi?api_key=#{ENV['RIOT_API']}").
-        to_return(:status => 404, :body => "", :headers => {})
-
-        stub_request(:get, "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/pentakill?api_key=#{ENV['RIOT_API']}").
-          to_return(:status => 200, :body => '{"pentakill":{"id":0,"name":"Pentakill","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
-
-          stub_request(:get, "https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/peak?api_key=#{ENV['RIOT_API']}").
-            to_return(:status => 200, :body => '{"peak":{"id":21848947,"name":"Peak","profileIconId":28,"revisionDate":0,"summonerLevel":30}}', :headers => {})
-
-            stub_request(:get, "https://na.api.pvp.net/api/lol/na/v2.4/league/by-summoner/0/entry?api_key=#{ENV['RIOT_API']}").
-              to_return(:status => 404, :body => "", :headers => {})
-
-              stub_request(:get, "https://na.api.pvp.net/api/lol/na/v2.4/league/by-summoner/21848947/entry?api_key=#{ENV['RIOT_API']}").
-                to_return(:status => 200, :body => '{"21848947":[{"name": "asdf","queue": "RANKED_SOLO_5x5","tier": "GOLD","entries":[{"isHotStreak": false,"isFreshBlood": false,"isVeteran": false,"lastPlayed": -1,"playerOrTeamId": "21848947","leaguePoints": 37,"division": "IV","isInactive": false,"playerOrTeamName": "Peak","wins": 7}]}]}', :headers => {})
-  end
-
-  config.after(:suite) do
-    WebMock.disable!
     Redis.current.select(1)
     Redis.current.flushdb
+    DatabaseCleaner.clean
   end
 end

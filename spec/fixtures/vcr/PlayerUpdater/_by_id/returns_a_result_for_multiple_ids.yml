@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://na.api.pvp.net/api/lol/na/v1.4/summoner/21848947,442232?api_key=11270efd-6cbd-42c0-a55f-0ebae96feb24
+    uri: https://na.api.pvp.net/api/lol/na/v1.4/summoner/21848947,442232?api_key=<API_KEY>
     body:
       encoding: US-ASCII
       string: ''
@@ -21,20 +21,18 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 11 Jul 2014 15:30:13 GMT
+      - Sat, 19 Jul 2014 03:21:09 GMT
       Server:
       - Jetty(9.1.1.v20140108)
       Vary:
       - Accept-Encoding, User-Agent
-      X-Newrelic-App-Data:
-      - PxQFWFFSDwQTVVdUBAgAVkYdFGQHBDcQUQxLA1tMXV1dORYzVBBGBxdCdhUSEVFRRRAEPhhQRw84HlpcDjpMDFE+FxQJFgBuHBZMDFwOXQcWahgSEw5VXF4BEytTQhVKVB8GH1JIU1IBUgxQAQkYHwJJG1RVVwMBXQFUAFZaCwUCBVFAag==
       Content-Length:
       - '218'
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
-      string: '{"442232":{"id":442232,"name":"aphromoo","profileIconId":621,"summonerLevel":30,"revisionDate":1404719593000},"21848947":{"id":21848947,"name":"Peak","profileIconId":28,"summonerLevel":30,"revisionDate":1405044014000}}'
+      string: '{"442232":{"id":442232,"name":"aphromoo","profileIconId":621,"summonerLevel":30,"revisionDate":1405677046000},"21848947":{"id":21848947,"name":"Peak","profileIconId":28,"summonerLevel":30,"revisionDate":1405739829000}}'
     http_version: 
-  recorded_at: Fri, 11 Jul 2014 15:30:13 GMT
+  recorded_at: Sat, 19 Jul 2014 03:21:10 GMT
 recorded_with: VCR 2.9.2

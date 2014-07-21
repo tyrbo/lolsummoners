@@ -10,14 +10,14 @@ class Player < ActiveRecord::Base
   scope :region_tier_and_division_count, -> (region, tier, division) {
     includes(:player_league).
     where(region: region).
-    where(player_leagues: { tier: tier, rank: division }).
+    where(player_leagues: { tier: tier, division: division }).
     count
   }
 
   attr_accessor :ladder
-  delegate :tier, to: :player_league
   delegate :wins, to: :player_league
-  delegate :rank, to: :player_league
+  delegate :division, to: :player_league
+  delegate :tier, to: :player_league
   delegate :league_points, to: :player_league
   delegate :league_id, to: :player_league
   delegate :is_veteran, to: :player_league
