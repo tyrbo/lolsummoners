@@ -1,13 +1,13 @@
 class Player < ActiveRecord::Base
-  scope :name_and_region, -> (internal_name, region) {
+  scope :name_and_region, ->(internal_name, region) {
     where(internal_name: internal_name, region: region)
   }
 
-  scope :summoner_id_and_region, -> (summoner_id, region) {
+  scope :summoner_id_and_region, ->(summoner_id, region) {
     where(summoner_id: summoner_id, region: region)
   }
 
-  scope :region_tier_and_division_count, -> (region, tier, division) {
+  scope :region_tier_and_division_count, ->(region, tier, division) {
     includes(:player_league).
     where(region: region).
     where(player_leagues: { tier: tier, division: division }).

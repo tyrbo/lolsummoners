@@ -1,5 +1,5 @@
 class Stats < ActiveRecord::Base
-  scope :by_region, -> (region) {
+  scope :by_region, ->(region) {
     where(region: region)
   }
 
