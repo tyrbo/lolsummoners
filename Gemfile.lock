@@ -255,7 +255,7 @@ DEPENDENCIES
   capybara
   capybara-webkit
   codeclimate-test-reporter
-  coffee-rails (~> 4.0.0)
+  coffee-rails
   coveralls
   curb
   database_cleaner
@@ -263,7 +263,7 @@ DEPENDENCIES
   figaro
   foreman
   humane-rails
-  jbuilder (~> 2.1.0)
+  jbuilder
   jquery-rails
   mail_form
   newrelic_rpm
@@ -274,14 +274,14 @@ DEPENDENCIES
   recaptcha
   redis
   rspec-rails
-  sass-rails (~> 4.0.0)
+  sass-rails
   sdoc
   sidekiq
   spring
   spring-commands-rspec
   tubesock!
   turbolinks
-  uglifier (~> 2.5.0)
+  uglifier
   vcr
   webmock
-  will_paginate (~> 3.0)
+  will_paginate
