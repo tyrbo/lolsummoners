@@ -21,20 +21,20 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 11 Jul 2014 19:04:11 GMT
+      - Fri, 12 Sep 2014 20:37:39 GMT
       Server:
       - Jetty(9.1.1.v20140108)
       Vary:
       - Accept-Encoding, User-Agent
       X-Newrelic-App-Data:
-      - PxQFWFFSDwQTVVdUBAgAVkYdFGQHBDcQUQxLA1tMXV1dORYzVBBGBxdCdhUSEVFRRRAEPhhQRw84HlpcDjpMDFE+FxQJFgBuHE9lTlMYHgwFW1I9SUkaHwBKUU4HHwdWVwAABVtQVU4dUxRADwkCV1dVDABXU1cEXQ4OV0Q+
+      - PxQFWFFSDwQTVVdUBAgAVkYdFGQHBDcQUQxLA1tMXV1dORYzVBBGBxdCdhUSEVFRRRAEPhhQRw84HlpcDjpMDFE+FxQJFgBuHE9lTlMYHgwFW1I9SUkaHwBKUU4HHwdWVwEBClNUW04dUxRAWlwEAlUHWgcFVwtXAgYEQzs=
       Content-Length:
       - '219'
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
-      string: '{"pentakill":{"id":27745418,"name":"Pentakill","profileIconId":28,"summonerLevel":30,"revisionDate":1405040340000},"peak":{"id":21848947,"name":"Peak","profileIconId":28,"summonerLevel":30,"revisionDate":1405044014000}}'
+      string: '{"pentakill":{"id":27745418,"name":"Pentakill","profileIconId":28,"summonerLevel":30,"revisionDate":1405917974000},"peak":{"id":21848947,"name":"Peak","profileIconId":28,"summonerLevel":30,"revisionDate":1410414819000}}'
     http_version: 
-  recorded_at: Fri, 11 Jul 2014 19:04:11 GMT
+  recorded_at: Fri, 12 Sep 2014 20:37:39 GMT
 recorded_with: VCR 2.9.2

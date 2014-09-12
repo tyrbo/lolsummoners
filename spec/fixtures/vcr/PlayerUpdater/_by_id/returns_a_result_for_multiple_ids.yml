@@ -21,18 +21,20 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Sat, 19 Jul 2014 03:21:09 GMT
+      - Fri, 12 Sep 2014 20:37:39 GMT
       Server:
       - Jetty(9.1.1.v20140108)
       Vary:
       - Accept-Encoding, User-Agent
-      Content-Length:
-      - '218'
+      X-Newrelic-App-Data:
+      - PxQFWFFSDwQTVVdUBAgAVkYdFGQHBDcQUQxLA1tMXV1dORYzVBBGBxdCdhUSEVFRRRAEPhhQRw84HlpcDjpMDFE+FxQJFgBuHBZMDFwOXQcWahgSEw5VXF4BEytTQhVKVB8GH1JIU1IBUgFQDA0AHh5UFUMFVwBUUgYAVwACCVJVXVFAag==
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
-      string: '{"442232":{"id":442232,"name":"aphromoo","profileIconId":621,"summonerLevel":30,"revisionDate":1405677046000},"21848947":{"id":21848947,"name":"Peak","profileIconId":28,"summonerLevel":30,"revisionDate":1405739829000}}'
+      string: '{"442232":{"id":442232,"name":"aphromoo","profileIconId":621,"summonerLevel":30,"revisionDate":1410242714000},"21848947":{"id":21848947,"name":"Peak","profileIconId":28,"summonerLevel":30,"revisionDate":1410414819000}}'
     http_version: 
-  recorded_at: Sat, 19 Jul 2014 03:21:10 GMT
+  recorded_at: Fri, 12 Sep 2014 20:37:40 GMT
 recorded_with: VCR 2.9.2

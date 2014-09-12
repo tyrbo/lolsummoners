@@ -27,8 +27,10 @@ class League < ActiveRecord::Base
       15000
     when 'DIAMOND'
       20000
-    when 'CHALLENGER'
+    when 'MASTER'
       25000
+    when 'CHALLENGER'
+      30000
     end
   end
 

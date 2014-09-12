@@ -8,17 +8,20 @@ describe League do
     it 'should return 5000 for SILVER' do
       expect(League.add_points_for_tier('SILVER')).to eq 5000
     end
-    it 'should return 0 for GOLD' do
+    it 'should return 10000 for GOLD' do
       expect(League.add_points_for_tier('GOLD')).to eq 10000
     end
-    it 'should return 0 for PLATINUM' do
+    it 'should return 15000 for PLATINUM' do
       expect(League.add_points_for_tier('PLATINUM')).to eq 15000
     end
-    it 'should return 0 for DIAMOND' do
+    it 'should return 20000 for DIAMOND' do
       expect(League.add_points_for_tier('DIAMOND')).to eq 20000
     end
-    it 'should return 25000 for CHALLENGER' do
-      expect(League.add_points_for_tier('CHALLENGER')).to eq 25000
+    it 'should return 25000 for MASTER' do
+      expect(League.add_points_for_tier('MASTER')).to eq 25000
+    end
+    it 'should return 30000 for CHALLENGER' do
+      expect(League.add_points_for_tier('CHALLENGER')).to eq 30000
     end
   end
 

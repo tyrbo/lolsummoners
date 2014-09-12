@@ -7,9 +7,8 @@ class PlayerLeagueUpdater
   end
 
   def by_player(players)
-    response = []
-    players.each_slice(40) do |batch|
-      response << api.league_for_full(batch.map(&:summoner_id))
+    response = players.each_slice(40).map do |batch|
+      api.league_for_full(batch.map(&:summoner_id))
     end
     handle(response)
   end
@@ -25,22 +24,20 @@ class PlayerLeagueUpdater
   end
 
   def update(data)
-    league_obj = LeagueBuilder.create_or_update(data['name'], data['tier'], data['queue'], region)
-    player_ids = Player.where(summoner_id: data['entries'].map { |x| x['playerOrTeamId'] })
-                       .map(&:summoner_id)
-    to_create = data['entries'].reject { |e| player_ids.any? { |x| x == e['playerOrTeamId'] } }
-                               .map { |e| e['playerOrTeamId'] }
-
-    to_update = player_ids.concat(to_create)
-
-    players = PlayerUpdater.new(region)
-                           .by_id(to_update)
+    league = LeagueBuilder.create_or_update(data['name'], data['tier'], data['queue'], region)
+    players = PlayerUpdater.new(region).by_id(players_to_update(data))
 
     data['entries'].each do |entry|
       player = players.detect { |x| x.summoner_id == entry['playerOrTeamId'].to_i }
       if player
-        PlayerLeagueBuilder.create_or_update(player, entry, region, league_obj)
+        PlayerLeagueBuilder.create_or_update(player, entry, region, league)
       end
     end
+  end
+
+  private
+
+  def players_to_update(data)
+    data['entries'].map { |x| x['playerOrTeamId'] }
   end
 end

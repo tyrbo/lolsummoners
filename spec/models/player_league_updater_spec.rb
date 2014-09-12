@@ -13,21 +13,21 @@ describe PlayerLeagueUpdater, vcr: true do
     end
 
     it 'updates the PlayerLeague for the given player' do
-      player = create(:player, summoner_id: 442232, region: 'na')
+      player = create(:player, summoner_id: 2648, region: 'na')
       p = PlayerLeagueUpdater.new('na')
       p.by_player([player])
-      expect(PlayerLeague.count).to eq 200
+      expect(PlayerLeague.count).to eq 196
     end
 
     it 'updates the PlayerLeague for the given players' do
       player1 = create(:player, summoner_id: 442232, region: 'na')
-      player2 = create(:player, summoner_id: 21848947, region: 'na')
+      player2 = create(:player, summoner_id: 2648, region: 'na')
 
       p = PlayerLeagueUpdater.new('na')
       p.by_player([player1, player2])
 
-      expect(PlayerLeague.all.map(&:player_or_team_id)).to include('21848947', '442232')
-      expect(PlayerLeague.count).to eq 380
+      expect(PlayerLeague.all.map(&:player_or_team_id)).to include('442232', '2648')
+      expect(PlayerLeague.count).to eq 588
     end
   end
 end
