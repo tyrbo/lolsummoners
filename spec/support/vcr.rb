@@ -6,4 +6,5 @@ VCR.configure do |c|
   c.default_cassette_options = { record: :new_episodes }
   c.configure_rspec_metadata!
   c.filter_sensitive_data('<API_KEY>') { ENV['RIOT_API'] }
+  c.ignore_hosts 'codeclimate.com'
 end

@@ -2,11 +2,11 @@ class Ladder
   PER_PAGE = 25.0
 
   def self.rank_for(region, player)
-    Redis.current.zrevrank("rank_#{region}", "#{player.summoner_id}_#{player.region}") + 1
+    redis.zrevrank("rank_#{region}", "#{player.summoner_id}_#{player.region}") + 1
   end
 
   def self.get_total_players(id)
-    Redis.current.zcard("rank_#{id}")
+    redis.zcard("rank_#{id}")
   end
 
   def self.next_page?(opts)
@@ -15,6 +15,10 @@ class Ladder
 
   def self.prev_page?(opts)
     opts[:page].to_i > 1
+  end
+
+  def self.redis
+    Redis.current
   end
 
   def initialize(region)
