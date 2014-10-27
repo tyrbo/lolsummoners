@@ -1,20 +1,26 @@
 class RateLimit
-  def self.limited?(key_name)
-    redis.exists(key_name)
+  attr_reader :ip, :key
+
+  def initialize(request)
+    @ip = request.remote_ip
+    @key = "#{ip}_#{Time.now.to_i}"
   end
 
-  def self.get(key_name)
-    redis.get(key_name)
+  def limited?
+    return false unless @ip
+    redis.exists(key)
   end
 
-  def self.set(key_name, timeout, value = nil)
+  def limit!(timeout = 1, value = nil)
     redis.multi do
-      redis.set(key_name, value)
-      redis.expire(key_name, timeout)
+      redis.set(key, value)
+      redis.expire(key, timeout)
     end
   end
 
-  def self.redis
+  private
+
+  def redis
     Redis.current
   end
 end

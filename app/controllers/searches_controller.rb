@@ -26,12 +26,10 @@ class SearchesController < ApplicationController
   end
 
   def rate_limited?
-    ip = request.remote_ip || 'unknown_ip'
-    key_name = "#{ip}_#{Time.now.to_i}"
-    if RateLimit.limited?(key_name)
+    if RateLimit.new(request).limited?
       render status: 429, text: 'Too much'
     else
-      RateLimit.set(key_name, 1)
+      RateLimit.new(request).limit!
     end
   end
 end
