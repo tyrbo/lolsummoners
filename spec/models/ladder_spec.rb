@@ -21,7 +21,7 @@ describe Ladder do
     it 'returns a list of players and ranks' do
       ladder = Ladder.new('test')
       first_player = ladder.combine_players_with_rank(Player.all).first
-      expect(first_player.ladder).to eq 0
+      expect(first_player.rank).to eq 1
     end
   end
 

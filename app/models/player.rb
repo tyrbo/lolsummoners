@@ -14,7 +14,7 @@ class Player < ActiveRecord::Base
     count
   }
 
-  attr_accessor :ladder
+  attr_accessor :rank
   delegate :wins, to: :player_league
   delegate :division, to: :player_league
   delegate :tier, to: :player_league

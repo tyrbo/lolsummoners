@@ -29,8 +29,8 @@ class Ladder
 
   def combine_players_with_rank(players)
     players.each do |player|
-      player.ladder = redis.zrevrank("rank_#{@region}", "#{player.summoner_id}_#{player.region}")
-    end.sort_by { |player| player.ladder }
+      player.rank = redis.zrevrank("rank_#{@region}", "#{player.summoner_id}_#{player.region}") + 1
+    end.sort_by { |player| player.rank }
   end
 
   def find_redis_ranks(page)
