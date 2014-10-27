@@ -7,7 +7,7 @@ class PlayerLeagueUpdater
   end
 
   def by_player(players)
-    response = players.each_slice(40).map do |batch|
+    response = players.each_slice(10).map do |batch|
       api.league_for_full(batch.map(&:summoner_id))
     end
     handle(response)

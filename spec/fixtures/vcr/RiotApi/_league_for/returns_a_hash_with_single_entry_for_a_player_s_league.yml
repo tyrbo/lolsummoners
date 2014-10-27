@@ -21,22 +21,20 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 12 Sep 2014 20:37:38 GMT
+      - Mon, 27 Oct 2014 16:11:27 GMT
       Server:
       - Jetty(9.1.1.v20140108)
       Vary:
       - Accept-Encoding
       X-Newrelic-App-Data:
-      - PxQFWFFSDwQTVVZSBwAGVkYdFGQHBDcQUQxLA1tMXV1dORYzVBJHNQFUZAQUFVFQVThOA0dYa0kIXlpvTR0RB1cLVwxFZBtEAUsNPR4NVgMDQ1I9SQFBHkMRDA9YX1IUOB5NQBcLDg1eB0orXEtJbhwAVxVDGBNKI3NjSERPCB0ASFFMBwEOVl0DAAVRSk5THEBeUlkOBwVVBAhQCVlQUVdSFTw=
-      Content-Length:
-      - '577'
+      - PxQFWFFSDwQTVVZSBwAGVkYdFGQHBDcQUQxLA1tMXV1dORYzVBJHNQFUZAQUFVFQVThOA0dYa0kIXlpvTR0RB1cLVwxFZBtEAUsNPR4NVgMDQ1I9SQFBHkMRDA9YX1IUOB5NQBcLDg1eB0orXEtJbhwAVxVDGBNKI3NjSERPCB0ASFFMBwEDU1QABQFWSk5THEAJU1oOAgcLAFxYBgAGV1YDFTw=
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
-      string: '{"21848947":[{"name":"Tryndamere''s Deceivers","tier":"GOLD","queue":"RANKED_SOLO_5x5","entries":[{"playerOrTeamId":"21848947","playerOrTeamName":"Peak","division":"I","leaguePoints":20,"wins":10,"isHotStreak":false,"isVeteran":false,"isFreshBlood":false,"isInactive":false}]},{"name":"Caitlyn''s
-        Defiants","tier":"GOLD","queue":"RANKED_TEAM_5x5","entries":[{"playerOrTeamId":"TEAM-fe57e300-b3d7-11e3-a02a-782bcb4d0bb2","playerOrTeamName":"fecal
-        fingers","division":"V","leaguePoints":0,"wins":47,"isHotStreak":false,"isVeteran":false,"isFreshBlood":false,"isInactive":false}]}]}'
+      string: '{"21848947":[{"name":"Tryndamere''s Barbarians","tier":"GOLD","queue":"RANKED_SOLO_5x5","entries":[{"playerOrTeamId":"21848947","playerOrTeamName":"Peak","division":"II","leaguePoints":75,"wins":10,"isHotStreak":false,"isVeteran":false,"isFreshBlood":false,"isInactive":true}]}]}'
     http_version: 
-  recorded_at: Fri, 12 Sep 2014 20:37:39 GMT
+  recorded_at: Mon, 27 Oct 2014 16:11:27 GMT
 recorded_with: VCR 2.9.2
