@@ -3,8 +3,6 @@ class Contact < MailForm::Base
   attribute :subject, validate: true
   attribute :message, validate: true
 
-  # Declare the e-mail headers. It accepts anything the mail method
-  # in ActionMailer accepts.
   def headers
     {
       :subject => "[SITE] #{subject}",
