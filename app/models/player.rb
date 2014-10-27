@@ -27,28 +27,23 @@ class Player < ActiveRecord::Base
   has_one :player_league, dependent: :destroy
   before_save :prepare_name
 
-  def self.find_players_by_region(player_list)
-    results = []
-    arranged_players = explode_redis_results(player_list)
-    arranged_players.each do |region, summoners|
-      results << Player.where(summoner_id: summoners, region: region)
+  def self.find_players_by_region(players)
+    arranged_players(players).map do |region, summoners|
+      Player.where(summoner_id: summoners, region: region)
+    end.flatten
+  end
+
+  def self.arranged_players(players)
+    players.each_with_object({}) do |(key, _), obj|
+      summoner_id, region = key.split('_')
+      obj[region] ||= []
+      obj[region] << summoner_id
     end
-    results.flatten
   end
 
   private
 
   def prepare_name
     self.internal_name = self.name.downcase.gsub(/\s+/, '')
-  end
-
-  def self.explode_redis_results(redis_results)
-    players_by_region = {}
-    redis_results.each do |key, score|
-      summoner_id, region = key.split('_')
-      players_by_region[region] ||= []
-      players_by_region[region] << summoner_id
-    end
-    players_by_region
   end
 end
