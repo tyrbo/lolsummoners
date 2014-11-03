@@ -1,8 +1,10 @@
 require 'curb'
 
 class RiotApi
+  attr_reader :region
+
   def initialize(region)
-    @region = region
+    @region = Region.new(region)
   end
 
   def by_name(names)
@@ -53,10 +55,10 @@ class RiotApi
   end
 
   def build_url(resource)
-    "#{base_url}/#{@region}/#{resource}?api_key=#{ENV['RIOT_API']}"
+    "#{base_url}/#{region.key}/#{resource}?api_key=#{ENV['RIOT_API']}"
   end
 
   def base_url
-    "#{Region.base_url(@region)}/api/lol"
+    "#{region.base_url}/api/lol"
   end
 end

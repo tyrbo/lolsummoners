@@ -9,7 +9,8 @@ class QueuesController < ApplicationController
 
       Thread.new do
         current = nil
-        loop do
+        i = 0
+        20.times do
           current = @redis.get("response_#{key_name}")
           unless current.nil?
             tubesock.send_data current
@@ -17,6 +18,8 @@ class QueuesController < ApplicationController
           end
           sleep 0.25
         end
+
+        tubesock.close
       end
 
       tubesock.onclose do

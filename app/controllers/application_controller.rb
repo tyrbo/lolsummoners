@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
 
   def valid_region?
     if !params[:region].nil?
-      params[:region] = params[:region].downcase
-      if !Region.available?(params[:region])
+      if !Region.new(params[:region]).available?
         fail ActionController::RoutingError.new('Not Found')
       end
     end

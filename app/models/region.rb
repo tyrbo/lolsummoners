@@ -1,20 +1,21 @@
 class Region
-  def self.available?(region)
-    return true if region == 'all'
-    REGIONS.key?(region.to_sym)
+  attr_reader :key
+
+  def initialize(region)
+    @key = region.downcase
   end
 
-  def self.name(region)
-    return 'Global' if region == 'all'
-    REGIONS[region.to_sym][:name]
+  def available?
+    return true if key == 'all'
+    REGIONS.key?(key)
   end
 
-  def self.base_url(region)
-    "https://#{region.downcase}.api.pvp.net"
+  def name
+    return 'Global' if key == 'all'
+    REGIONS[key][:name]
   end
 
-  def self.api?(region)
-    return false unless self.available?(region)
-    REGIONS[region.to_sym][:has_api]
+  def base_url
+    "https://#{key}.api.pvp.net"
   end
 end

@@ -43,4 +43,8 @@ module ApplicationHelper
     percentage = 0.01 if percentage < 0.01
     number_with_precision(percentage, precision: 2)
   end
+
+  def name_for_region(region)
+    Region.new(region).name
+  end
 end

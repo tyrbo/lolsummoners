@@ -5,9 +5,8 @@ class PlayerUpdater
   end
 
   def by_name(values)
-    response = []
-    values.each_slice(40) do |names|
-      response << @api.by_name(names)
+    response = values.each_slice(40).map do |names|
+      @api.by_name(names)
     end
     update(response)
   end
