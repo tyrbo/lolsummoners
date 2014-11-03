@@ -21,5 +21,5 @@ $ ->
         if split[1] == '404'
           $('#loading').html('<h1>Not found. :(</h1><p>We couldn\'t find that player. Sorry.')
         else
-          $('#loading').html('<h1>It broke.</h1><p>The Riot API is unavailable. Try again later.')
+          $('#loading').html('<h1>It broke.</h1><p>The Riot API may be unavailable. Try again later.')
         socket.close()

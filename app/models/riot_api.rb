@@ -21,13 +21,13 @@ class RiotApi
 
   def league_for(summoner_ids)
     ids = summoner_ids.join(',')
-    response = get("v2.4/league/by-summoner/#{ids}/entry")
+    response = get("v2.5/league/by-summoner/#{ids}/entry")
     handle_response(response)
   end
 
   def league_for_full(summoner_ids)
     ids = summoner_ids.join(',')
-    response = get("v2.4/league/by-summoner/#{ids}")
+    response = get("v2.5/league/by-summoner/#{ids}")
     handle_response(response)
   end
 

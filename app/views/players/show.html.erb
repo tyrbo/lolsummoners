@@ -1,4 +1,4 @@
-<% content_for :title do %><%= @player.name %>, <%= Region.name(@player.region) %><% end %>
+<% content_for :title do %><%= @player.name %>, <%= name_for_region(@player.region) %><% end %>
 <div class="col-md-8">
   <div class="content-container clearfix">
     <div class="header" id="update-value" data-update="<%= @update %>" data-name="<%= @player.summoner_id %>" data-region="<%= @player.region %>"><%= @player.name %></div>
@@ -33,7 +33,7 @@
               <%= number_with_delimiter(rank_region) %> (<%= percentage_for(@player.region, rank_region) %>%)
             </div>
             <div class="col-md-6">
-              <div class="title"><%= Region.name('all') %></div>
+              <div class="title"><%= name_for_region('all') %></div>
               <% rank_all = rank_for('all', @player) %>
               <%= number_with_delimiter(rank_all) %> (<%= percentage_for('all', rank_all) %>%)
             </div>

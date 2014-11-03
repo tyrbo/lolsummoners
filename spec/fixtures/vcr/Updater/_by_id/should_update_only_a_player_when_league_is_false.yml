@@ -21,13 +21,13 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Mon, 27 Oct 2014 16:11:26 GMT
+      - Mon, 03 Nov 2014 21:14:54 GMT
       Server:
       - Jetty(9.1.1.v20140108)
       Vary:
       - Accept-Encoding, User-Agent
       X-Newrelic-App-Data:
-      - PxQFWFFSDwQTVVdUBAgAVkYdFGQHBDcQUQxLA1tMXV1dORYzVBBGBxdCdhUSEVFRRRAEPhhQRw84HlpcDjpMDFE+FxQJFgBuHBZMDFwOXQcWahgSEw5VXF4BEytTQhVKVB8GH1pIVlIJUwonFQwYHwJJG1RQWQZRUgBTWF4HDVEFVVlAag==
+      - PxQFWFFSDwQTVVdUBAgAVkYdFGQHBDcQUQxLA1tMXV1dORYzVBBGBxdCdhUSEVFRRRAEPhhQRw84HlpcDjpMDFE+FxQJFgBuHBZMDFwOXQcWahgSEw5VXF4BEytTQhVKVB8GH1JIU1IBVQhaCwoBHh5UFUMEVARUBwAPAAUHCQpWXVVXFWw=
       Content-Length:
       - '109'
       Connection:
@@ -36,5 +36,5 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"21848947":{"id":21848947,"name":"Peak","profileIconId":28,"summonerLevel":30,"revisionDate":1413917344000}}'
     http_version: 
-  recorded_at: Mon, 27 Oct 2014 16:11:26 GMT
+  recorded_at: Mon, 03 Nov 2014 21:14:54 GMT
 recorded_with: VCR 2.9.2

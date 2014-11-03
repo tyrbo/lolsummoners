@@ -47,7 +47,7 @@
 				<% @players.each do |player| %>
 					<tr> 
 					<td><%= player.region.upcase %></td>
-					<td class="rank"><%= player.ladder + 1 %></td>
+					<td class="rank"><%= player.rank %></td>
 					<td class="name"><%= link_to player.name, player_path(region: player.region, summoner_id: player.summoner_id) %></td>
 					<td class="points"><%= player.league_points %></td>
 				</tr>

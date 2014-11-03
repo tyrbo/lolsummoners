@@ -1,5 +1,5 @@
 class PlayerLeagueUpdater
-  attr_reader :region, :api
+  attr_reader :region, :api, :players
 
   def initialize(region)
     @api = RiotApi.new(region)
@@ -7,6 +7,8 @@ class PlayerLeagueUpdater
   end
 
   def by_player(players)
+    @players = players
+
     response = players.each_slice(10).map do |batch|
       api.league_for_full(batch.map(&:summoner_id))
     end
@@ -25,7 +27,8 @@ class PlayerLeagueUpdater
 
   def update(data)
     league = LeagueBuilder.create_or_update(data['name'], data['tier'], data['queue'], region)
-    players = PlayerUpdater.new(region).by_id(players_to_update(data))
+    new_players = PlayerUpdater.new(region).by_id(players_to_update(data))
+    players.concat(new_players)
 
     data['entries'].each do |entry|
       player = players.detect { |x| x.summoner_id == entry['playerOrTeamId'].to_i }
@@ -38,6 +41,9 @@ class PlayerLeagueUpdater
   private
 
   def players_to_update(data)
-    data['entries'].map { |x| x['playerOrTeamId'] }
+    api_ids = data['entries'].map { |x| x['playerOrTeamId'] }
+    existing_ids = players.map(&:summoner_id)
+
+    api_ids - existing_ids
   end
 end
