@@ -8,6 +8,6 @@ class SearchWorker
   end
 
   def perform(opts)
-    ApiHandler.new(opts['region']).player_search(opts)
+    #ApiHandler.new(opts['region']).player_search(opts)
   end
 end
