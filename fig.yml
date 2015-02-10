@@ -1,0 +1,31 @@
+db:
+  image: postgres
+  ports:
+    - "5432"
+
+redis:
+  image: redis
+
+web:
+  build: .
+  command: bin/rails server -p 9292 -b 0.0.0.0
+  volumes:
+    - .:/app
+  ports:
+    - "9292:9292"
+  links:
+    - db
+    - redis
+  environment:
+    REDIS_URL: redis://redis:6379/0
+
+sidkiq:
+  build: .
+  command: sidekiq -v
+  volumes:
+    - .:/app
+  links:
+    - db
+    - redis
+  environment:
+    REDIS_URL: redis://redis:6379/0

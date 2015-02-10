@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140719050544) do
+ActiveRecord::Schema.define(version: 20150209215124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "leagues", force: true do |t|
+  create_table "leagues", force: :cascade do |t|
     t.string   "name"
     t.string   "queue"
     t.string   "tier"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140719050544) do
 
   add_index "leagues", ["name", "tier", "queue", "region"], name: "index_leagues_on_name_and_tier_and_queue_and_region", using: :btree
 
-  create_table "player_leagues", force: true do |t|
+  create_table "player_leagues", force: :cascade do |t|
     t.boolean  "is_fresh_blood"
     t.boolean  "is_hot_streak"
     t.boolean  "is_inactive"
@@ -44,13 +44,14 @@ ActiveRecord::Schema.define(version: 20140719050544) do
     t.datetime "updated_at"
     t.integer  "player_id"
     t.integer  "league_id"
+    t.integer  "losses"
   end
 
   add_index "player_leagues", ["id", "updated_at", "is_inactive"], name: "index_player_leagues_on_id_and_updated_at_and_is_inactive", using: :btree
   add_index "player_leagues", ["league_id"], name: "index_player_leagues_on_league_id", using: :btree
   add_index "player_leagues", ["player_id"], name: "index_player_leagues_on_player_id", unique: true, using: :btree
 
-  create_table "players", force: true do |t|
+  create_table "players", force: :cascade do |t|
     t.integer  "summoner_id",     limit: 8
     t.string   "name"
     t.integer  "profile_icon_id"
@@ -65,14 +66,14 @@ ActiveRecord::Schema.define(version: 20140719050544) do
   add_index "players", ["internal_name", "region"], name: "index_players_on_internal_name_and_region", using: :btree
   add_index "players", ["summoner_id", "region"], name: "index_players_on_summoner_id_and_region", unique: true, using: :btree
 
-  create_table "posts", force: true do |t|
+  create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "stats", force: true do |t|
+  create_table "stats", force: :cascade do |t|
     t.string "name"
     t.string "value"
     t.string "region"

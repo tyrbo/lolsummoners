@@ -21,3 +21,6 @@
 
 # Ignore coverage
 /coverage
+
+# Assets
+/public/assets

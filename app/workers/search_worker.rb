@@ -3,21 +3,32 @@ class SearchWorker
   sidekiq_options retry: false
 
   def self.queue(opts)
-    self.perform_async(opts)
-    true
+    key = "limited_#{opts[:region]}_#{opts[:by]}_#{opts[:id]}"
+
+    unless RateLimit.new(key).limited?
+      RateLimit.new(key).limit!(60 * 15)
+
+      self.perform_async(opts)
+
+      return true
+    end
+    false
   end
 
   def perform(opts)
-    #ApiHandler.new(opts['region']).player_search(opts)
     updater = Updater.new(opts['region'])
     key_name = key_name_for(opts)
 
-    data = []
+    player = nil
     if opts['by'] == 'name'
       data = updater.by_name([opts['id']])
+      player = data.find { |x| x.internal_name == opts['id'] }
+    elsif opts['by'] == 'sid'
+      data = updater.by_id([opts['id']])
+      player = data.find { |x| x.summoner_id == opts['id'] }
     end
 
-    if player = data.find { |x| x.internal_name == opts['id'] }
+    if player
       push("response_#{key_name}", 60 * 30, "done #{player.summoner_id}")
     else
       push("response_#{key_name}", 60 * 30, "fail 404")

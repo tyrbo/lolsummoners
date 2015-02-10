@@ -3,8 +3,8 @@ development:
   encoding: unicode
   database: lolsummoners_development
   pool: 5
-  host: localhost
-  username: lolsummoners
+  host: db
+  username: postgres
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -33,8 +33,8 @@ test:
   encoding: unicode
   database: lolsummoners_test
   pool: 5
-  host: localhost
-  username: lolsummoners
+  host: db
+  username: postgres
   password:
 
 production:

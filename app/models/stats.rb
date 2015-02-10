@@ -4,7 +4,7 @@ class Stats < ActiveRecord::Base
   }
 
   def self.update
-    all = { bronze: {}, silver: {}, gold: {}, platinum: {}, diamond: {}, challenger: {} }
+    all = { bronze: {}, silver: {}, gold: {}, platinum: {}, diamond: {}, master: {}, challenger: {} }
 
     REGIONS.each do |region, _|
       all = update_stats_for_region(region, all)
@@ -20,11 +20,11 @@ class Stats < ActiveRecord::Base
   end
 
   def self.update_stats_for_region(region, hash)
-    tiers = ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM', 'DIAMOND', 'CHALLENGER']
+    tiers = ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM', 'DIAMOND', 'MASTER', 'CHALLENGER']
     tiers.each do |tier|
       stat = Stats.find_or_initialize_by(region: region, name: tier.downcase)
       stats = {}
-      unless tier == 'CHALLENGER'
+      unless tier == 'CHALLENGER' || tier == 'MASTER'
         stats[:I] = Player.region_tier_and_division_count(region, tier, 'I')
         stats[:II] = Player.region_tier_and_division_count(region, tier, 'II')
         stats[:III] = Player.region_tier_and_division_count(region, tier, 'III')

@@ -1,13 +1,11 @@
 class RateLimit
-  attr_reader :ip, :key
+  attr_reader :key
 
-  def initialize(request)
-    @ip = request.remote_ip
-    @key = "#{ip}_#{Time.now.to_i}"
+  def initialize(key)
+    @key = key
   end
 
   def limited?
-    return false unless @ip
     redis.exists(key)
   end
 

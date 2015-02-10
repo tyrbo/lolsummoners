@@ -2,6 +2,7 @@ class PlayerLeague < ActiveRecord::Base
   belongs_to :player
   belongs_to :league
   after_save :update_ranking
+  after_destroy :delete_ranking
 
   delegate :summoner_id, to: :player
   delegate :region, to: :player
@@ -21,6 +22,14 @@ class PlayerLeague < ActiveRecord::Base
     Redis.current.pipelined do
       Redis.current.zadd("rank_#{region}", modified_points, "#{summoner_id}_#{region}")
       Redis.current.zadd("rank_all", modified_points, "#{summoner_id}_#{region}")
+    end
+  end
+
+  def delete_ranking
+    return unless league_id
+    Redis.current.pipelined do
+      Redis.current.zrem("rank_#{region}", "#{summoner_id}_#{region}")
+      Redis.current.zrem("rank_all", "#{summoner_id}_#{region}")
     end
   end
 end

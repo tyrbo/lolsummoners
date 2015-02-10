@@ -24,10 +24,11 @@ class SearchesController < ApplicationController
   end
 
   def rate_limited?
-    if RateLimit.new(request).limited?
+    key = "#{request.remote_ip}_#{Time.now.to_i}"
+    if RateLimit.new(key).limited?
       render status: 429, text: 'You\'re doing that too much.'
     else
-      RateLimit.new(request).limit!
+      RateLimit.new(key).limit!
     end
   end
 end
