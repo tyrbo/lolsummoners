@@ -6,7 +6,7 @@ db:
 redis:
   image: redis
 
-web:
+app:
   build: .
   command: bin/rails server -p 9292 -b 0.0.0.0
   volumes:

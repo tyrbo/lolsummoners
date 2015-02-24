@@ -27,7 +27,7 @@ class PlayerLeagueUpdater
       end
     end
 
-    Player.where(summoner_id: summoner_ids).each { |p| p.player_league.destroy }
+    Player.where(summoner_id: summoner_ids).each { |p| p.player_league && p.player_league.destroy }
   end
 
   def update(data)
