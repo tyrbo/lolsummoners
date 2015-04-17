@@ -1,22 +1,23 @@
 class PlayerUpdater
-  def initialize(region)
-    @api = RiotApi.new(region)
+  attr_reader :api, :region
+
+  def initialize(api, region)
+    @api = api
     @region = region
   end
 
   def by_name(values)
     response = values.each_slice(40).map do |names|
-      @api.by_name(names)
+      api.by_name(names)
     end
-    update(response)
+    #update(response)
   end
 
   def by_id(values)
-    response = []
-    values.each_slice(40) do |ids|
-      response << @api.by_summoner_id(ids)
+    values.each_slice(40).map do |ids|
+      api.by_summoner_id(ids)
     end
-    update(response)
+    #update(response)
   end
 
   def update(response)

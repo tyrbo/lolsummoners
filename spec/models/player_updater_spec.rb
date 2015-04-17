@@ -1,49 +1,55 @@
 require 'spec_helper'
 
-describe PlayerUpdater, vcr: true do
+describe PlayerUpdater do
   describe '#initialize' do
-    it 'should require a region as an argument' do
+    it 'should require an api and region as an argument' do
       expect { PlayerUpdater.new }.to raise_error(ArgumentError)
     end
   end
   
   describe '#by_name' do
     it 'returns a result for a single name' do
-      p = PlayerUpdater.new('na')
-      response = p.by_name(['pentakill'])
+      api = double('riot api', by_name: { 'pentakill' => {} })
+      player_updater = PlayerUpdater.new(api, 'na')
+
+      response = player_updater.by_name(['pentakill'])
+
+      expect(api).to have_received(:by_name).exactly(:once)
       expect(response.count).to eq 1
     end
 
-    it 'returns results for multiple names' do
-      p = PlayerUpdater.new('na')
-      response = p.by_name(['pentakill', 'aphromoo'])
-      expect(response.count).to eq 2
-    end
+    it 'splits calls into sets of 40' do
+      api = double('riot api')
+      allow(api).to receive(:by_name)
+      player_updater = PlayerUpdater.new(api, 'na')
+      players = Array.new(41) { 'a' }
 
-    it 'returns zero results for a bad name' do
-      p = PlayerUpdater.new('na')
-      response = p.by_name(['riotfakename'])
-      expect(response.count).to eq 0
+      response = player_updater.by_name(players)
+
+      expect(api).to have_received(:by_name).exactly(:twice)
     end
   end
 
   describe '#by_id' do
     it 'returns a result for a single id' do
-      p = PlayerUpdater.new('na')
-      response = p.by_id([21848947])
+      api = double('riot api', by_summoner_id: { 21848947 => {} })
+      player_updater = PlayerUpdater.new(api, 'na')
+
+      response = player_updater.by_id([21848947])
+
+      expect(api).to have_received(:by_summoner_id).exactly(:once)
       expect(response.count).to eq 1
     end
 
-    it 'returns a result for multiple ids' do
-      p = PlayerUpdater.new('na')
-      response = p.by_id([21848947, 442232])
-      expect(response.count).to eq 2
-    end
+    it 'splits calls into sets of 40' do
+      api = double('riot api')
+      allow(api).to receive(:by_summoner_id)
+      player_updater = PlayerUpdater.new(api, 'na')
+      ids = Array.new(41) { 1 }
 
-    it 'returns zero results for a bad id' do
-      p = PlayerUpdater.new('na')
-      response = p.by_id([0])
-      expect(response.count).to eq 0
+      response = player_updater.by_id(ids)
+
+      expect(api).to have_received(:by_summoner_id).exactly(:twice)
     end
   end
 end
