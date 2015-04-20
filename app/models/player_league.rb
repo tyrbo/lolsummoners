@@ -8,10 +8,11 @@ class PlayerLeague < ActiveRecord::Base
   delegate :region, to: :player
   delegate :tier, to: :league
 
-  def self.player_to_update(time = 1.hours.ago)
+  def self.players_to_update(time = 1.hours.ago)
     includes(:player).
       where('updated_at < ? and is_inactive = false', time).
-      order(nil)
+      order(nil).
+      limit(10)
   end
 
   private
