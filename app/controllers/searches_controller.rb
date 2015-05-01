@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-  before_action :rate_limited?, :prepare_params
+  before_action :prepare_params
 
   def show
     if params[:region].blank? || params[:name].blank?
@@ -20,14 +20,5 @@ class SearchesController < ApplicationController
 
   def prepare_params
     params[:name] = params[:name].to_s.downcase.gsub(/\s+/, '')
-  end
-
-  def rate_limited?
-    key = "#{request.remote_ip}_#{Time.now.to_i}"
-    if RateLimit.new(key).limited?
-      render status: 429, text: 'You\'re doing that too much.'
-    else
-      RateLimit.new(key).limit!
-    end
   end
 end
