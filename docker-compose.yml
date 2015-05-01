@@ -19,7 +19,7 @@ app:
   environment:
     REDIS_URL: redis://redis:6379/0
 
-sidkiq:
+sidekiq:
   build: .
   command: sidekiq -v
   volumes:
