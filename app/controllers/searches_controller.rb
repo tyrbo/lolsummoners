@@ -10,7 +10,6 @@ class SearchesController < ApplicationController
       if player
         redirect_to player_path(region: player.region, summoner_id: player.summoner_id)
       else
-        SearchWorker.queue(region: params[:region], id: params[:name], by: :name, caller: :search)
         @region = params[:region]
         @name = params[:name]
       end
