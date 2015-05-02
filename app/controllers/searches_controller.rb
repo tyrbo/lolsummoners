@@ -1,22 +1,29 @@
 class SearchesController < ApplicationController
-  before_action :prepare_params
+  before_action :prepare_params, :check_params, :find_player
 
   def show
-    if params[:region].blank? || params[:name].blank?
-      flash[:error] = 'You need to specify a name to search for.'
-      redirect_to root_path
+    if @player
+      redirect_to player_path(region: @player.region, summoner_id: @player.summoner_id)
     else
-      player = Player.name_and_region(params[:name], params[:region]).first
-      if player
-        redirect_to player_path(region: player.region, summoner_id: player.summoner_id)
-      else
-        @region = params[:region]
-        @name = params[:name]
-      end
+      @region = params[:region]
+      @name = params[:name]
+
+      PlayerSearchJob.perform_later(@region, @name)
     end
   end
 
   private
+
+  def find_player
+    @player = Player.name_and_region(params[:name], params[:region]).first
+  end
+
+  def check_params
+    if params[:region].blank? || params[:name].blank?
+      flash[:error] = 'You need to specify a name to search for.'
+      redirect_to root_path
+    end
+  end
 
   def prepare_params
     params[:name] = params[:name].to_s.downcase.gsub(/\s+/, '')

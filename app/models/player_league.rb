@@ -18,8 +18,8 @@ class PlayerLeague < ActiveRecord::Base
   private
 
   def update_ranking
-    return unless league_id
-    modified_points = League.points_for_ranking({'league_points' => league_points, 'tier' => League.find(league_id).tier, 'division' => division})
+    return unless league
+    modified_points = League.points_for_ranking({'league_points' => league_points, 'tier' => league.tier, 'division' => division})
     Redis.current.pipelined do
       Redis.current.zadd("rank_#{region}", modified_points, "#{summoner_id}_#{region}")
       Redis.current.zadd("rank_all", modified_points, "#{summoner_id}_#{region}")
@@ -27,7 +27,6 @@ class PlayerLeague < ActiveRecord::Base
   end
 
   def delete_ranking
-    return unless league_id
     Redis.current.pipelined do
       Redis.current.zrem("rank_#{region}", "#{summoner_id}_#{region}")
       Redis.current.zrem("rank_all", "#{summoner_id}_#{region}")
