@@ -8,8 +8,11 @@ $ ->
 
   pusher = new Pusher "4f4e7e2cb5c10674db7f"
   channel = pusher.subscribe("search_#{region}_#{name}")
+
+  channel.bind 'pusher:subscription_succeeded', ->
+    jQuery.post("/api/search", { name: "#{name}", region: "#{region}" })
   
-  channel.bind 'my_event', (data) ->
+  channel.bind 'response', (data) ->
     clearTimeout timeout
 
     if data.status == 200

@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-  before_action :prepare_params, :check_params, :find_player
+  before_action :prepare_params, :check_params, :find_player, except: [:process]
 
   def show
     if @player
@@ -7,9 +7,13 @@ class SearchesController < ApplicationController
     else
       @region = params[:region]
       @name = params[:name]
-
-      PlayerSearchJob.perform_later(@region, @name)
     end
+  end
+
+  def trigger
+    return unless params[:name] && params[:region]
+
+    PlayerSearchJob.perform_later(params[:region], params[:name])
   end
 
   private
