@@ -13,7 +13,7 @@ describe RiotApi, vcr: true do
     end
 
     it 'raises error for an invalid player' do
-      expect { @api.by_name(['riotfakename']) }.to raise_error(RiotApi::InvalidStatusCode)
+      expect { @api.by_name(['riotfakename']) }.to raise_error(RiotApi::NotFoundCode)
     end
   end
 
@@ -27,7 +27,7 @@ describe RiotApi, vcr: true do
     end
 
     it 'raises error for a player not in a league' do
-      expect { @api.league_for([0]) }.to raise_error(RiotApi::InvalidStatusCode)
+      expect { @api.league_for([0]) }.to raise_error(RiotApi::NotFoundCode)
     end
   end
 
@@ -41,7 +41,7 @@ describe RiotApi, vcr: true do
     end
 
     it 'raises error for a player not in a league' do
-      expect{ @api.league_for_full([0]) }.to raise_error(RiotApi::InvalidStatusCode)
+      expect{ @api.league_for_full([0]) }.to raise_error(RiotApi::NotFoundCode)
 
     end
   end
