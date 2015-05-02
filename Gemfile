@@ -24,6 +24,7 @@ gem 'newrelic_rpm'
 gem 'rack-rewrite'
 gem 'curb'
 gem 'therubyracer'
+gem 'pusher'
 
 group :doc do
   gem 'sdoc', require: false
