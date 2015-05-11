@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-  before_action :prepare_params, :check_params, :find_player, except: [:process]
+  before_action :prepare_params, :check_params, :find_player, except: [:trigger]
 
   def show
     if @player
