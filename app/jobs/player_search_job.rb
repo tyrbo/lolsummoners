@@ -10,7 +10,7 @@ class PlayerSearchJob < ActiveJob::Base
   def perform(region, name)
     @region = region
 
-    player = perform_with_error_handling do
+    player = perform_with_error_handling(name) do
       result = api.by_name([name])[name]
       PlayerBuilder.create_or_update(result, region)
     end
@@ -18,17 +18,19 @@ class PlayerSearchJob < ActiveJob::Base
     PlayerLeagueJob.perform_later(player, true) if player
   end
 
-  def perform_with_error_handling(&block)
+  private
+
+  def perform_with_error_handling(name)
     begin
       yield
     rescue RiotApi::NotFoundCode
       fire_event(404, region, name)
+      return
     rescue RiotApi::InvalidStatusCode
       fire_event(500, region, name)
+      return
     end
   end
-
-  private
 
   def api
     @api ||= RiotApi.new(region)

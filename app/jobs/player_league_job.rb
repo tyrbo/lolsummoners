@@ -24,11 +24,12 @@ class PlayerLeagueJob < ActiveJob::Base
 
   private
 
-  def perform_with_error_handling(&block)
+  def perform_with_error_handling
     begin
       yield
     rescue RiotApi::NotFoundCode
       fire_event(200, player.region, player.internal_name, player.summoner_id) if should_notify
+      return
     end
   end
 
