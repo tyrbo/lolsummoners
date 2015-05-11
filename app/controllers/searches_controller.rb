@@ -14,6 +14,8 @@ class SearchesController < ApplicationController
     return unless params[:name] && params[:region]
 
     PlayerSearchJob.perform_later(params[:region], params[:name])
+
+    render nothing: true
   end
 
   private

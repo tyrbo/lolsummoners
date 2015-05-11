@@ -18,6 +18,6 @@ $ ->
     if data.status == 200
       window.location = "/players/#{region}/#{data.id}"
     else if data.status == 404
-      $("#loading").html("<h1>Not Found. :(</h1>We couldn\t find that player. Sorry.")
+      $("#loading").html("<h1>Not Found. :(</h1>We couldn't find that player. Sorry.")
     else
       $("#loading").html("<h1>It broke.</h1><p>The Riot API may be unavailable. Try again later.")
