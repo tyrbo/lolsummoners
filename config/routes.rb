@@ -21,4 +21,6 @@ Lolsummoners::Application.routes.draw do
 
   get '/stats(/:region)', to: 'stats#show', as: 'stats',
           defaults: { region: 'all' }
+
+  post '/api/search', to: 'searches#trigger'
 end

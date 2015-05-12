@@ -1,6 +1,9 @@
 require 'curb'
 
 class RiotApi
+  class InvalidStatusCode < StandardError; end;
+  class NotFoundCode < StandardError; end;
+
   attr_reader :region
 
   def initialize(region)
@@ -35,11 +38,7 @@ class RiotApi
 
   def handle_response(response)
     if !response.nil?
-      if response.response_code == 200
-        JSON.parse(response.body_str)
-      else
-        {}
-      end
+      json_for_response(response)
     else
       {}
     end
@@ -51,6 +50,16 @@ class RiotApi
       Curl.get(address)
     rescue StandardError => e
       puts e
+    end
+  end
+
+  def json_for_response(response)
+    if response.response_code == 200
+      JSON.parse(response.body_str)
+    elsif response.response_code == 404
+      raise NotFoundCode
+    else
+      raise InvalidStatusCode
     end
   end
 

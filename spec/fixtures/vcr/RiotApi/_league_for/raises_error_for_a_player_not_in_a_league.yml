@@ -21,11 +21,11 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 03 Nov 2014 21:15:07 GMT
+      - Fri, 01 May 2015 22:54:35 GMT
       Server:
       - Jetty(9.1.1.v20140108)
       X-Newrelic-App-Data:
-      - PxQFWFFSDwQTVVZSBwAGVkYdFGQHBDcQUQxLA1tMXV1dORYzVBJHNQFUZAQUFVFQVThOA0dYa0kIXlpvTR0RB1cLVwxFZBtEAUsMPR4NVgMDQ1I9SQFBHkMRDA9YX1IUOB5NQBcLDg1eB0orXEtJbhwAVxVDGBNKI3NjSERPCB0ASFFMBwMBUFQEAAdXSk5THEAJWggKVgULXV8DBQdXUgVTFTw=
+      - PxQFWFFSDwQTVVZSBwAGVkYdFGQHBDcQUQxLA1tMXV1dORYzVBJHNQFUZAQUFVFQVThOA0dYa0kIXlpvTR0RB1cLVwxFZBtEAUsMPR4NVgMDQ1I9SQFBHkMRDA9YX1IUOB5NQBcLDg1eB0orXEtJbhwAVxVDGBNKI3NjSERPCB0ASFFMBwUDUVICAwpOS1JOElRcAF0OVgNQVQwDBQIEUgIUag==
       Content-Length:
       - '0'
       Connection:
@@ -34,5 +34,5 @@ http_interactions:
       encoding: ASCII-8BIT
       string: ''
     http_version: 
-  recorded_at: Mon, 03 Nov 2014 21:15:07 GMT
-recorded_with: VCR 2.9.2
+  recorded_at: Fri, 01 May 2015 22:54:35 GMT
+recorded_with: VCR 2.9.3

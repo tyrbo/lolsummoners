@@ -1,25 +1,23 @@
 $ ->
-  region = $('#loading').data('region')
-  name = $('#loading').data('name')
+  region = $("#loading").data("region")
+  name = $("#loading").data("name")
 
   timeout = setTimeout ( ->
-    socket.close()
-    $('#loading').html('<h1>Uh oh.</h1><p>We took too long to find that player. Try again later.')
+    $("#loading").html("<h1>Uh oh.</h1><p>We took too long to find that player. Try again later.")
   ), 5000
 
-  socket = new WebSocket "ws://#{window.location.host}/queue/#{region}/#{name}?by=name"
+  pusher = new Pusher "4f4e7e2cb5c10674db7f"
+  channel = pusher.subscribe("search_#{region}_#{name}")
 
-  socket.onmessage = (event) ->
+  channel.bind 'pusher:subscription_succeeded', ->
+    jQuery.post("/api/search", { name: "#{name}", region: "#{region}" })
+  
+  channel.bind 'response', (data) ->
     clearTimeout timeout
-    if event.data.length
-      split = event.data.split(' ')
-      if split[0] == 'done'
-        clearTimeout(timeout)
-        window.location = "/players/#{region}/#{split[1]}"
-      else if split[0] == 'fail'
-        clearTimeout(timeout)
-        if split[1] == '404'
-          $('#loading').html('<h1>Not found. :(</h1><p>We couldn\'t find that player. Sorry.')
-        else
-          $('#loading').html('<h1>It broke.</h1><p>The Riot API may be unavailable. Try again later.')
-        socket.close()
+
+    if data.status == 200
+      window.location = "/players/#{region}/#{data.id}"
+    else if data.status == 404
+      $("#loading").html("<h1>Not Found. :(</h1>We couldn't find that player. Sorry.")
+    else
+      $("#loading").html("<h1>It broke.</h1><p>The Riot API may be unavailable. Try again later.")

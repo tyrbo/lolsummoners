@@ -29,5 +29,7 @@ module Lolsummoners
       r302 %r{/ladder/(.*)}, '/ladders/$1'
       r302 '/ladder', '/ladders'
     end
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
