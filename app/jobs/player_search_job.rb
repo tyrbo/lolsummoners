@@ -11,7 +11,7 @@ class PlayerSearchJob < ActiveJob::Base
     @region = region
 
     player = perform_with_error_handling(name) do
-      result = api.by_name([name])[name]
+      result = api.by_name(name)[name]
       PlayerBuilder.create_or_update(result, region)
     end
 
