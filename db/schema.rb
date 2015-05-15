@@ -15,12 +15,13 @@ ActiveRecord::Schema.define(version: 20150209215124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "leagues", force: :cascade do |t|
-    t.string   "name"
-    t.string   "queue"
-    t.string   "tier"
-    t.string   "region"
+    t.string   "name",       limit: 255
+    t.string   "queue",      limit: 255
+    t.string   "tier",       limit: 255
+    t.string   "region",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,11 +35,11 @@ ActiveRecord::Schema.define(version: 20150209215124) do
     t.boolean  "is_veteran"
     t.integer  "last_played",         limit: 8
     t.integer  "league_points"
-    t.string   "mini_series"
-    t.string   "player_or_team_id"
-    t.string   "player_or_team_name"
-    t.string   "queue"
-    t.string   "division"
+    t.string   "mini_series",         limit: 255
+    t.string   "player_or_team_id",   limit: 255
+    t.string   "player_or_team_name", limit: 255
+    t.string   "queue",               limit: 255
+    t.string   "division",            limit: 255
     t.integer  "wins"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -53,30 +54,30 @@ ActiveRecord::Schema.define(version: 20150209215124) do
 
   create_table "players", force: :cascade do |t|
     t.integer  "summoner_id",     limit: 8
-    t.string   "name"
+    t.string   "name",            limit: 255
     t.integer  "profile_icon_id"
     t.integer  "revision_date",   limit: 8
     t.integer  "summoner_level"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "region"
-    t.string   "internal_name"
+    t.string   "region",          limit: 255
+    t.string   "internal_name",   limit: 255
   end
 
   add_index "players", ["internal_name", "region"], name: "index_players_on_internal_name_and_region", using: :btree
   add_index "players", ["summoner_id", "region"], name: "index_players_on_summoner_id_and_region", unique: true, using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      limit: 255
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "stats", force: :cascade do |t|
-    t.string "name"
-    t.string "value"
-    t.string "region"
+    t.string "name",   limit: 255
+    t.string "value",  limit: 255
+    t.string "region", limit: 255
   end
 
 end
