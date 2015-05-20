@@ -6,7 +6,7 @@ $ ->
     $("#loading").html("<h1>Uh oh.</h1><p>We took too long to find that player. Try again later.")
   ), 5000
 
-  pusher = new Pusher "4f4e7e2cb5c10674db7f"
+  pusher = new Pusher "f1f712c95f23e54a53b0"
   channel = pusher.subscribe("search_#{region}_#{name}")
 
   channel.bind 'pusher:subscription_succeeded', ->
