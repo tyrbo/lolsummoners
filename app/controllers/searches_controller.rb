@@ -13,7 +13,7 @@ class SearchesController < ApplicationController
   def trigger
     return unless params[:name] && params[:region]
 
-    PlayerSearchJob.perform_later(params[:region], params[:name])
+    SearchJob.perform_later(params[:region], params[:name])
 
     render nothing: true
   end
