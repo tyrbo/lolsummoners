@@ -1,0 +1,12 @@
+production:
+  postgresql:
+    server:
+      vendor: digitalocean
+      region: sfo1
+      size: 4gb
+  
+  redis:
+    server:
+      vendor: digitalocean
+      region: sfo1
+      size: 4gb
