@@ -28,6 +28,12 @@ class Player < ActiveRecord::Base
   has_one :player_league, dependent: :destroy
   before_save :prepare_name
 
+  def self.find_players_to_update(time = 1.hours.ago)
+    eager_load(:player_league).
+      where('player_leagues.updated_at < ? and player_leagues.is_inactive = false', time).
+      limit(100)
+  end
+
   def self.find_players_by_region(players)
     arranged_players(players).map do |region, summoners|
       Player.where(summoner_id: summoners, region: region)

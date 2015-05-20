@@ -59,6 +59,7 @@ class RiotApi
     elsif response.response_code == 404
       raise NotFoundCode
     else
+      puts "Got #{response.response_code}"
       raise InvalidStatusCode
     end
   end
