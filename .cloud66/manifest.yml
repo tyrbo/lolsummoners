@@ -1,14 +1,14 @@
 production:
   postgresql:
     server:
-      unique_name: postgres_1
+      unique_name: postgres-1
       vendor: digitalocean
       region: sfo1
       size: 4gb
   
   redis:
     server:
-      unique_name: redis_1
+      unique_name: redis-1
       vendor: digitalocean
       region: sfo1
       size: 4gb
