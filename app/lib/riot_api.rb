@@ -37,8 +37,10 @@ class RiotApi
 
   def handle_response(response)
     if !response.nil?
-      if response.response_code == 200 || response.response_code == 404
+      if response.response_code == 200
         JSON.parse(response.body_str)
+      elsif response.response_code == 404
+        {}
       else
         raise InvalidStatusCode
       end
