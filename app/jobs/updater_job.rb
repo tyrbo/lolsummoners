@@ -8,7 +8,7 @@ class UpdaterJob < ActiveJob::Base
         begin
           PlayerLeagueUpdater.update_all(region, batch)
         rescue RiotApi::InvalidStatusCode
-          Rails.logger.warn("Received invalid status code on #{region} with #{batch.map(&:summoner_id).inspect}"
+          Rails.logger.warn("Received invalid status code on #{region} with #{batch.map(&:summoner_id).inspect}")
           next
         end
       end
