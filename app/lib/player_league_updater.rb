@@ -28,10 +28,10 @@ class PlayerLeagueUpdater
         end
       end
 
-      (players - completed_players).each { |p| p.player_league.destroy }
-
       leagues = completed_players.uniq.map(&:player_league).map(&:id)
       PlayerLeague.where(id: leagues).update_all(updated_at: Time.now)
     end
+
+    (players - completed_players).each { |p| p.player_league.destroy }
   end
 end
