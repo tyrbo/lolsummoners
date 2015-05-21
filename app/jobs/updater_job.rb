@@ -5,7 +5,12 @@ class UpdaterJob < ActiveJob::Base
       break if players.length.zero?
 
       players.each do |region, batch|
-        PlayerLeagueUpdater.update_all(region, batch)
+        begin
+          PlayerLeagueUpdater.update_all(region, batch)
+        rescue RiotApi::InvalidStatusCode
+          Rails.logger.warn("Received invalid status code on #{region} with #{batch.map(&:summoner_id).inspect}"
+          next
+        end
       end
 
       nil

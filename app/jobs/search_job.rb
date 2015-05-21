@@ -6,14 +6,18 @@ class SearchJob < ActiveJob::Base
   attr_reader :api
 
   def perform(region, name)
-    player = PlayerUpdater.update_by_name(region, name)
+    begin
+      player = PlayerUpdater.update_by_name(region, name)
 
-    if player
-      PlayerLeagueUpdater.update(player)
+      if player
+        PlayerLeagueUpdater.update(player)
 
-      fire_event(200, region, name, player.summoner_id)
-    else
-      fire_event(404, region, name)
+        fire_event(200, region, name, player.summoner_id)
+      else
+        fire_event(404, region, name)
+      end
+    rescue RiotApi::InvalidStatusCode
+      fire_event(500, region, name)
     end
   end
 end
