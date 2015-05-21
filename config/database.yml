@@ -41,7 +41,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: lolsummoners_production
-  pool: 75
+  pool: 30
   username: lolsummoners
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: postgres.lolsummoners.com
