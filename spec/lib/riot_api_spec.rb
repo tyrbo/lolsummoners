@@ -12,8 +12,8 @@ describe RiotApi, vcr: true do
       expect(@api.by_name(['pentakill', 'peak']).count).to eq 2
     end
 
-    it 'raises error for an invalid player' do
-      expect { @api.by_name('riotfakename') }.to raise_error(RiotApi::NotFoundCode)
+    it 'returns an empty hash for an invalid player' do
+      expect(@api.by_name('riotfakename')).to eq Hash.new
     end
   end
 
@@ -26,8 +26,8 @@ describe RiotApi, vcr: true do
       expect(@api.league_for([20132258, 442232]).count).to eq 2
     end
 
-    it 'raises error for a player not in a league' do
-      expect { @api.league_for(0) }.to raise_error(RiotApi::NotFoundCode)
+    it 'raises empty hash for a player not in a league' do
+      expect(@api.league_for(0)).to eq Hash.new
     end
   end
 
@@ -40,8 +40,8 @@ describe RiotApi, vcr: true do
       expect(@api.league_for_full([20132258, 442232]).count).to eq 2
     end
 
-    it 'raises error for a player not in a league' do
-      expect{ @api.league_for_full(0) }.to raise_error(RiotApi::NotFoundCode)
+    it 'returns empty hash for a player not in a league' do
+      expect(@api.league_for_full(0)).to eq Hash.new
 
     end
   end
