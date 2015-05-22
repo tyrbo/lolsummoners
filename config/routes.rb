@@ -23,4 +23,5 @@ Lolsummoners::Application.routes.draw do
           defaults: { region: 'all' }
 
   post '/api/search', to: 'searches#trigger'
+  post '/api/update', to: 'players#trigger'
 end

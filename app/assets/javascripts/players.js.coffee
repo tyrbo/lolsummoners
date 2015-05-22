@@ -5,23 +5,23 @@ $ ->
 
   if updating == true
     timeout = setTimeout ( ->
-      #socket.close()
       humane.error('We were unable to update the player at this time.')
     ), 5000
 
-    #socket = new WebSocket "ws://#{window.location.host}/queue/#{region}/#{name}?by=sid"
+    pusher = new Pusher "f1f712c95f23e54a53b0"
+    channel = pusher.subscribe("player_#{region}_#{name}")
 
-    #socket.onmessage = (event) ->
-    #  if event.data.length
-    #    split = event.data.split(' ')
-    #    if split[0] == 'done'
-    #      humane.notice('This player has been updated. The page will reload in 3 seconds.')
-    #      clearTimeout(timeout)
-    #      setTimeout (->
-    #        window.location.reload(true)
-    #      ), 3000
-    #    else if split[0] == 'fail'
-    #      if split[1] != '404'
-    #        clearTimeout(timeout)
-    #        humane.error('The Riot API is unavailable. We were unable to update this player.')
-    #      socket.close()
+    channel.bind 'pusher:subscription_succeeded', ->
+      jQuery.post("/api/update", { summoner_id: "#{name}", region: "#{region}" })
+
+    channel.bind 'response', (data) ->
+      clearTimeout timeout
+
+      if data.status == 200
+        humane.notice('This player has been updated. The page will reload in 3 seconds.')
+        clearTimeout(timeout)
+        setTimeout (->
+          window.location.reload(true)
+        ), 3000
+      else if data.status != 404
+        humane.error('The Riot API is unavailable. We were unable to update this player.')

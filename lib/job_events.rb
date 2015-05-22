@@ -7,4 +7,13 @@ module JobEvents
       })
     end
   end
+
+  module PlayerResult
+    def fire_event(status, region, id)
+      Pusher["player_#{region}_#{id}"].trigger('response', {
+        status: status,
+        id: id
+      })
+    end
+  end
 end
