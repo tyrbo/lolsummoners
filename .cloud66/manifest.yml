@@ -1,4 +1,9 @@
 production:
+  first_thing:
+    - snippet: cloud66/newrelic
+      target: any
+      execute: true
+
   postgresql:
     server:
       unique_name: postgres
