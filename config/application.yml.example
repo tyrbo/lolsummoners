@@ -1,0 +1,3 @@
+RIOT_API: your-key-here
+DATABASE_PASSWORD: your-database-password
+PUSHER_SECRET: your-pusher-secret
