@@ -3,8 +3,6 @@ require 'job_events'
 class SearchJob < ActiveJob::Base
   include JobEvents::SearchResult
 
-  attr_reader :api
-
   def perform(region, name)
     begin
       player = PlayerUpdater.update_by_name(region, name)
