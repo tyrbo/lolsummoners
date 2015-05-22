@@ -7,6 +7,8 @@ class PlayerLeagueUpdater
     if result.include?(summoner_id) && data = result[summoner_id].detect { |x| x["queue"] == "RANKED_SOLO_5x5" }
       league = LeagueBuilder.create_or_find(data, player.region)
       PlayerLeagueBuilder.create_or_update(player, data["entries"].detect { |x| x["playerOrTeamId"] == summoner_id }, player.region, league)
+    else
+      player.player_league.destroy
     end
   end
 
