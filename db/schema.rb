@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522220058) do
+ActiveRecord::Schema.define(version: 20150522225628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,10 @@ ActiveRecord::Schema.define(version: 20150522220058) do
     t.datetime "updated_at"
   end
 
-  add_index "leagues", ["name", "tier", "queue", "region"], name: "index_leagues_on_name_and_tier_and_queue_and_region", using: :btree
+  add_index "leagues", ["name"], name: "index_leagues_on_name", using: :btree
+  add_index "leagues", ["queue"], name: "index_leagues_on_queue", using: :btree
+  add_index "leagues", ["region"], name: "index_leagues_on_region", using: :btree
+  add_index "leagues", ["tier"], name: "index_leagues_on_tier", using: :btree
 
   create_table "player_leagues", force: :cascade do |t|
     t.boolean  "is_fresh_blood"
@@ -65,8 +68,9 @@ ActiveRecord::Schema.define(version: 20150522220058) do
     t.string   "internal_name",   limit: 255
   end
 
-  add_index "players", ["internal_name", "region"], name: "index_players_on_internal_name_and_region", using: :btree
-  add_index "players", ["summoner_id", "region"], name: "index_players_on_summoner_id_and_region", unique: true, using: :btree
+  add_index "players", ["internal_name"], name: "index_players_on_internal_name", using: :btree
+  add_index "players", ["region"], name: "index_players_on_region", using: :btree
+  add_index "players", ["summoner_id"], name: "index_players_on_summoner_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255
