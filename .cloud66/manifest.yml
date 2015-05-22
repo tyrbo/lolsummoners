@@ -3,6 +3,7 @@ production:
     - snippet: cloud66/newrelic
       target: any
       execute: true
+      apply_during: build_only
 
   postgresql:
     server:
