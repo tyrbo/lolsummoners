@@ -1,4 +1,6 @@
 class UpdaterJob < ActiveJob::Base
+  queue_as :updates
+
   def perform(ids)
     players = Player.eager_load(:player_league).find(ids).reject(&:limited?)
     players.each(&:limit!)
