@@ -8,7 +8,7 @@ class PlayerLeagueUpdater
       league = LeagueBuilder.create_or_find(data, player.region)
       PlayerLeagueBuilder.create_or_update(player, data["entries"].detect { |x| x["playerOrTeamId"] == summoner_id }, player.region, league)
     else
-      player.player_league.destroy
+      player.player_league.destroy if player.player_league
     end
   end
 
