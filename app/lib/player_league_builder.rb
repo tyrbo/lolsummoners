@@ -5,6 +5,8 @@ class PlayerLeagueBuilder
     attributes['league_id'] = league.id
     attributes = prepare_attributes(attributes)
 
+    player.reload
+
     if player.player_league.nil?
       player.create_player_league(attributes)
     else
@@ -13,6 +15,7 @@ class PlayerLeagueBuilder
         player.player_league.save
       end
     end
+
     player.player_league
   end
 
