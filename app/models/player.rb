@@ -48,6 +48,14 @@ class Player < ActiveRecord::Base
     end
   end
 
+  def limit
+    Redis.current.set("limit_#{id}", true, ex: 86400)
+  end
+
+  def limited?
+    Redis.current.exists("limit_#{id}")
+  end
+
   private
 
   def prepare_name

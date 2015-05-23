@@ -1,11 +1,9 @@
 class UpdaterJob < ActiveJob::Base
   def perform(ids)
-    #players = Player.find_players_to_update(1.day.ago).group_by(&:region)
-    #break if players.length.zero?
+    players = Player.eager_load(:player_league).find(ids).reject(&:limited?)
+    players.each(&:limit)
 
-    players = Player.eager_load(:player_league).find(ids).group_by(&:region)
-
-    players.each do |region, batch|
+    players.group_by(&:region).each do |region, batch|
       begin
         PlayerLeagueUpdater.update_all(region, batch)
       rescue RiotApi::InvalidStatusCode

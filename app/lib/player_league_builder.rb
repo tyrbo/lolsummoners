@@ -5,15 +5,18 @@ class PlayerLeagueBuilder
     attributes['league_id'] = league.id
     attributes = prepare_attributes(attributes)
 
-    player.reload
-
-    if player.player_league.nil?
-      player.create_player_league(attributes)
-    else
-      player.player_league.assign_attributes(attributes)
-      if player.player_league.changed?
-        player.player_league.save
+    begin
+      if player.player_league.nil?
+        player.create_player_league(attributes)
+      else
+        player.player_league.assign_attributes(attributes)
+        if player.player_league.changed?
+          player.player_league.save
+        end
       end
+    rescue ActiveRecord::RecordNotUnique
+      player.reload
+      retry
     end
 
     player.player_league
