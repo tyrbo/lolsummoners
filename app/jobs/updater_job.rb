@@ -1,7 +1,7 @@
 class UpdaterJob < ActiveJob::Base
   def perform(ids)
     players = Player.eager_load(:player_league).find(ids).reject(&:limited?)
-    players.each(&:limit)
+    players.each(&:limit!)
 
     players.group_by(&:region).each do |region, batch|
       begin

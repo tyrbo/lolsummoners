@@ -25,6 +25,7 @@ class PlayerLeagueUpdater
 
         data["entries"].each do |entry|
           player = players.detect { |x| x.summoner_id == entry["playerOrTeamId"].to_i } || PlayerBuilder.create_from_league(entry, region)
+          player.limit!
           completed_players << player
           ids.delete(player.summoner_id)
           PlayerLeagueBuilder.create_or_update(player, entry, region, league)

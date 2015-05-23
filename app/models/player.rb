@@ -48,7 +48,7 @@ class Player < ActiveRecord::Base
     end
   end
 
-  def limit
+  def limit!
     Redis.current.set("limit_#{id}", true, ex: 86400)
   end
 
