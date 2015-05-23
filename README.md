@@ -2,8 +2,7 @@
 
 This app serves as a ladder for League of Legends.
 
-The site is currently live at http://www.lolsummoners.com, but the code in this repository is not currently pushed up to live.
-Currently in the process of making things work properly again. Some code is ugly and will be refactored in the future.
+A lot of the existing code is ugly. Some of it has been ugly for a while, and some of it was recently made ugly while I quickly fixed a lot of broken parts of the site (real life got in the way of maintaining it). Cleaning things up is my main priority once the site is running how I want it to be.
 
 Rebuilding the existing Python codebase for this site into Rails was the first project I tackled after making the decision to learn Ruby.
 
