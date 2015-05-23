@@ -36,6 +36,6 @@ class PlayerLeagueUpdater
       PlayerLeague.where(id: leagues).update_all(updated_at: Time.now)
     end
 
-    (players - completed_players).each { |p| p.player_league.destroy }
+    (players - completed_players).each { |p| p.player_league.destroy if p.player_league }
   end
 end
