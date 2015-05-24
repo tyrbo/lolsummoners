@@ -9,7 +9,7 @@ class PlayersController < ApplicationController
       end
 
       if @player.player_league
-        if Redis.current.zrank("rank_all", "#{@player.summoner_id}_#{@player.region}")
+        if !Redis.current.zrank("rank_all", "#{@player.summoner_id}_#{@player.region}")
           @player.player_league.send(:update_ranking)
         end
       end
