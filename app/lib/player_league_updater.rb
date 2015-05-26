@@ -22,7 +22,7 @@ class PlayerLeagueUpdater
 
   def update_all
     results = PlayerLeagueQuery.new(region, players).execute
-    @players = @players.concat(Player.eager_load(:player_league).where(summoner_id: results.map { |y| y["entries"].map { |x| x["playerOrTeamId"].to_i } }, region: region)).uniq
+    @players = load_known_players(results)
 
     results.each do |data|
       player_leagues = process_entries(data)
@@ -30,6 +30,12 @@ class PlayerLeagueUpdater
     end
 
     prune_missing_players
+  end
+
+  private
+
+  def load_known_players(results)
+    @players.concat(Player.eager_load(:player_league).where(summoner_id: results.map { |y| y["entries"].map { |x| x["playerOrTeamId"].to_i } }, region: region)).uniq
   end
 
   def process_entries(data)

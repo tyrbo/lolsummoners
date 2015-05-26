@@ -8,10 +8,9 @@ class PlayerLeague < ActiveRecord::Base
   delegate :region, to: :player
   delegate :tier, to: :league
 
-  private
-
   def update_ranking
     return unless league
+
     modified_points = League.points_for_ranking({'league_points' => league_points, 'tier' => tier, 'division' => division})
     Redis.current.pipelined do
       Redis.current.zadd("rank_#{region}", modified_points, "#{summoner_id}_#{region}")
