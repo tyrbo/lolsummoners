@@ -3,7 +3,8 @@ class UpdaterJob < ActiveJob::Base
 
   def perform(region, ids)
     increase_count(region)
-    players = Player.eager_load(:player_league).find(ids)
+
+    players = Player.eager_load(:player_league).where(id: ids)
 
     process(players)
 
