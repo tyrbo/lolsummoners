@@ -12,7 +12,7 @@ class PlayerBuilder
   end
 
   def self.create_from_league(attributes, region)
-    player = Player.find_or_initialize_by(summoner_id: attributes["playerOrTeamId"], region: region)
+    player = Player.eager_load(:player_league).find_or_initialize_by(summoner_id: attributes["playerOrTeamId"], region: region)
     player.assign_attributes({ summoner_level: 30, name: attributes["playerOrTeamName"] })
     player.save
     player
