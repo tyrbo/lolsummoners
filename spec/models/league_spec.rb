@@ -42,4 +42,26 @@ describe League do
       expect(League.add_points_for_rank('V')).to eq 0
     end
   end
+
+  describe ".rank_from_points" do
+    it "should return I for 3900" do
+      expect(League.rank_from_points(3900)).to eq "I"
+    end
+
+    it "should return II for 2900" do
+      expect(League.rank_from_points(2900)).to eq "II"
+    end
+
+    it "should return III for 1900" do
+      expect(League.rank_from_points(1900)).to eq "III"
+    end
+
+    it "should return IV for 900" do
+      expect(League.rank_from_points(900)).to eq "IV"
+    end
+
+    it "should return V for 899" do
+      expect(League.rank_from_points(899)).to eq "V"
+    end
+  end
 end
