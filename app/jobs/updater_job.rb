@@ -6,19 +6,17 @@ class UpdaterJob < ActiveJob::Base
 
     players = Player.eager_load(:player_league).where(id: ids)
 
-    process(players)
+    process(region, players)
 
     decrease_count(region)
   end
 
-  def process(players)
+  def process(region, players)
     players.each_slice(10) do |batch|
       begin
         PlayerLeagueUpdater.new(region, batch).update_all
       rescue RiotApi::InvalidStatusCode
         Rails.logger.warn("Received invalid status code on #{region} with #{batch.map(&:summoner_id).inspect}")
-        next
-      rescue
         next
       end
     end
