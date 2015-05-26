@@ -26,13 +26,17 @@ class PlayerLeagueUpdater
 
     results.each do |data|
       player_leagues = process_entries(data)
-      PlayerLeague.where(id: player_leagues.map(&:id)).update_all(updated_at: Time.now)
+      touch_all(player_leagues)
     end
 
     prune_missing_players
   end
 
   private
+
+  def touch_all(player_leagues)
+    PlayerLeague.where(id: player_leagues.map(&:id)).update_all(updated_at: Time.now)
+  end
 
   def load_known_players(results)
     @players.concat(Player.eager_load(:player_league).where(summoner_id: results.map { |y| y["entries"].map { |x| x["playerOrTeamId"].to_i } }, region: region)).uniq
