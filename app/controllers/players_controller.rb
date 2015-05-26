@@ -2,7 +2,8 @@ require 'is_bot'
 
 class PlayersController < ApplicationController
   def show
-    @player = Player.summoner_id_and_region(params[:summoner_id], params[:region]).first
+    @player = Player.find_by(summoner_id: params[:summoner_id], region: params[:region])
+
     if @player
       if @player.updated_at < 30.minutes.ago && !IsBot::is_bot?(request)
         @update = true

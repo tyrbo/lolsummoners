@@ -21,7 +21,7 @@ class SearchesController < ApplicationController
   private
 
   def find_player
-    @player = Player.name_and_region(params[:name], params[:region]).first
+    @player = Player.find_by(internal_name: params[:name], region: params[:region])
   end
 
   def check_params

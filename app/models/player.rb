@@ -1,12 +1,4 @@
 class Player < ActiveRecord::Base
-  scope :name_and_region, ->(internal_name, region) {
-    where(internal_name: internal_name, region: region)
-  }
-
-  scope :summoner_id_and_region, ->(summoner_id, region) {
-    where(summoner_id: summoner_id, region: region)
-  }
-
   scope :region_tier_and_division_count, ->(region, tier, division) {
     includes(player_league: :league).
     where(region: region).
@@ -46,14 +38,6 @@ class Player < ActiveRecord::Base
       obj[region] ||= []
       obj[region] << summoner_id
     end
-  end
-
-  def limit!
-    Redis.current.set("limit_#{id}", true, ex: 864000)
-  end
-
-  def limited?
-    Redis.current.exists("limit_#{id}")
   end
 
   private
