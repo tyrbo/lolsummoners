@@ -50,12 +50,8 @@ class RiotApi
   end
 
   def get(resource)
-    begin
-      address = build_url(resource)
-      Curl.get(address)
-    rescue StandardError => e
-      puts e
-    end
+    address = build_url(resource)
+    Curl.get(address)
   end
 
   def build_url(resource)
