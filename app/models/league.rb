@@ -2,14 +2,6 @@ class League < ActiveRecord::Base
   has_many :player_leagues, -> { order 'league_points DESC' }
   has_many :players, through: :player_leagues
 
-  def self.set_rank(region, summoner_id, attributes)
-    modified_points = points_for_ranking(attributes)
-    Redis.current.multi do
-      Redis.current.zadd("rank_#{region}", modified_points, "#{summoner_id}_#{region}")
-      Redis.current.zadd("rank_all", modified_points, "#{summoner_id}_#{region}")
-    end
-  end
-
   def self.points_for_ranking(attributes)
     points = attributes['league_points']
     points + add_points_for_tier(attributes['tier']) + add_points_for_rank(attributes['division'])
