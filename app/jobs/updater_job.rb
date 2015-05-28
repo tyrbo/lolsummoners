@@ -18,7 +18,8 @@ class UpdaterJob < ActiveJob::Base
       rescue RiotApi::InvalidStatusCode
         Rails.logger.warn("Received invalid status code on #{region} with #{batch.map(&:summoner_id).inspect}")
         next
-      rescue
+      rescue => e
+        puts e.inspect, e.backtrace
         next
       end
     end
