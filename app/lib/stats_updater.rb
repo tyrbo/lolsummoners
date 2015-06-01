@@ -1,4 +1,23 @@
 class StatsUpdater
+  def self.update_all
+    total = REGIONS.keys.reduce(0) { |sum, x| sum += StatsUpdater.new(x).update }
+    Redis.current.set("total_all", total)
+
+    build_stats
+  end
+
+  def self.build_stats
+    stats = Stats.where.not(region: "all").group_by(&:name)
+    stats.keys.each do |stat|
+      values = stats[stat].map { |x| JSON.parse(x.value) }
+      hash = values.reduce { |m, x| m.merge(x) { |_, o, n| o + n } }
+      
+      stat = Stats.find_or_initialize_by(region: "all", name: stat)
+      stat.value = hash.to_json
+      stat.save
+    end
+  end
+
   attr_reader :region
   TIERS = ['BRONZE', 'SILVER', 'GOLD', 'PLATINUM', 'DIAMOND', 'MASTER', 'CHALLENGER']
 
