@@ -6,10 +6,6 @@ class StatsController < ApplicationController
   private
 
   def stats_hash(stats)
-    hash = {}
-    stats.each do |stat|
-      hash[stat.name] = JSON.parse(stat.value)
-    end
-    hash
+    stats.each_with_object({}) { |stat, h| h[stat.name] = JSON.parse(stat.value) )
   end
 end
