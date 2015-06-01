@@ -40,8 +40,14 @@ describe StatsUpdater do
       expect(Stats.last).to eq nil
 
       StatsUpdater.new("na").update_tier("GOLD")
+      values = JSON.parse(Stats.last.value)
 
-      expect(Stats.last.value).to eq "{\"III\":5,\"IV\":5,\"I\":5,\"II\":5,\"V\":5,\"total\":25}"
+      expect(values["I"]).to eq 5
+      expect(values["II"]).to eq 5
+      expect(values["III"]).to eq 5
+      expect(values["IV"]).to eq 5
+      expect(values["V"]).to eq 5
+      expect(values["total"]).to eq 25
     end
   end
 end
