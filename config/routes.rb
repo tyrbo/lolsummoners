@@ -15,8 +15,6 @@ Lolsummoners::Application.routes.draw do
 
   get '/players/:region/:summoner_id', to: 'players#show', as: 'player'
 
-  get '/queue/:region/:name', to: 'queues#show'
-
   get '/leagues/:region/:id', to: 'leagues#show', as: 'league'
 
   get '/stats(/:region)', to: 'stats#show', as: 'stats',
