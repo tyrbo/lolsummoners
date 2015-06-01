@@ -1,6 +1,7 @@
 class StatsUpdater
   def self.update_all
     total = REGIONS.keys.reduce(0) { |sum, x| sum += StatsUpdater.new(x).update }
+
     Redis.current.set("total_all", total)
 
     build_stats
