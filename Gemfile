@@ -24,6 +24,7 @@ gem 'rack-rewrite'
 gem 'curb'
 gem 'therubyracer'
 gem 'pusher'
+gem 'draper'
 
 group :doc do
   gem 'sdoc', require: false
