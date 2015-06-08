@@ -15,16 +15,16 @@
         </tr>
       </thead>
       <tbody>
-      <% @players.each do |player| %>
-      <tr class="ladder">
-        <td class="region"><%= player.region.upcase %></td>
-        <td class="rank"><%= number_with_delimiter(player.rank) %> (<%= percentage_for(params[:region], player.rank) %>%)</td>
-        <td class="name"><%= link_to player.name, league_path(region: player.region, id: player.league_id) %></td>
-        <td class="tier"><%= "#{player.tier.capitalize} #{player.division}" %></td>
-        <td class="wins"><%= player.wins %></td>
-        <td class="points"><%= number_with_delimiter(player.league_points) %></td>
-      </tr>
-    <% end %>
+        <% @players.each do |player| %>
+          <tr class="ladder">
+            <td class="region"><%= player.formatted_region %></td>
+            <td class="rank"><%= player.formatted_rank %> (<%= player.percentile(params[:region]) %>%)</td>
+            <td class="name"><%= link_to player.name, league_path(region: player.region, id: player.league_id) %></td>
+            <td class="tier"><%= "#{player.formatted_tier} #{player.division}" %></td>
+            <td class="wins"><%= player.wins %></td>
+            <td class="points"><%= player.formatted_league_points %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
     <div class="col-md-12 ladder-pagination">
