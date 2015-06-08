@@ -1,8 +1,7 @@
 module LeaguesHelper
   def points_for(player)
     unless player.mini_series.nil?
-      target, _, wins, losses = player.mini_series.split(',')
-      target, wins, losses = target.to_i, wins.to_i, losses.to_i
+      target, _, wins, losses = player.mini_series.split(',').map(&:to_i)
       total = if target == 2 then 3 else 5 end
       togo = total - wins - losses
       str = []
