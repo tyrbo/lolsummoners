@@ -19,12 +19,12 @@ gem 'mail_form'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'humane-rails'
 gem 'foreman'
-gem 'newrelic_rpm'
 gem 'rack-rewrite'
 gem 'curb'
 gem 'therubyracer'
 gem 'pusher'
 gem 'draper'
+gem 'skylight'
 
 group :doc do
   gem 'sdoc', require: false
