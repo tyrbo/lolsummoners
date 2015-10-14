@@ -24,7 +24,7 @@ gem 'curb'
 gem 'therubyracer'
 gem 'pusher'
 gem 'draper'
-gem 'skylight'
+gem 'honeybadger', '~> 2.0'
 
 group :doc do
   gem 'sdoc', require: false
