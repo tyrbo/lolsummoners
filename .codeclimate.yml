@@ -12,6 +12,8 @@ engines:
     enabled: true
 ratings:
   paths:
+  - app/**
+  - lib/**
   - "**.rb"
   - "**.coffee"
   - "**.js"
