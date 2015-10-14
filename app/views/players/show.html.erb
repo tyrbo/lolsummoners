@@ -18,27 +18,27 @@
           <div class="points">
             <% if @player.player_league %>
               <div class="col-md-12"><strong><%= "#{@player.player_league.tier.capitalize} #{@player.player_league.division}" %></strong></div>
-            <div class="col-md-12"><%= @player.league_points %> LP</div>
-          <% else %>
+              <div class="col-md-12"><%= @player.league_points %> LP</div>
+            <% else %>
               Not Ranked
-          <% end %>
+            <% end %>
           </div>
           <%= image_tag "medals/#{@player.tier.downcase}_#{roman_to_numeral(@player.division)}.png", class: 'img-responsive center-block' if @player.player_league %>
           <%= image_tag 'placing.png', class: 'img-responsive center-block' unless @player.player_league %>
           <% if @player.player_league %>
             <div class="rank">
-            <div class="col-md-6">
-              <div class="title"><%= @player.region.upcase %></div>
-              <% rank_region = rank_for(@player.region, @player) %>
-              <%= number_with_delimiter(rank_region) %> (<%= percentage_for(@player.region, rank_region) %>%)
+              <div class="col-md-6">
+                <div class="title"><%= @player.region.upcase %></div>
+                <% rank_region = rank_for(@player.region, @player) %>
+                <%= number_with_delimiter(rank_region) %> (<%= percentage_for(@player.region, rank_region) %>%)
+              </div>
+              <div class="col-md-6">
+                <div class="title"><%= name_for_region('all') %></div>
+                <% rank_all = rank_for('all', @player) %>
+                <%= number_with_delimiter(rank_all) %> (<%= percentage_for('all', rank_all) %>%)
+              </div>
             </div>
-            <div class="col-md-6">
-              <div class="title"><%= name_for_region('all') %></div>
-              <% rank_all = rank_for('all', @player) %>
-              <%= number_with_delimiter(rank_all) %> (<%= percentage_for('all', rank_all) %>%)
-            </div>
-          </div>
-        <% end %>
+          <% end %>
         </div>
       </div>
       <div class="col-md-4">
