@@ -1,11 +1,11 @@
-FROM ruby:2.2.2
+FROM rails:4.2.4
 
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev libqt4-dev
-RUN mkdir /app
+RUN mkdir /usr/src/app
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-ADD Gemfile Gemfile.lock /app/
+ADD Gemfile Gemfile.lock /usr/src/app/
+
 RUN bundle install
 
-ADD . /app
+ADD . /usr/src/app
