@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :league_entry do
+    league_points 25
+  end
+
   factory :summoner do
     region "na"
 
@@ -11,6 +15,8 @@ FactoryGirl.define do
     end
 
     trait :with_ranking do
+      association :league_entry
+
       after(:create) do |x|
         x.update_ranking!
       end

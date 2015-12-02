@@ -2,17 +2,13 @@ class Summoner < ActiveRecord::Base
   before_destroy :delete_ranking!
   before_save :internalize_name
 
+  delegate :league_points, to: :league_entry
+
   has_one :league_entry, dependent: :destroy
 
   def delete_ranking!
-    redis.pipelined do
-      redis.zrem("rank_#{region}", id)
-      redis.zrem("rank_all", id)
-    end
-  end
-  
-  def points
-    25
+    redis.zrem("rank_#{region}", id)
+    redis.zrem("rank_all", id)
   end
 
   def rank(region: "all")
@@ -20,10 +16,8 @@ class Summoner < ActiveRecord::Base
   end
 
   def update_ranking!
-    redis.pipelined do
-      redis.zadd("rank_#{region}", points, id)
-      redis.zadd("rank_all", points, id)
-    end
+    redis.zadd("rank_#{region}", league_points, id)
+    redis.zadd("rank_all", league_points, id)
   end
 
   private
