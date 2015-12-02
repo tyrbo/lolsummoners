@@ -5,7 +5,7 @@ class CreateSummoner < ActiveRecord::Migration
       t.string :name
       t.string :internal_name
       t.integer :profile_icon_id
-      t.integer :revision_date
+      t.datetime :revision_date
       t.integer :summoner_level
       t.string :region
 

@@ -4,6 +4,10 @@ class CreateLeague < ActiveRecord::Migration
       t.string :name
       t.string :queue
       t.string :tier
+      t.string :region
     end
+
+    add_index :leagues, :name
+    add_index :leagues, :region
   end
 end

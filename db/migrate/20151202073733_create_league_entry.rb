@@ -8,7 +8,7 @@ class CreateLeagueEntry < ActiveRecord::Migration
       t.boolean :is_veteran
       t.integer :league_points
       t.integer :losses
-      t.string :mini_series
+      t.json :mini_series
       t.string :player_or_team_id
       t.string :player_or_team_name
       t.integer :wins

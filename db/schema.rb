@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20151202083859) do
     t.boolean  "is_veteran"
     t.integer  "league_points"
     t.integer  "losses"
-    t.string   "mini_series"
+    t.json     "mini_series"
     t.string   "player_or_team_id"
     t.string   "player_or_team_name"
     t.integer  "wins"
@@ -41,14 +41,18 @@ ActiveRecord::Schema.define(version: 20151202083859) do
     t.string "name"
     t.string "queue"
     t.string "tier"
+    t.string "region"
   end
+
+  add_index "leagues", ["name"], name: "index_leagues_on_name", using: :btree
+  add_index "leagues", ["region"], name: "index_leagues_on_region", using: :btree
 
   create_table "summoners", force: :cascade do |t|
     t.integer  "summoner_id"
     t.string   "name"
     t.string   "internal_name"
     t.integer  "profile_icon_id"
-    t.integer  "revision_date"
+    t.datetime "revision_date"
     t.integer  "summoner_level"
     t.string   "region"
     t.datetime "created_at",      null: false

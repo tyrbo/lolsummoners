@@ -5,6 +5,7 @@ gem "rails", "4.2.4"
 
 gem "bootstrap-sass", "~> 3.3.6"
 gem "coffee-rails", "~> 4.1.0"
+gem "faraday"
 gem "foreman"
 gem "haml-rails", "~> 0.9"
 gem "jbuilder", "~> 2.0"
