@@ -2,7 +2,8 @@ class Summoner < ActiveRecord::Base
   before_destroy :delete_ranking!
   before_save :internalize_name
 
-  delegate :league_points, to: :league_entry
+  delegate :division, :league_points, :wins, to: :league_entry
+  delegate :tier, to: :league
 
   has_one :league, through: :league_entry
   has_one :league_entry, dependent: :destroy
