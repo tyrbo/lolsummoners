@@ -12,7 +12,7 @@ FactoryGirl.define do
 
     trait :with_ranking do
       after(:create) do |x|
-        x.update_ranking(25)
+        x.update_ranking!
       end
     end
   end

@@ -1,7 +1,7 @@
 class Summoner < ActiveRecord::Base
   before_save :internalize_name
 
-  def delete_ranking
+  def delete_ranking!
     redis.pipelined do
       redis.zrem("rank_#{region}", id)
       redis.zrem("rank_all", id)
@@ -13,10 +13,10 @@ class Summoner < ActiveRecord::Base
   end
 
   def rank(region: "all")
-    @rank ||= redis.zrevrank("rank_#{region}", id) + 1
+    @rank ||= redis.zrevrank("rank_#{region}", id)
   end
 
-  def update_ranking(points)
+  def update_ranking!
     redis.pipelined do
       redis.zadd("rank_#{region}", points, id)
       redis.zadd("rank_all", points, id)
