@@ -8,4 +8,6 @@ WORKDIR /app
 ADD Gemfile Gemfile.lock /app/
 RUN bundle install
 
+EXPOSE 3333
+
 ADD . /app

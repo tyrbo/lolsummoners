@@ -8,13 +8,14 @@ redis:
 
 app:
   build: .
-  command: bin/rails server -p 9292 -b 0.0.0.0
+  command: bundle exec foreman start
   volumes:
     - .:/app
   ports:
-    - "9292:9292"
+    - "3333:3333"
   links:
     - db
     - redis
   environment:
-    REDIS_URL: redis://redis:6379/0
+    DATABASE_URL: postgres://postgres:postgres@db/
+    RAILS_ENV: development
