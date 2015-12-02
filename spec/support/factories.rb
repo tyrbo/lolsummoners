@@ -15,7 +15,11 @@ FactoryGirl.define do
     end
 
     trait :with_ranking do
-      association :league_entry
+      association :league_entry, league_points: league_points
+
+      transient do
+        league_points 25
+      end
 
       after(:create) do |x|
         x.update_ranking!
