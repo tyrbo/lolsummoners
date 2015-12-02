@@ -1,0 +1,39 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}
+    = csrf_meta_tags
+
+    %title Lolsummoners
+
+    = stylesheet_link_tag :application, media: "all"
+    = javascript_include_tag :application
+
+  %body
+    .container
+      .row
+        .wrapper.hidden-xs
+          = image_tag "banner", class: "col-md-12 visible-lg"
+          = image_tag "banner-940", class: "col-md-12, visible-md"
+          = image_tag "banner-720", class: "col-md-12 visible-sm"
+
+    .container
+      .surround
+        %nav{class: "navbar"}
+          .navbar-header
+            %button{type: "button", class: "navbar-toggle", "data-toggle": "collapse", "data-target": "#menu"}
+              %span{class: "sr-only"} Toggle navigation
+              %span{class: "icon-bar"}
+              %span{class: "icon-bar"}
+              %span{class: "icon-bar"}
+
+          .collapse.navbar-collapse#menu
+            %ul.nav.navbar-nav
+              %li= link_to "Ladders", ladders_path
+
+          .arrow-bar
+            .arrow.hidden-xs{class: controller_name}
+
+        %section{class: "row"}
+          .col-md-12
+            = yield
