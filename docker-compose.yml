@@ -18,14 +18,3 @@ app:
     - redis
   environment:
     REDIS_URL: redis://redis:6379/0
-
-sidekiq:
-  build: .
-  command: sidekiq -v
-  volumes:
-    - .:/app
-  links:
-    - db
-    - redis
-  environment:
-    REDIS_URL: redis://redis:6379/0
