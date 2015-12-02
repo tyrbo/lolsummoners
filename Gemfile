@@ -9,6 +9,7 @@ gem "foreman"
 gem "haml-rails", "~> 0.9"
 gem "jbuilder", "~> 2.0"
 gem "jquery-rails"
+gem "redis", "~> 3.2"
 gem "sass-rails", "~> 5.0"
 gem "sdoc", "~> 0.4.0", group: :doc
 gem "sidekiq"
@@ -23,12 +24,13 @@ gem "puma"
 group :development, :test do
   gem "byebug"
   gem "dotenv-rails"
+  gem "factory_girl_rails"
+  gem "pry-rails"
   gem "rspec-rails", "~> 3.0"
 end
 
 group :development do
   gem "bundler-audit"
-  gem "pry-rails"
   gem "quiet_assets"
   gem "spring"
   gem "web-console", "~> 2.0"
@@ -37,6 +39,6 @@ end
 group :test do
   gem "capybara"
   gem "capybara-webkit"
-  gem "factory_girl_rails"
+  gem "fakeredis"
   gem "shoulda-matchers", "~> 3.0"
 end

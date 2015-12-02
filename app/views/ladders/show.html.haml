@@ -1,0 +1,39 @@
+.col-md-8
+  .content-container.clearfix
+    .header Solo Queue Ladder
+
+    %table{class: "ladder"}
+      %thead
+        %tr
+          %th.col-md-1 Region
+          %th.col-md-2 Rank
+          %th.col-md-3 Summoner
+          %th.col-md-3 Tier
+          %th.col-md-2 Wins
+          %th.col-md-1 Points
+
+      %tbody
+        - @ladder.summoners.each do |summoner|
+          %tr.summoner
+            %td.region= summoner.region
+            %td.rank= summoner.rank
+            %td.name= summoner.name
+            %td.tier
+              Gold
+              IV
+            %td.wins
+              25
+            %td.points
+              25
+
+    .col-md-12.ladder-pagination
+      - if @ladder.has_prev_page?
+        = link_to "Prev", ladder_path(region: @ladder.region, page: @ladder.prev_page),
+            class: "ladder-nav-button pull-left"
+
+      - if @ladder.has_next_page?
+        = link_to "Next", ladder_path(region: @ladder.region, page: @ladder.next_page),
+            class: "ladder-nav-button pull-right"
+
+.col-md-4
+  = render "stats"
