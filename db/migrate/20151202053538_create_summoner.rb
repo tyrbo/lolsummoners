@@ -8,6 +8,8 @@ class CreateSummoner < ActiveRecord::Migration
       t.integer :revision_date
       t.integer :summoner_level
       t.string :region
+
+      t.timestamps null: false
     end
     add_index :summoners, :summoner_id
     add_index :summoners, :internal_name

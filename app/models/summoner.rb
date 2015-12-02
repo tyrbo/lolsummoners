@@ -1,5 +1,8 @@
 class Summoner < ActiveRecord::Base
+  before_destroy :delete_ranking!
   before_save :internalize_name
+
+  has_one :league_entry, dependent: :destroy
 
   def delete_ranking!
     redis.pipelined do
