@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Summoner do
   context "associations" do
+    it { should have_one(:league).through(:league_entry) }
     it { should have_one(:league_entry) }
   end
 

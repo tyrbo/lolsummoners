@@ -4,6 +4,7 @@ class Summoner < ActiveRecord::Base
 
   delegate :league_points, to: :league_entry
 
+  has_one :league, through: :league_entry
   has_one :league_entry, dependent: :destroy
 
   def delete_ranking!
