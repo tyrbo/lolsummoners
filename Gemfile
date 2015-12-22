@@ -41,5 +41,6 @@ group :test do
   gem "capybara"
   gem "capybara-webkit"
   gem "fakeredis"
+  gem "poltergeist"
   gem "shoulda-matchers", "~> 3.0"
 end
