@@ -1,12 +1,11 @@
 FROM trenpixster/elixir:latest
 
-RUN apt-get -y update
-RUN apt-get -y upgrade
-
-RUN apt-get install -y build-essential inotify-tools postgresql-client
-
-RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-RUN apt-get install -y nodejs
+RUN apt-get -y update -q && \
+    apt-get install -y build-essential inotify-tools postgresql-client && \
+    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean -y && \
+    rm -rf /var/cache/apt
 
 RUN mix local.hex --force && \
     mix local.rebar
