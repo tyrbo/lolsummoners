@@ -9,7 +9,7 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
 RUN mix local.hex
-RUN mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v1.1.1/phoenix_new-1.1.1.ez
+RUN mix archive.install --force https://github.com/phoenixframework/phoenix/releases/download/v1.1.1/phoenix_new-1.1.1.ez
 
 RUN mkdir -p /usr/src/app
 
