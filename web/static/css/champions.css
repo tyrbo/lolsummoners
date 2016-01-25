@@ -1,0 +1,12 @@
+.champion-0 {
+  background-image: url('/images/champion0.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 48px;
+  width: 48px;
+}
+
+.aatrox {
+  background-position: -0px -0px;
+}
+

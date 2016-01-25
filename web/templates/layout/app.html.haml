@@ -1,0 +1,76 @@
+!!! 5
+%html{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}
+    %meta{http-equiv: "X-UA-Compatible", content: "IE=edge"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    %meta{name: "description", content: "League of Legends scores, rankings, and statistics"}
+    %meta{name: "author", content: "Jonmichael Chambers (github.com/tyrbo)"}
+
+    %title Lolsummoners
+
+    - css_path = static_path(@conn, "/css/app.css")
+    %link{rel: "stylesheet", href: css_path}
+
+  %body
+    .container
+      .row
+        .col-sm-8.col-sm-offset-2
+          .dashhead
+            .dashhead-titles
+              %h6.dashhead-subtitle Rankings
+              %h2.dashhead-title All Regions
+
+            .btn-toolbar.dashhead-toolbar
+              .btn-toolbar-item.input-with-icon
+                %input{type: "text"}.form-control
+                %span.icon.icon-magnifying-glass
+
+          .hr-divider.m-b-md.m-t
+            %ul.nav.nav-pills.hr-divider-content.hr-divider-nav
+              %li.active
+                %a{href: "#"}
+                  Stats
+              %li
+                %a{href: "#"}
+                  Breakdown
+
+          .row.text-center
+            .col-xs-6.col-lg-3
+              .statcard
+                .p-a
+                  .statcard-desc
+                    Players
+
+                  %h2.statcard-number= @total
+
+            .col-xs-6.col-lg-3
+              .statcard
+                .p-a
+                  .statcard-desc
+                    Leagues
+
+                  %h2.statcard-number= @leagues
+
+            .col-xs-6.col-lg-3
+              .statcard
+                .p-a
+                  .statcard-desc
+                    New
+
+                  %h2.statcard-number= @new
+
+            .col-xs-6.col-lg-3
+              .statcard
+                .p-a
+                  .statcard-desc
+                    Updates
+
+                  %h2.statcard-number= @updates
+
+          %hr.m-t-md.m-b-md
+
+    %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"}
+
+    - js_path = static_path(@conn, "/js/app.js")
+    %script{src: js_path}
