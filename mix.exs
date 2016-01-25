@@ -37,7 +37,8 @@ defmodule App.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
-     {:phoenix_haml, github: "chrismccord/phoenix_haml"}]
+     {:phoenix_haml, github: "chrismccord/phoenix_haml"},
+     {:exredis, ">= 0.2.2"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

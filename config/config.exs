@@ -14,6 +14,13 @@ config :app, App.Endpoint,
   pubsub: [name: App.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :exredis,
+  host: "redis",
+  port: 6379,
+  db: 0,
+  reconnect: :no_reconnect,
+  max_queue: :infinity
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

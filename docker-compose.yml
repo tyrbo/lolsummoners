@@ -14,3 +14,6 @@ db:
     POSTGRES_USER: postgres
   volumes:
     - /var/lib/postgresql/data
+
+redis:
+  image: redis:latest
