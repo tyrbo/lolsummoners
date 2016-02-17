@@ -1,16 +1,11 @@
-FROM trenpixster/elixir:latest
+FROM msaraiva/elixir-dev
 
-RUN apt-get -y update -q && \
-    apt-get install -y build-essential inotify-tools postgresql-client && \
-    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash - && \
-    apt-get install -y nodejs && \
-    apt-get clean -y && \
-    rm -rf /var/cache/apt
+RUN apk --update add nodejs postgresql-dev
 
 RUN mix local.hex --force && \
     mix local.rebar
 
-RUN mix archive.install --force https://github.com/phoenixframework/phoenix/releases/download/v1.1.1/phoenix_new-1.1.1.ez
+RUN mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-1.1.1.ez
 
 RUN mkdir -p /usr/src/app
 
