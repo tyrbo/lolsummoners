@@ -7,12 +7,10 @@ defmodule App do
     import Supervisor.Spec, warn: false
 
     children = [
-      # Start the endpoint when the application starts
       supervisor(App.Endpoint, []),
-      # Start the Ecto repository
       supervisor(App.Repo, []),
-      # Here you could define other workers and supervisors as children
-      # worker(App.Worker, [arg1, arg2, arg3]),
+      supervisor(App.UpdaterPool, []),
+      worker(App.BusyBeaver, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
