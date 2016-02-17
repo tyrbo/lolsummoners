@@ -1,7 +1,7 @@
 defmodule App.Updater do
   use GenServer
 
-  @key "11270efd-6cbd-42c0-a55f-0ebae96feb24"
+  @key Application.get_env(:app, :riot_api_key)
 
   def start_link(state) do
     GenServer.start_link(__MODULE__, state, [])
