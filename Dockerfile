@@ -1,6 +1,6 @@
 FROM msaraiva/elixir-dev
 
-RUN apk --update add nodejs postgresql-dev
+RUN apk --update add inotify-tools nodejs postgresql-dev
 
 RUN mix local.hex --force && \
     mix local.rebar
