@@ -3,8 +3,10 @@ defmodule App.Player do
 
   schema "players" do
     field :summoner_id, :integer
+    field :name, :string
+    field :level, :integer
+    field :profile_icon_id, :integer
 
-    field :inserted_at, Ecto.DateTime, default: Ecto.DateTime.utc
-    field :updated_at, Ecto.DateTime, default: Ecto.DateTime.utc
+    timestamps
   end
 end

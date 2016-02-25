@@ -1,1 +1,43 @@
-test
+.hr-divider.m-b-md.m-t
+  %ul.nav.nav-pills.hr-divider-content.hr-divider-nav
+    %li.active
+      %a{href: "#"}
+        Stats
+    %li
+      %a{href: "#"}
+        Breakdown
+
+.row.text-center
+  .col-xs-12.col-md-3
+    .statcard
+      .p-a
+        .statcard-desc
+          Players
+
+        %h2.statcard-number= @total
+
+  .col-xs-12.col-md-3
+    .statcard
+      .p-a
+        .statcard-desc
+          Leagues
+
+        %h2.statcard-number= @leagues
+
+  .col-xs-12.col-md-3
+    .statcard
+      .p-a
+        .statcard-desc
+          New
+
+        %h2.statcard-number= @new
+
+  .col-xs-12.col-md-3
+    .statcard
+      .p-a
+        .statcard-desc
+          Updates
+
+        %h2.statcard-number= @updates
+
+%hr.m-t-md.m-b-md
