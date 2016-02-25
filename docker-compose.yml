@@ -1,5 +1,7 @@
 app:
   build: .
+  environment:
+    DATABASE_HOST: db
   links:
     - db
   ports:
