@@ -7,6 +7,8 @@ defmodule App.Player do
     field :level, :integer
     field :profile_icon_id, :integer
 
+    has_one :player_ranking, App.PlayerRanking
+
     timestamps
   end
 end
