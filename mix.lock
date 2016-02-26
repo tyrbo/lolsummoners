@@ -27,4 +27,5 @@
   "poolboy": {:hex, :poolboy, "1.5.1"},
   "postgrex": {:hex, :postgrex, "0.10.0"},
   "ranch": {:hex, :ranch, "1.2.0"},
+  "redis_poolex": {:hex, :redis_poolex, "0.0.5"},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"}}

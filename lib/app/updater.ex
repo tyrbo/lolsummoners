@@ -1,5 +1,6 @@
 defmodule App.Updater do
   use GenServer
+  alias RedisPoolex, as: Redis
   require Logger
 
   @key Application.get_env(:app, :riot_api)[:key]
@@ -24,6 +25,10 @@ defmodule App.Updater do
     {:noreply, status}
   end
 
+  defp fetch(url) do
+    HTTPotion.get url
+  end
+
   defp find_player({:name, name}) do
     "v1.4/summoner/by-name"
     |> from_url(name)
@@ -34,10 +39,6 @@ defmodule App.Updater do
 
   defp find_player({:summoner_id, id}) do
     get_league(id)
-  end
-
-  defp fetch(url) do
-    HTTPotion.get url
   end
 
   defp from_url(endpoint, arg) do
@@ -123,15 +124,18 @@ defmodule App.Updater do
     |> handle_leagues
   end
 
-  defp handle_entries([entry | tail], league) do
+  defp handle_entries(entries, league, completed \\ [])
+
+  defp handle_entries([entry | tail], league, completed) do
     {:ok, player_id} = insert_player(entry)
 
-    insert_entry(entry, player_id)
+    {:ok, ranking_id} = insert_entry(entry, player_id)
 
-    handle_entries(tail, league)
+    handle_entries(tail, league, [ranking_id | completed])
   end
 
-  defp handle_entries([], _league) do
+  defp handle_entries([], _league, completed) do
+    update_rankings(completed)
   end
 
   defp handle_leagues([{_, [league = %{"queue" => "RANKED_SOLO_5x5"}]} | tail]) do
@@ -163,8 +167,6 @@ defmodule App.Updater do
   end
 
   defp handle_response(%HTTPotion.Response{status_code: 429}) do
-    Logger.info "[Updater] Rate limited"
-
     []
   end
 
@@ -175,5 +177,29 @@ defmodule App.Updater do
   defp timestamp do
     {_, timestamp} = Ecto.DateTime.utc(:usec) |> Ecto.DateTime.dump
     timestamp
+  end
+
+  defp update_rankings(ranking_ids, queries \\ [])
+
+  defp update_rankings([head | tail], queries) do
+    %App.PlayerRanking{league_points: points, player: %App.Player{summoner_id: summoner_id}}
+      = App.Repo.get(App.PlayerRanking, head) |> App.Repo.preload(:player)
+
+    query = [
+      ["zadd", "rank_na", points, "#{summoner_id}_na"],
+      ["zadd", "rank_all", points, "#{summoner_id}_na"],
+    ]
+
+    update_rankings(tail, Enum.concat(queries, query))
+  end
+
+  defp update_rankings([], queries) do
+    cond do
+      is_list(queries) == true ->
+        Redis.query_pipe(queries)
+
+      true ->
+        nil
+    end
   end
 end

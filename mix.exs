@@ -23,7 +23,7 @@ defmodule App.Mixfile do
 
   defp app_list do
     [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-      :phoenix_ecto, :postgrex, :httpotion, :poolboy]
+      :phoenix_ecto, :postgrex, :httpotion, :poolboy, :redis_poolex]
   end
 
   defp app_list(:test), do: [:hound | app_list]
@@ -50,7 +50,8 @@ defmodule App.Mixfile do
      {:httpotion, "~> 2.1.0"},
      {:dogma, "~> 0.0", only: :dev},
      {:poolboy, "~> 1.5"},
-     {:hound, "~> 0.8", only: :test}]
+     {:hound, "~> 0.8", only: :test},
+     {:redis_poolex, "~> 0.0.2"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

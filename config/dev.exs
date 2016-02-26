@@ -42,4 +42,12 @@ config :app, App.Repo,
   hostname: System.get_env("DATABASE_HOST") || "localhost",
   pool_size: 10
 
+config :redis_poolex,
+  host: "127.0.0.1",
+  port: 6379,
+  db: 0,
+  reconnect: :no_reconnect,
+  pool_size: 10,
+  pool_max_overflow: 1
+
 import_config "dev.secret.exs"
