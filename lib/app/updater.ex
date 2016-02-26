@@ -26,10 +26,10 @@ defmodule App.Updater do
 
   defp find_player({:name, name}) do
     "v1.4/summoner/by-name"
-      |> from_url(name)
-      |> fetch
-      |> handle_response
-      |> handle_players
+    |> from_url(name)
+    |> fetch
+    |> handle_response
+    |> handle_players
   end
 
   defp find_player({:summoner_id, id}) do
@@ -117,10 +117,10 @@ defmodule App.Updater do
 
   defp get_league(summoner_id) do
     "v2.5/league/by-summoner"
-      |> from_url(summoner_id)
-      |> fetch
-      |> handle_response
-      |> handle_leagues
+    |> from_url(summoner_id)
+    |> fetch
+    |> handle_response
+    |> handle_leagues
   end
 
   defp handle_entries([entry | tail], league) do

@@ -1,25 +1,41 @@
-app:
-  build: .
-  environment:
-    DATABASE_HOST: db
-  links:
-    - db
-    - phantomjs
-  ports:
-    - "4000:4000"
-  volumes:
-    - .:/usr/src/app
+version: '2'
 
-db:
-  image: postgres:latest
-  environment:
-    POSTGRES_PASSWORD: postgres
-    POSTGRES_USER: postgres
-  volumes:
-    - /var/lib/postgresql/data
+services:
+  app:
+    build: .
+    environment:
+      APP_HOST: app
+      DATABASE_HOST: db
+      PHANTOMJS_HOST: phantomjs
+      RIOT_API_KEY: 6e79f324-f713-4d97-945f-dc13fa93f8a8
+    depends_on:
+      - db
+      - redis
+      - phantomjs
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/usr/src/app
 
-redis:
-  image: redis:latest
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
 
-phantomjs:
-  image: tyrbo/phantomjs:2.1.1
+  redis:
+    image: redis:latest
+    volumes:
+      - redis-data:/var/lib/redis
+
+  phantomjs:
+    image: tyrbo/phantomjs:2.1.1
+
+volumes:
+  redis-data:
+    driver: local
+
+  postgres-data:
+    driver: local

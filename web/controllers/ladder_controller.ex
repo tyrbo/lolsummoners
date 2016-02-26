@@ -1,5 +1,6 @@
 defmodule App.LadderController do
   use App.Web, :controller
+  require Logger
 
   def index(conn, _params) do
     conn

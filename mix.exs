@@ -18,9 +18,16 @@ defmodule App.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {App, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :httpotion, :poolboy]]
+     applications: app_list(Mix.env)]
   end
+
+  defp app_list do
+    [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
+      :phoenix_ecto, :postgrex, :httpotion, :poolboy]
+  end
+
+  defp app_list(:test), do: [:hound | app_list]
+  defp app_list(_),     do: app_list
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
@@ -42,7 +49,8 @@ defmodule App.Mixfile do
      {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.2"},
      {:httpotion, "~> 2.1.0"},
      {:dogma, "~> 0.0", only: :dev},
-     {:poolboy, "~> 1.5"}]
+     {:poolboy, "~> 1.5"},
+     {:hound, "~> 0.8", only: :test}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

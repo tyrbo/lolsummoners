@@ -17,8 +17,8 @@ defmodule App.BusyBeaver do
 
   def get_league([head|tail]) do
     Enum.split([head|tail], 10)
-      |> Tuple.to_list
-      |> get_leagues
+    |> Tuple.to_list
+    |> get_leagues
   end
 
   def get_league(summoner_id) do
@@ -49,8 +49,8 @@ defmodule App.BusyBeaver do
 
   defp clean(name) do
     name
-      |> String.downcase
-      |> String.replace(" ", "")
+    |> String.downcase
+    |> String.replace(" ", "")
   end
 
   defp find_player(worker, name) do
