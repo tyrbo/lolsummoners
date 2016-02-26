@@ -7,7 +7,6 @@ services:
       APP_HOST: app
       DATABASE_HOST: db
       PHANTOMJS_HOST: phantomjs
-      RIOT_API_KEY: 6e79f324-f713-4d97-945f-dc13fa93f8a8
     depends_on:
       - db
       - redis

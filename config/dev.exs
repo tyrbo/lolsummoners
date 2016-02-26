@@ -41,3 +41,5 @@ config :app, App.Repo,
   database: "app_dev",
   hostname: System.get_env("DATABASE_HOST") || "localhost",
   pool_size: 10
+
+import_config "dev.secret.exs"
