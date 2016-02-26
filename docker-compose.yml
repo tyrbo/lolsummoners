@@ -4,6 +4,7 @@ app:
     DATABASE_HOST: db
   links:
     - db
+    - phantomjs
   ports:
     - "4000:4000"
   volumes:
@@ -19,3 +20,6 @@ db:
 
 redis:
   image: redis:latest
+
+phantomjs:
+  image: tyrbo/phantomjs:2.1.1
