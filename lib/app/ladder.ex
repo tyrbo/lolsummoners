@@ -11,26 +11,19 @@ defmodule App.Ladder do
     |> fetch_players
   end
 
-  defp clean_id(id) do
-    id
-    |> String.replace(~r/[^0-9]/, "")
-  end
-
   defp clean_ids(ids) when is_list(ids) do
     ids
-    |> Enum.map(&clean_id/1)
+    |> Enum.map(fn(x) -> String.replace(x, ~r/[^0-9]/, "") end)
   end
 
-  defp fetch_players(players = [head|tail]) do
+  defp fetch_players([]), do: []
+
+  defp fetch_players(players) when is_list(players) do
     query = from p in App.Player, where: p.summoner_id in ^players
 
     query
     |> App.Repo.all
     |> App.Repo.preload(:player_ranking)
-  end
-
-  defp fetch_players([]) do
-    []
   end
 
   defp fetch_from_redis(page) do
