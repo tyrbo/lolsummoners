@@ -2,7 +2,7 @@ defmodule App.Updater do
   use GenServer
   require Logger
 
-  @key Application.get_env(:riot_api, :key)
+  @key Application.get_env(:app, :riot_api, :key)
 
   def start_link(state) do
     GenServer.start_link(__MODULE__, state, [])

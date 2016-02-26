@@ -1,36 +1,42 @@
 version: '2'
 
 services:
-  app:
-    build: .
-    environment:
-      APP_HOST: app
-      DATABASE_HOST: db
-      PHANTOMJS_HOST: phantomjs
-    depends_on:
-      - db
-      - redis
-      - phantomjs
-    ports:
-      - "4000:4000"
-    volumes:
-      - .:/usr/src/app
+  #app:
+  #  build: .
+  #  environment:
+  #    APP_HOST: app
+  #    DATABASE_HOST: db
+  #    PHANTOMJS_HOST: phantomjs
+  #  depends_on:
+  #    - db
+  #    - redis
+  #    - phantomjs
+  #  ports:
+  #    - "4000:4000"
+  #  volumes:
+  #    - .:/usr/src/app
 
   db:
     image: postgres:latest
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
+    ports:
+      - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
   redis:
     image: redis:latest
+    ports:
+      - "6379:6379"
     volumes:
       - redis-data:/var/lib/redis
 
   phantomjs:
     image: tyrbo/phantomjs:2.1.1
+    ports:
+      - "8910:8910"
 
 volumes:
   redis-data:

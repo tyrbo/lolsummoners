@@ -21,12 +21,6 @@ config :exredis,
   reconnect: :no_reconnect,
   max_queue: :infinity
 
-config :hound,
-  driver: "phantomjs",
-  host: "http://phantomjs",
-  port: 8910,
-  app_host: "http://app"
-
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

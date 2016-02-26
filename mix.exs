@@ -27,7 +27,7 @@ defmodule App.Mixfile do
   end
 
   defp app_list(:test), do: [:hound | app_list]
-  defp app_list(_),     do: app_list
+  defp app_list(_), do: app_list
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "web", "test/support"]

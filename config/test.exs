@@ -17,3 +17,5 @@ config :app, App.Repo,
   database: "app_test",
   hostname: System.get_env("DATABASE_HOST") || "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :hound, driver: "phantomjs"
