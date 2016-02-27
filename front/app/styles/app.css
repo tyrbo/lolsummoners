@@ -1,0 +1,21 @@
+/* global body padding */
+body {
+  padding-top:    20px;
+  padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top:    50px;
+    padding-bottom: 50px;
+  }
+
+  .ladder {
+    padding: 20px;
+  }
+}
+
+.ladder {
+  border: 1px solid #434857;
+  border-radius: 3px 3px 0px 0px;
+}
