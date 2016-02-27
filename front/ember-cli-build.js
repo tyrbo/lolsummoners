@@ -7,10 +7,8 @@ module.exports = function(defaults) {
     // Add options here
   });
 
-  app.import('vendor/app.js');
-  app.import('vendor/ladder.js');
-  app.import('vendor/socket.js');
   app.import('vendor/toolkit.js');
+
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //

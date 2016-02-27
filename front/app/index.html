@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Front</title>
-    <meta name="description" content="">
+
+    <title>Lolsummoners</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="League of Legends scores, rankings, and statistics">
+    <meta name="author" content="Jonmichael Chambers (github.com/tyrbo)">
 
     {{content-for "head"}}
 
@@ -15,7 +18,25 @@
     {{content-for "head-footer"}}
   </head>
   <body>
-    {{content-for "body"}}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2" id="app">
+          <div class="dashhead">
+            <div class="dashhead-titles">
+              <h6 class="dashhead-subtitle">
+                Rankings
+              </h6>
+
+              <h2 class="dashhead-title">
+                All Regions
+              </h2>
+            </div>
+          </div>
+
+          {{content-for "body"}}
+        </div>
+      </div>
+    </div>
 
     <script src="assets/vendor.js"></script>
     <script src="assets/front.js"></script>
